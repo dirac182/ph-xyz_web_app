@@ -1,25 +1,29 @@
-import logo from './logo.svg';
-import './App.css';
+import Navbar from "./components/Navbar";
+import Route from "./components/Route";
+import About from "./pages/About";
+import Landing from "./pages/Landing";
+import Faq from "./pages/Faq";
+import DemoSetup from "./pages/DemoSetup"
+
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
+    return(
+        <div className="font-sans ">
+            <Navbar />
+            <Route path="/">
+                <Landing/>
+            </Route>
+            <Route path="/demo">
+                <DemoSetup/>
+            </Route>
+            <Route path="/about">
+                <About/>
+            </Route>
+            <Route path="/faq">
+                <Faq />
+            </Route>
+        </div>
+    )
+};
 
 export default App;
