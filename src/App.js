@@ -4,6 +4,7 @@ import About from "./pages/About";
 import Landing from "./pages/Landing";
 import Faq from "./pages/Faq";
 import DemoSetup from "./pages/DemoSetup"
+import Footer from "./components/Footer";
 
 
 function App() {
@@ -22,6 +23,9 @@ function App() {
             <Route path="/faq">
                 <Faq />
             </Route>
+            <div>
+                <Footer />
+            </div>
         </div>
     )
 };

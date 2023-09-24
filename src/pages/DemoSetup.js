@@ -8,12 +8,11 @@ function DemoSetup() {
    const handleAddTopic = (topic) => {
       const updatedTopics = [...selectedTopics,topic];
       setSelectedTopics(updatedTopics);
-      console.log(selectedTopics)
    }
 
-   const handleRemoveTopic = (topicToRemove) => {
+   const handleRemoveTopic = (topicIdToRemove) => {
       const updatedTopics = selectedTopics.filter((topic) => {
-         return topic !== topicToRemove
+         return topic.id !== topicIdToRemove
       })
       setSelectedTopics(updatedTopics);
       console.log(selectedTopics)
@@ -30,19 +29,19 @@ function DemoSetup() {
    return(
        <div className="landing-page-container bg-indigo-500  h-screen w-full pr-6">
          <div className="landing-page-sidebar bg-blue-300 h-full w-full">
-            <Sidebar/>
+            <Sidebar onDelete={handleRemoveTopic} addedTopics={selectedTopics}/>
          </div>
          <div className="landing-page-title bg-green-300">
             <p className="text-3xl">Create new worksheet here.</p>
          </div>
          <div className="landing-page-body bg-orange-300">
-            <UnitDropdown onAdd={handleAddTopic} onDelete={handleRemoveTopic} topics={unitOneTopics}>Unit 1: Kinematics</UnitDropdown>            
-            <UnitDropdown onAdd={handleAddTopic} onDelete={handleRemoveTopic} topics={unitTwoTopics}>Unit 2: Dynamics</UnitDropdown>            
-            <UnitDropdown onAdd={handleAddTopic} onDelete={handleRemoveTopic} topics={unitThreeTopics}>Unit 3: Circular Motion and Gravitation</UnitDropdown>            
-            <UnitDropdown onAdd={handleAddTopic} onDelete={handleRemoveTopic} topics={unitFourTopics}>Unit 4: Energy</UnitDropdown>            
-            <UnitDropdown onAdd={handleAddTopic} onDelete={handleRemoveTopic} topics={unitFiveTopics}>Unit 5: Momentum</UnitDropdown>            
-            <UnitDropdown onAdd={handleAddTopic} onDelete={handleRemoveTopic} topics={unitSixTopics}>Unit 6: Simple Harmonic Motion</UnitDropdown>            
-            <UnitDropdown onAdd={handleAddTopic} onDelete={handleRemoveTopic} topics={unitSevenTopics}>Unit 7: Torque and Rotational Motion</UnitDropdown>
+            <UnitDropdown checkedBoxes = {selectedTopics} onAdd={handleAddTopic} onDelete={handleRemoveTopic} topics={unitOneTopics}>Unit 1: Kinematics</UnitDropdown>            
+            <UnitDropdown checkedBoxes = {selectedTopics} onAdd={handleAddTopic} onDelete={handleRemoveTopic} topics={unitTwoTopics}>Unit 2: Dynamics</UnitDropdown>            
+            <UnitDropdown checkedBoxes = {selectedTopics} onAdd={handleAddTopic} onDelete={handleRemoveTopic} topics={unitThreeTopics}>Unit 3: Circular Motion and Gravitation</UnitDropdown>            
+            <UnitDropdown checkedBoxes = {selectedTopics} onAdd={handleAddTopic} onDelete={handleRemoveTopic} topics={unitFourTopics}>Unit 4: Energy</UnitDropdown>            
+            <UnitDropdown checkedBoxes = {selectedTopics} onAdd={handleAddTopic} onDelete={handleRemoveTopic} topics={unitFiveTopics}>Unit 5: Momentum</UnitDropdown>            
+            <UnitDropdown checkedBoxes = {selectedTopics} onAdd={handleAddTopic} onDelete={handleRemoveTopic} topics={unitSixTopics}>Unit 6: Simple Harmonic Motion</UnitDropdown>            
+            <UnitDropdown checkedBoxes = {selectedTopics} onAdd={handleAddTopic} onDelete={handleRemoveTopic} topics={unitSevenTopics}>Unit 7: Torque and Rotational Motion</UnitDropdown>
          </div>
        </div>
     )   
