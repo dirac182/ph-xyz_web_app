@@ -35,13 +35,13 @@ function DemoSetup() {
             <p className="text-3xl">Create new worksheet here.</p>
          </div>
          <div className="landing-page-body bg-orange-300">
-            <UnitDropdown checkedBoxes = {selectedTopics} onAdd={handleAddTopic} onDelete={handleRemoveTopic} topics={unitOneTopics}>Unit 1: Kinematics</UnitDropdown>            
-            <UnitDropdown checkedBoxes = {selectedTopics} onAdd={handleAddTopic} onDelete={handleRemoveTopic} topics={unitTwoTopics}>Unit 2: Dynamics</UnitDropdown>            
-            <UnitDropdown checkedBoxes = {selectedTopics} onAdd={handleAddTopic} onDelete={handleRemoveTopic} topics={unitThreeTopics}>Unit 3: Circular Motion and Gravitation</UnitDropdown>            
-            <UnitDropdown checkedBoxes = {selectedTopics} onAdd={handleAddTopic} onDelete={handleRemoveTopic} topics={unitFourTopics}>Unit 4: Energy</UnitDropdown>            
-            <UnitDropdown checkedBoxes = {selectedTopics} onAdd={handleAddTopic} onDelete={handleRemoveTopic} topics={unitFiveTopics}>Unit 5: Momentum</UnitDropdown>            
-            <UnitDropdown checkedBoxes = {selectedTopics} onAdd={handleAddTopic} onDelete={handleRemoveTopic} topics={unitSixTopics}>Unit 6: Simple Harmonic Motion</UnitDropdown>            
-            <UnitDropdown checkedBoxes = {selectedTopics} onAdd={handleAddTopic} onDelete={handleRemoveTopic} topics={unitSevenTopics}>Unit 7: Torque and Rotational Motion</UnitDropdown>
+            <UnitDropdown icon="GiCatapult" checkedBoxes = {selectedTopics} onAdd={handleAddTopic} onDelete={handleRemoveTopic} topics={unitOneTopics}>Unit 1: Kinematics</UnitDropdown>            
+            <UnitDropdown icon="GiUnbalanced" checkedBoxes = {selectedTopics} onAdd={handleAddTopic} onDelete={handleRemoveTopic} topics={unitTwoTopics}>Unit 2: Dynamics</UnitDropdown>            
+            <UnitDropdown icon="GiMoonOrbit" checkedBoxes = {selectedTopics} onAdd={handleAddTopic} onDelete={handleRemoveTopic} topics={unitThreeTopics}>Unit 3: Circular Motion and Gravitation</UnitDropdown>            
+            <UnitDropdown icon="MdRocketLaunch" checkedBoxes = {selectedTopics} onAdd={handleAddTopic} onDelete={handleRemoveTopic} topics={unitFourTopics}>Unit 4: Energy</UnitDropdown>            
+            <UnitDropdown icon="GiPendulumSwing" checkedBoxes = {selectedTopics} onAdd={handleAddTopic} onDelete={handleRemoveTopic} topics={unitFiveTopics}>Unit 5: Momentum</UnitDropdown>            
+            <UnitDropdown icon="PiWaveSineDuotone" checkedBoxes = {selectedTopics} onAdd={handleAddTopic} onDelete={handleRemoveTopic} topics={unitSixTopics}>Unit 6: Simple Harmonic Motion</UnitDropdown>            
+            <UnitDropdown icon="BsTornado" checkedBoxes = {selectedTopics} onAdd={handleAddTopic} onDelete={handleRemoveTopic} topics={unitSevenTopics}>Unit 7: Torque and Rotational Motion</UnitDropdown>
          </div>
        </div>
     )   
