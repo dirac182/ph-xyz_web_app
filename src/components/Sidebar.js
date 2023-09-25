@@ -1,4 +1,5 @@
 import SidebarTopic from "./SidebarTopic";
+import SidebarForm from "./SidebarForm";
 
 function Sidebar({addedTopics, onDelete}) {
 
@@ -12,8 +13,8 @@ function Sidebar({addedTopics, onDelete}) {
 
     return (
         <div>
-            <div className="bg-red-300">
-                Learning Objectives and Skills
+            <div className="">
+                <SidebarForm />
             </div>            
                 {renderedTopics}        
         </div>

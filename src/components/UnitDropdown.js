@@ -24,43 +24,43 @@ function UnitDropdown({children, topics, onAdd, onDelete, checkedBoxes, icon}) {
     const handleIcon = (icon) => {
         if (icon === "GiMoonOrbit"){
             return(
-                <span className="text-4xl text-indigo-500">
+                <span className="text-4xl text-indigo-600">
                     <GiMoonOrbit />
                 </span>   
             )
         }else if (icon === "GiCatapult"){
             return(
-                <span className="text-4xl text-indigo-500">
+                <span className="text-4xl text-indigo-600">
                     <GiCatapult />          
                 </span>               
             )
         }else if (icon === "GiPendulumSwing"){
             return(
-                <span className="text-4xl text-indigo-500">
+                <span className="text-4xl text-indigo-600">
                     <GiPendulumSwing />
                 </span>
             )
         }else if (icon === "MdRocketLaunch"){
             return(
-                <span className="text-4xl text-indigo-500">
+                <span className="text-4xl text-indigo-600">
                     <MdRocketLaunch />
                 </span>
             )
         }else if (icon === "GiUnbalanced"){
             return(
-                <span className="text-4xl text-indigo-500">
+                <span className="text-4xl text-indigo-600">
                     <GiUnbalanced />
                 </span>                
             )
         }else if (icon === "PiWaveSineDuotone"){
             return(
-                <span className="text-4xl text-indigo-500">
+                <span className="text-4xl text-indigo-600">
                     <PiWaveSineDuotone />
                 </span>                
             )
         }else if (icon === "BsTornado"){
             return(
-                <span className="text-4xl text-indigo-500">
+                <span className="text-4xl text-indigo-600">
                     <BsTornado />
                 </span>               
             )
@@ -69,8 +69,8 @@ function UnitDropdown({children, topics, onAdd, onDelete, checkedBoxes, icon}) {
 
     return (
     <div className="w-full p-4 ">
-        <div className="flex cursor-pointer text-lg font-medium p-4 bg-white border-2 border-indigo-500 rounded-lg " onClick={handleClick}>
-        {handleIcon(icon)}<span className="flex justify-center items-center p-2"> {children}</span>
+        <div className="flex cursor-pointer text-lg font-medium p-4 bg-indigo-200 border-2 border-indigo-500 rounded-lg " onClick={handleClick}>
+        {handleIcon(icon)}<span className="flex justify-center items-center p-2 whitespace-nowrap"> {children}</span>
         </div>
         {renderedItems}
     </div>

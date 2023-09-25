@@ -4,7 +4,7 @@ import Link from "./Link.js";
 
 function Navbar () {
     return(
-    <div className="h-20 flex justify-between items-center bg-white shadow-md">
+    <div className="h-20 flex justify-between items-center bg-white shadow-lg">
         <span className="pl-16">
             <a href="/">
             <img src="./images/logo_indigo.png" href="/" width="200" height="175" alt="Site Logo"/>

@@ -27,8 +27,8 @@ function DemoSetup() {
    const unitSevenTopics = [{id:7.1, topic:"Rotational Kinematics"},{id:7.2,topic:"Torque and Angular Acceleration"},{id:7.3, topic:"Angular Momentum and Torque"},{id:7.4,topic:"Conservation of Angular Momentum"}];
 
    return(
-       <div className="landing-page-container bg-indigo-500  h-screen w-full pr-6">
-         <div className="landing-page-sidebar bg-blue-300 h-full w-full">
+       <div className="landing-page-container h-screen w-full pr-6">
+         <div className="landing-page-sidebar h-full w-full">
             <Sidebar onDelete={handleRemoveTopic} addedTopics={selectedTopics}/>
          </div>
          <div className="landing-page-title bg-green-300">
