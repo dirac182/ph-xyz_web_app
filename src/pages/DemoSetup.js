@@ -16,7 +16,11 @@ function DemoSetup() {
       })
       setSelectedTopics(updatedTopics);
       console.log(selectedTopics)
-   } 
+   }
+   
+   const handleCreatePage = (name,questions,timedBool,timeLimit,dueDate,dueTime) => {
+         console.log(name,questions,timedBool,timeLimit,dueDate,dueTime)
+   }
 
    const unitOneTopics = [{id:1.1, topic:"Position, Velocity, & Acceleration"},{id:1.2,topic:"Representations of Motion"}];
    const unitTwoTopics = [{id:2.1, topic:"Systems"},{id:2.2,topic:"The Gravitational Field"},{id:2.3, topic:"Contact Forces"},{id:2.4,topic:"Newton's First Law"},{id:2.5, topic:"Newton's Third Law and free-body diagrams"},{id:2.6,topic:"Newton's Second Law"},{id:2.7, topic:"Applications of Newton's Second Law"}];
@@ -29,7 +33,7 @@ function DemoSetup() {
    return(
        <div className="landing-page-container h-screen w-full pr-6">
          <div className="landing-page-sidebar h-full w-full">
-            <Sidebar onDelete={handleRemoveTopic} addedTopics={selectedTopics}/>
+            <Sidebar onCreate={handleCreatePage} onDelete={handleRemoveTopic} addedTopics={selectedTopics}/>
          </div>
          <div className="landing-page-title bg-green-300">
             <p className="text-3xl">Create new worksheet here.</p>

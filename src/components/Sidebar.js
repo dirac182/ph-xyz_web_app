@@ -1,7 +1,7 @@
 import SidebarTopic from "./SidebarTopic";
 import SidebarForm from "./SidebarForm";
 
-function Sidebar({addedTopics, onDelete}) {
+function Sidebar({addedTopics, onDelete, onCreate}) {
 
     const renderedTopics = addedTopics.map((topic) =>{
             return (
@@ -14,7 +14,7 @@ function Sidebar({addedTopics, onDelete}) {
     return (
         <div>
             <div className="">
-                <SidebarForm />
+                <SidebarForm onCreate={onCreate} />
             </div>            
                 {renderedTopics}        
         </div>

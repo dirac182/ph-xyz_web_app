@@ -10,6 +10,7 @@ function Button({
     danger,
     outline,
     rounded,
+    time,
     ...rest
 }) {
     const classes = twMerge(
@@ -26,6 +27,7 @@ function Button({
         "text-green-500": outline && success,
         "text-yellow-400": outline && warning,
         "text-red-500": outline && danger,
+        "border-2  border-slate-500" : time,
         })
 );
 
