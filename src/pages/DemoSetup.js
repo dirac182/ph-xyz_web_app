@@ -60,16 +60,16 @@ function DemoSetup() {
          <div className="landing-page-sidebar h-full w-full">
             <Sidebar onCreate={handleCreatePage} onDelete={handleRemoveTopic} addedTopics={selectedTopics}/>
          </div>
-         <div className="flex px-4 pt-10 justify-between landing-page-title">
-            <Searchbar />
-            <Button onClick={handleExpandButton} primary expand >{expandButtonText}</Button>
-            
-            <span className="flex items-center">
-               <label className="pr-3">Sort By: </label>
-               <SortDropdown options={dropdownOptions} value={dropdownSelection} onChange={handleDropdownSelect} />
-            </span>
-            
-         </div>
+         
+         <div>
+            <div className="flex px-4 pt-10 justify-between landing-page-title">
+               <Searchbar />
+               <Button onClick={handleExpandButton} primary expand >{expandButtonText}</Button>
+               <span className="flex items-center">
+                  <label className="pr-3">Sort By: </label>
+                  <SortDropdown options={dropdownOptions} value={dropdownSelection} onChange={handleDropdownSelect} />
+               </span>
+            </div>
          <div className="landing-page-body">
             <UnitDropdown expand={expandBool} icon="GiCatapult" checkedBoxes = {selectedTopics} onAdd={handleAddTopic} onDelete={handleRemoveTopic} topics={unitOneTopics}>Unit 1: Kinematics</UnitDropdown>            
             <UnitDropdown expand={expandBool} icon="GiUnbalanced" checkedBoxes = {selectedTopics} onAdd={handleAddTopic} onDelete={handleRemoveTopic} topics={unitTwoTopics}>Unit 2: Dynamics</UnitDropdown>            
@@ -78,6 +78,7 @@ function DemoSetup() {
             <UnitDropdown expand={expandBool} icon="GiPendulumSwing" checkedBoxes = {selectedTopics} onAdd={handleAddTopic} onDelete={handleRemoveTopic} topics={unitFiveTopics}>Unit 5: Momentum</UnitDropdown>            
             <UnitDropdown expand={expandBool} icon="PiWaveSineDuotone" checkedBoxes = {selectedTopics} onAdd={handleAddTopic} onDelete={handleRemoveTopic} topics={unitSixTopics}>Unit 6: Simple Harmonic Motion</UnitDropdown>            
             <UnitDropdown expand={expandBool} icon="BsTornado" checkedBoxes = {selectedTopics} onAdd={handleAddTopic} onDelete={handleRemoveTopic} topics={unitSevenTopics}>Unit 7: Torque and Rotational Motion</UnitDropdown>
+         </div>
          </div>
        </div>
     )   

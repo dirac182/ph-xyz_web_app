@@ -26,15 +26,14 @@ function DataProvider({children}) {
             }
           },
           {
-            "text": "Europe is a continent rich in history and culture. Each country in Europe has its distinct identity. France, for instance, is known for its Eiffel Tower, cuisine, and art. What is the capital of France?",
+            "text": "A car and a bicycle start from rest and accelerate uniformly over the same straight path. If the car reaches a final speed twice that of the bicycle in the same time, which has a greater acceleration?",
             "image": null,
             "choices": [
-              "Berlin",
-              "Madrid",
-              "Rome",
-              "Paris"
+              "The Car",
+              "The Bike",
+              "They are the same.",
             ],
-            "correctAnswer": "Paris",
+            "correctAnswer": "The Car",
             "skills": ["3.B.1", "3.B.2", "4.C.3", "5.D.2", "6.A.4"],
             "solution": {
               "steps": [
@@ -49,9 +48,9 @@ function DataProvider({children}) {
             "text": "The animal kingdom is vast and diverse. Different species belong to different classifications. Mammals are one such category, known for certain characteristics. Which of the following is not a mammal?",
             "image": "path/to/image3.jpg",
             "choices": [
-              "Whale",
-              "Dolphin",
-              "Shark",
+              "Vestibulum quis lacus ut dui sodales cursus vitae id sapien. In quis nulla ac diam aliquet euismod eget eget tellus. Nam accumsan mattis laoreet. Phasellus ullamcorper risus lorem, et gravida turpis sollicitudin nec.",
+              "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur ornare semper tristique. Curabitur nisi nisi, condimentum et eros id, accumsan convallis ligula. Praesent et vestibulum libero, eget viverra eros. Vestibulum odio arcu, malesuada vitae vestibulum et, faucibus porta elit. Maecenas odio dui, mattis et diam nec, ullamcorper scelerisque arcu.",
+              "Quisque magna ligula, semper sit amet vehicula posuere, tempor sed nulla. Pellentesque porttitor lacus purus. Nam at velit cursus, scelerisque lorem non, varius lectus. ",
               "Dog"
             ],
             "correctAnswer": "Shark",
