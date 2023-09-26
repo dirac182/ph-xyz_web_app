@@ -2,32 +2,19 @@
 @tailwind components;
 @tailwind utilities;
 
-/* body {
-    background-color: rgb(99 102 241);
-  } */
-
-  .landing-page-container {
-    display: grid;
-    grid-template-columns: 1fr 2fr;
-    gap: 1rem;
-    align-content: start;
-  }
-  .landing-page-sidebar {
-    grid-row: span 2;
-  }
-  .landing-page-title {
-
-  }
-  .landing-page-body {
-    display: grid;
-    gap:rem;
-    grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
-    align-items: start;
-    justify-items: start;
-  }
- .sidebar-form {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-    align-items: start;
-    justify-items: start;
- }
+.landing-page-container {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  gap: 1rem;
+  align-content: start;
+}
+.landing-page-sidebar {
+  grid-row: span 2;
+}
+.landing-page-body {
+  display: grid;
+  gap:rem;
+  grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+  align-items: start;
+  justify-items: start;
+}

@@ -1,6 +1,20 @@
+import useDataContext from "../hooks/use-data-context";
+
 function DemoWorksheet() {
+   const { questionData } = useDataContext();
+
+   const renderedQuestions = questionData.map((question,index) => {
+      console.log(question)
+      return(
+         <div>
+            {question.text}
+         </div>
+      )
+   })
     return(
-       <h1>Demo Worksheet...</h1>
+       <div>
+         {renderedQuestions}
+       </div>
     )   
    }
    

@@ -5,6 +5,7 @@ import Landing from "./pages/Landing";
 import Faq from "./pages/Faq";
 import DemoSetup from "./pages/DemoSetup"
 import Footer from "./components/Footer";
+import DemoWorksheet from "./pages/DemoWorksheet";
 
 
 function App() {
@@ -14,8 +15,11 @@ function App() {
             <Route path="/">
                 <Landing/>
             </Route>
-            <Route path="/demo">
+            <Route path="/demo/teacher">
                 <DemoSetup/>
+            </Route>
+            <Route path="/demo/student">
+                <DemoWorksheet/>
             </Route>
             <Route path="/about">
                 <About/>
@@ -23,9 +27,6 @@ function App() {
             <Route path="/faq">
                 <Faq />
             </Route>
-            <div>
-                <Footer />
-            </div>
         </div>
     )
 };

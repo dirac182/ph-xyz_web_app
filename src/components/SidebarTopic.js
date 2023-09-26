@@ -7,9 +7,9 @@ function SidebarTopic({topic, onDelete}) {
     }
 
     return (
-        <div className="flex p-3 border-gray-300 border-b-2 content-center justify-items-center bg-gray-100">
-            <MdOutlineCancel onClick={handleRemoveClick} className="relative top-0.5 left-1 text-red-500"/>
-            <p className="pl-2">
+        <div className="flex p-3 border-indigo-300 border-b-2 border-r-2 content-center justify-items-center bg-indigo-100">
+            <MdOutlineCancel onClick={handleRemoveClick} className="relative top-0.5 left-1 text-red-500 text-xl"/>
+            <p className="pl-3 text-lg">
                 {topic.topic}
             </p>
         </div>

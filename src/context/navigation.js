@@ -21,10 +21,11 @@ function NavigationProvider({children}) {
         setCurrentPath(to);
     };
 
-    return <NavigationContext.Provider value={{currentPath,navigate}}>
-        
+    return (
+    <NavigationContext.Provider value={{currentPath,navigate}}>    
         {children}
     </NavigationContext.Provider>
+    )
 } 
 
 export {NavigationProvider};

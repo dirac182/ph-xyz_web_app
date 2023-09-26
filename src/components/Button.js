@@ -11,6 +11,7 @@ function Button({
     outline,
     rounded,
     time,
+    expand,
     ...rest
 }) {
     const classes = twMerge(
@@ -27,7 +28,8 @@ function Button({
         "text-green-500": outline && success,
         "text-yellow-400": outline && warning,
         "text-red-500": outline && danger,
-        "border-2  border-slate-500" : time,
+        "border-2 border-indigo-500" : time,
+        "border-2 shadow-lg shadow-indigo-500/40 hover:bg-indigo-700" : expand,
         })
 );
 

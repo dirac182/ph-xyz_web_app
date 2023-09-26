@@ -12,8 +12,8 @@ function Sidebar({addedTopics, onDelete, onCreate}) {
         })
 
     return (
-        <div>
-            <div className="">
+        <div className="">
+            <div>
                 <SidebarForm onCreate={onCreate} />
             </div>            
                 {renderedTopics}        

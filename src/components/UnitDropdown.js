@@ -1,16 +1,24 @@
-import {useState} from "react";
+import {useState, useEffect} from "react";
 import {GiCatapult, GiMoonOrbit, GiPendulumSwing, GiUnbalanced} from "react-icons/gi"
 import Checkbox from "./Checkbox";
 import {MdRocketLaunch} from "react-icons/md";
 import {PiWaveSineDuotone} from "react-icons/pi"
 import{BsTornado} from "react-icons/bs"
 
-function UnitDropdown({children, topics, onAdd, onDelete, checkedBoxes, icon}) {
+function UnitDropdown({children, topics, onAdd, onDelete, checkedBoxes, icon, expand}) {
     const [isExpanded, setIsExpanded] = useState(false);
 
     const handleClick = () => {
         setIsExpanded(!isExpanded)
     }
+
+    useEffect(()=> {
+        if (expand){
+            setIsExpanded(true);
+        } else {
+            setIsExpanded(false);
+        }
+    },[expand])
 
     const renderedItems = topics.map((topic) => {
 
