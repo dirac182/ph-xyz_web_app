@@ -15,6 +15,7 @@ function DataProvider({children}) {
               "Jupiter"
             ],
             "correctAnswer": "Jupiter",
+            "correctAnswerIndex": [3],
             "skills": ["3.A.1", "4.B.2", "5.C.3", "6.D.1"],
             "solution": {
               "steps": [
@@ -34,6 +35,7 @@ function DataProvider({children}) {
               "They are the same.",
             ],
             "correctAnswer": "The Car",
+            "correctAnswerIndex": [0],
             "skills": ["3.B.1", "3.B.2", "4.C.3", "5.D.2", "6.A.4"],
             "solution": {
               "steps": [
@@ -51,9 +53,10 @@ function DataProvider({children}) {
               "Vestibulum quis lacus ut dui sodales cursus vitae id sapien. In quis nulla ac diam aliquet euismod eget eget tellus. Nam accumsan mattis laoreet. Phasellus ullamcorper risus lorem, et gravida turpis sollicitudin nec.",
               "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur ornare semper tristique. Curabitur nisi nisi, condimentum et eros id, accumsan convallis ligula. Praesent et vestibulum libero, eget viverra eros. Vestibulum odio arcu, malesuada vitae vestibulum et, faucibus porta elit. Maecenas odio dui, mattis et diam nec, ullamcorper scelerisque arcu.",
               "Quisque magna ligula, semper sit amet vehicula posuere, tempor sed nulla. Pellentesque porttitor lacus purus. Nam at velit cursus, scelerisque lorem non, varius lectus. ",
-              "Dog"
+              "Shark"
             ],
             "correctAnswer": "Shark",
+            "correctAnswerIndex":[3],
             "skills": ["3.C.1", "3.C.2", "4.A.3", "5.B.1"],
             "solution": {
               "steps": [

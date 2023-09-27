@@ -3,11 +3,12 @@ import QuestionButton from "./QustionButton.js";
 import AnswerChoice from "./AnswerChoice.js";
 import { useState } from "react";
 import FlagButton from "./FlagButton";
-import {FiFlag} from "react-icons/fi"
+import {FiFlag} from "react-icons/fi";
+import Button from "../Misc/Button.js"
 
-function QuestionArea({questionIndex,setQuestionIndex}) {
+function QuestionArea({questionIndex,setQuestionIndex, answerData, setAnswerData}) {
     const { questionData } = useDataContext();
-    const [flaggedIndex, setFlaggedIndex] =useState([])
+    const [flaggedIndex, setFlaggedIndex] = useState([])
 
     const handleQuestionButton = (index) => {
         setQuestionIndex(index);
@@ -27,10 +28,15 @@ function QuestionArea({questionIndex,setQuestionIndex}) {
         console.log(flaggedIndex)
      }
 
-    const renderedAnswerChoices = questionData[questionIndex].choices.map((choice,index) => {
+     const handleAnswerChoice = (questionIndex,answerIndex) => {
+         
+     }
+
+    const renderedAnswerChoices = questionData[questionIndex].choices.map((choice,answerIndex) => {
+
         return(
            <div key={choice} className=" content-start items-center px-5">
-              <AnswerChoice>{choice}</AnswerChoice>
+              <AnswerChoice answerData={answerData} setAnswerData={setAnswerData} questionIndex={questionIndex} answerIndex={answerIndex} >{choice}</AnswerChoice>
            </div>
         )
      })
@@ -38,7 +44,6 @@ function QuestionArea({questionIndex,setQuestionIndex}) {
      const renderedQuestions = questionData.map((question,index) => {
         var isFlaged = false;
         if(flaggedIndex.includes(index)){
-            console.log("flagged index: ", index)
             isFlaged= true;
         }
         return(
@@ -61,10 +66,13 @@ function QuestionArea({questionIndex,setQuestionIndex}) {
                <div className="flex border-2 border-indigo-500 rounded-lg p-5 bg-indigo-100 w-3/5 text-center">
                   {questionData[questionIndex].text}
                </div>
-               <div className="grid w-5/6 grid-cols-2 place-content-evenly gap-4 pt-10 justify-items-center ">
-                  {renderedAnswerChoices}
-               </div>
+                  <div className="grid w-5/6 grid-cols-2 place-content-evenly gap-4 pt-10 justify-items-center ">
+                     {renderedAnswerChoices}
+                  </div>           
             </div>
+            <div className="flex justify-center pt-10">
+                     <Button primary rounded submit>Submit Answer</Button>
+            </div>    
          </div>
     )
 }

@@ -11,6 +11,7 @@ function Button({
     outline,
     rounded,
     time,
+    submit,
     expand,
     ...rest
 }) {
@@ -30,6 +31,7 @@ function Button({
         "text-red-500": outline && danger,
         "border-2 border-indigo-500" : time,
         "border-2 shadow-lg shadow-indigo-500/40 hover:bg-indigo-700" : expand,
+        "shadow-lg shadow-indigo-500/40 hover:bg-indigo-700" : submit,
         })
 );
 
