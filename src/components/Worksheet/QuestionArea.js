@@ -28,22 +28,22 @@ function QuestionArea({questionIndex,setQuestionIndex}) {
      }
 
     const renderedAnswerChoices = questionData[questionIndex].choices.map((choice,index) => {
+        return(
+           <div key={choice} className=" content-start items-center px-5">
+              <AnswerChoice>{choice}</AnswerChoice>
+           </div>
+        )
+     })
+
+     const renderedQuestions = questionData.map((question,index) => {
         var isFlaged = false;
         if(flaggedIndex.includes(index)){
             console.log("flagged index: ", index)
             isFlaged= true;
         }
         return(
-           <div key={choice} className=" content-start items-center px-5">
-              <AnswerChoice flag={isFlaged}>{choice}</AnswerChoice>
-           </div>
-        )
-     })
-
-     const renderedQuestions = questionData.map((question,index) => {
-        return(
            <div key={question.image} className="flex items-center px-5">
-              <QuestionButton flaggedIndex={flaggedIndex} onClick={handleQuestionButton} index={index}/>
+              <QuestionButton flag={isFlaged} flaggedIndex={flaggedIndex} onClick={handleQuestionButton} index={index}/>
            </div>
         )
      })
