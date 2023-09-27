@@ -6,7 +6,7 @@ import FlagButton from "./FlagButton";
 import {FiFlag} from "react-icons/fi";
 import Button from "../Misc/Button.js"
 
-function QuestionArea({questionIndex,setQuestionIndex, answerData, setAnswerData}) {
+function QuestionArea({questionIndex,setQuestionIndex,answerData,setAnswerData,questionSubmit}) {
     const { questionData } = useDataContext();
     const [flaggedIndex, setFlaggedIndex] = useState([])
 
@@ -28,9 +28,6 @@ function QuestionArea({questionIndex,setQuestionIndex, answerData, setAnswerData
         console.log(flaggedIndex)
      }
 
-     const handleAnswerChoice = (questionIndex,answerIndex) => {
-         
-     }
 
     const renderedAnswerChoices = questionData[questionIndex].choices.map((choice,answerIndex) => {
 
@@ -71,7 +68,7 @@ function QuestionArea({questionIndex,setQuestionIndex, answerData, setAnswerData
                   </div>           
             </div>
             <div className="flex justify-center pt-10">
-                     <Button primary rounded submit>Submit Answer</Button>
+                     <Button onClick={questionSubmit} primary rounded submit>Submit Answer</Button>
             </div>    
          </div>
     )

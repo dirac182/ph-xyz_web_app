@@ -2,32 +2,37 @@ import { useEffect, useRef, useState } from "react";
 
 
 function AnswerChoice({children,questionIndex,answerIndex,setAnswerData,answerData,...rest}) {
-    // const [checked, setChecked] = useState(false)
-    const isChecked = useRef(false)
+    const [isChecked, setIsChecked] = useState(false)
+    // const isChecked = useRef(false)
 
     useEffect(() => {
-        console.log(answerData[questionIndex], questionIndex) 
         if(answerData[questionIndex] === null || answerData[questionIndex] !== answerIndex ){
-            console.log("Made Loop")
-            isChecked.current = false;
-            
+            setIsChecked(false)
         } 
        },[answerData])
 
+    useEffect(() => {
+        if(answerData[questionIndex] === answerIndex){
+            setIsChecked(true);
+        }
+    },[questionIndex])
 
-    const handleChange = (bool) => {
-        isChecked.current = !isChecked.current
-        if(isChecked.current === true) {
-            setAnswerData(questionIndex,answerIndex)
-        } else if (isChecked.current === false) {
+    const handleChange = () => {
+        setIsChecked(!isChecked)
+        if(isChecked === true) {
+            setAnswerData(questionIndex,null)
+        } else if (isChecked === false) {
             console.log(answerIndex)
-            setAnswerData(questionIndex,null);
+            setAnswerData(questionIndex,answerIndex);
         }
     }
+
+    const classes = isChecked ? "bg-indigo-300 flex p-3 font-normal border-2 border-indigo-500 items-center cursor-pointer" : "flex p-3 font-normal bg-gray-50 hover:bg-indigo-300 border-2 border-indigo-500 items-center cursor-pointer"
+
     
     return(
-        <div {...rest} onClick={handleChange} className=" flex p-3 font-normal bg-gray-50 hover:bg-indigo-300 border-2 border-indigo-500 items-center cursor-pointer">
-            <input onChange={handleChange} checked={isChecked.current} type="checkbox"/>
+        <div {...rest} onClick={handleChange} className={classes}>
+            <input onChange={handleChange} checked={isChecked} type="checkbox"/>
             <p className="pl-2" >{children}</p>
         </div>
     )
