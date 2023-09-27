@@ -1,10 +1,9 @@
-import Navbar from "./components/Navbar";
-import Route from "./components/Route";
+import Navbar from "./components/Misc/Navbar";
+import Route from "./components/Misc/Route";
 import About from "./pages/About";
 import Landing from "./pages/Landing";
 import Faq from "./pages/Faq";
 import DemoSetup from "./pages/DemoSetup"
-import Footer from "./components/Footer";
 import DemoWorksheet from "./pages/DemoWorksheet";
 
 

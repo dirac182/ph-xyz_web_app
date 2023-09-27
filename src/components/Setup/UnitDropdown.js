@@ -1,6 +1,6 @@
 import {useState, useEffect} from "react";
 import {GiCatapult, GiMoonOrbit, GiPendulumSwing, GiUnbalanced} from "react-icons/gi"
-import Checkbox from "../Checkbox";
+import Checkbox from "../Misc/Checkbox.js";
 import {MdRocketLaunch} from "react-icons/md";
 import {PiWaveSineDuotone} from "react-icons/pi"
 import{BsTornado} from "react-icons/bs"

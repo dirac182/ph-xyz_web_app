@@ -3,7 +3,7 @@ import Button  from "./Button.js";
 import Link from "./Link.js";
 import {GiUnbalanced} from "react-icons/gi"
 import Route from "./Route.js";
-import Landing from "../pages/Landing";
+import Landing from "../../pages/Landing.js";
 
 function Navbar () {
     

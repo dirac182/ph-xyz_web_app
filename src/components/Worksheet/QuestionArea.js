@@ -7,7 +7,7 @@ import {FiFlag} from "react-icons/fi"
 
 function QuestionArea({questionIndex,setQuestionIndex}) {
     const { questionData } = useDataContext();
-    const [flaggedIndex, setFlaggedIndex] =useState([1])
+    const [flaggedIndex, setFlaggedIndex] =useState([])
 
     const handleQuestionButton = (index) => {
         setQuestionIndex(index);

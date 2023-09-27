@@ -1,6 +1,6 @@
 import {useState , useEffect, useRef} from "react";
 import {GoChevronDown} from "react-icons/go";
-import Panel from "../Panel"
+import Panel from "../Misc/Panel"
 
 function SortDropdown({options, value, onChange}) {
     const [isOpen, setIsOpen] = useState(false);

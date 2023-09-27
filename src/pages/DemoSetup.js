@@ -1,9 +1,9 @@
-import UnitDropdown from "../components/UnitDropdown";
+import UnitDropdown from "../components/Setup/UnitDropdown";
 import { useState } from "react";
-import Sidebar from "../components/Sidebar";
-import Searchbar from "../components/Seachbar";
-import Button from "../components/Button";
-import SortDropdown from "../components/SortDropdown";
+import Sidebar from "../components/Setup/Sidebar";
+import Searchbar from "../components/Setup/Seachbar";
+import Button from "../components/Misc/Button";
+import SortDropdown from "../components/Setup/SortDropdown";
 
 function DemoSetup() {
    const [selectedTopics, setSelectedTopics] = useState([])
