@@ -6,6 +6,8 @@ import FlagButton from "./FlagButton";
 import {FiFlag} from "react-icons/fi";
 import Button from "../Misc/Button.js"
 import QuestionIcon from "./QuestionIcon";
+import SubmitButton from "./SubmitButton";
+import Solution from "./Solution";
 
 function QuestionArea({isCorrect,questionIndex,setQuestionIndex,answerData,setAnswerData,questionSubmit}) {
     const { questionData } = useDataContext();
@@ -31,7 +33,7 @@ function QuestionArea({isCorrect,questionIndex,setQuestionIndex,answerData,setAn
 
 
     const renderedAnswerChoices = isCorrect[questionIndex] === 0    
-     ?<div>Wrong</div>
+     ?<Solution qIndex={questionIndex} isCorrect={isCorrect}/>
      : isCorrect[questionIndex] === 1 
      ? <div>Correct</div>
      : questionData[questionIndex].choices.map((choice,answerIndex) => {
@@ -48,7 +50,7 @@ function QuestionArea({isCorrect,questionIndex,setQuestionIndex,answerData,setAn
         }
         return(
            <div key={question.image} className="flex items-center px-5">
-              <QuestionButton flag={isFlaged} flaggedIndex={flaggedIndex} onClick={handleQuestionButton} index={index}/>
+              <QuestionButton flag={isFlaged} flaggedIndex={flaggedIndex} onClick={handleQuestionButton} index={index} isCorrect={isCorrect}/>
            </div>
         )
      })
@@ -70,12 +72,12 @@ function QuestionArea({isCorrect,questionIndex,setQuestionIndex,answerData,setAn
                <div className="flex border-2 border-indigo-500 rounded-lg p-5 bg-indigo-100 w-3/5 text-center text-xl">
                   {questionData[questionIndex].text}
                </div>
-                  <div className="grid w-5/6 grid-cols-2 place-content-evenly gap-4 pt-10 justify-items-center ">
+                  <div className="grid w-5/6 grid-cols-2 place-content-evenly gap-4 pt-10 justify-items-center">
                      {renderedAnswerChoices}
                   </div>           
             </div>
             <div className="flex justify-center pt-10">
-                  <Button onClick={questionSubmit} qIndex={questionIndex} primary rounded submit>Submit Answer</Button>
+                  <SubmitButton isCorrect={isCorrect} onClick={questionSubmit} questionSubmit={questionSubmit} qIndex={questionIndex} />
             </div>    
          </div>
     )

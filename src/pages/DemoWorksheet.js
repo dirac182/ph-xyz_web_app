@@ -42,8 +42,8 @@ function DemoWorksheet() {
   }
 
    return(
-       <div className="flex grid-cols-3">
-         <AssignmentInfo />
+       <div className="flex grid-cols-3 h-screen">
+         <AssignmentInfo isCorrect={isCorrect} />
          <QuestionArea isCorrect={isCorrect} questionSubmit={handleSubmitQuestion} answerData={answerData} setAnswerData={handleAnswerChange} questionIndex={questionIndex} setQuestionIndex={setQuestionIndex}/>
          <SkillArea questionIndex={questionIndex} />
        </div>

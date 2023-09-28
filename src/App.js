@@ -5,11 +5,12 @@ import Landing from "./pages/Landing";
 import Faq from "./pages/Faq";
 import DemoSetup from "./pages/DemoSetup"
 import DemoWorksheet from "./pages/DemoWorksheet";
+import Footer from "./components/Misc/Footer";
 
 
 function App() {
     return(
-        <div className="font-sans ">
+        <div className="font-sans flex flex-col min-h-screen">
             <Navbar />
             <Route path="/">
                 <Landing/>
@@ -26,6 +27,7 @@ function App() {
             <Route path="/faq">
                 <Faq />
             </Route>
+            <Footer />
         </div>
     )
 };

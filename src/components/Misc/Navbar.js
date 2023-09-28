@@ -9,19 +9,16 @@ function Navbar () {
     
 
     return(
-    <div className="h-20 flex justify-between items-center bg-white shadow-lg shadow-indigo-500/40">
+    <div className="h-20 flex flex-wrap justify-between items-center bg-white shadow-lg shadow-indigo-500/40">
         <a href="/">
         <div className="relative left-16 flex content-center items-center text-6xl text-indigo-500 cursor-pointer">
-            
                 <GiUnbalanced className="relative right-2 bottom-3" />
                 <div className="pr-2 border-indigo-500 border-l-2">
                     <p className="relative top-2 ml-2  text-center" >ZYX</p>
                 </div>
-            
         </div>
         </a>
-        <span className="flex items-center">
-            
+        <span className="flex items-center">   
             <Link className="no-underline text-indigo-500 text-xl px-3" to="/demo/teacher">Teacher Demo</Link>
             <p className="text-xl">|</p>
             <Link className="no-underline text-indigo-500 text-xl px-3" to="/demo/student">Student Demo</Link>

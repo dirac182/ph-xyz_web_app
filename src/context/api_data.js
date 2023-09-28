@@ -17,15 +17,14 @@ function DataProvider({children}) {
             "correctAnswer": "Jupiter",
             "correctAnswerIndex": [3],
             "skills": ["3.A.1", "4.B.2", "5.C.3", "6.D.1"],
-            "solution": {
-              "steps": [
-                {"step1": "Start by reading about each planet's characteristics."},
-                {"step2": "Consider the fact that Jupiter is often mentioned as the largest planet."},
-                {"step3": "Match this information with the choices provided."},
-                {"step4": "Conclude that the answer is Jupiter."}
+            "solution": [
+                "Start by reading about each planet's characteristics.",
+                "Consider the fact that Jupiter is often mentioned as the largest planet.",
+                "Match this information with the choices provided.",
+                "Conclude that the answer is Jupiter."
               ]
             }
-          },
+           ,
           {
             "text": "A car and a bicycle start from rest and accelerate uniformly over the same straight path. If the car reaches a final speed twice that of the bicycle in the same time, which has a greater acceleration?",
             "image": null,
@@ -37,15 +36,14 @@ function DataProvider({children}) {
             "correctAnswer": "The Car",
             "correctAnswerIndex": [0],
             "skills": ["3.B.1", "3.B.2", "4.C.3", "5.D.2", "6.A.4"],
-            "solution": {
-              "steps": [
-                {"step1": "Recall key landmarks and characteristics of European countries."},
-                {"step2": "Recognize the Eiffel Tower and other attributes mentioned are from France."},
-                {"step3": "Identify the capital of France from the given options."},
-                {"step4": "Determine that Paris is the correct answer."}
+            "solution":[
+                "Recall key landmarks and characteristics of European countries.",
+                "Recognize the Eiffel Tower and other attributes mentioned are from France.",
+                "Identify the capital of France from the given options.",
+                "Determine that Paris is the correct answer."
               ]
             }
-          },
+          ,
           {
             "text": "The animal kingdom is vast and diverse. Different species belong to different classifications. Mammals are one such category, known for certain characteristics. Which of the following is not a mammal?",
             "image": "path/to/image3.jpg",
@@ -58,15 +56,14 @@ function DataProvider({children}) {
             "correctAnswer": "Shark",
             "correctAnswerIndex":[3],
             "skills": ["3.C.1", "3.C.2", "4.A.3", "5.B.1"],
-            "solution": {
-              "steps": [
-                {"step1": "Understand the characteristics of mammals."},
-                {"step2": "Know that mammals are typically warm-blooded and give live birth."},
-                {"step3": "Realize that sharks lay eggs and are cold-blooded."},
-                {"step4": "Conclude that sharks are not mammals."}
+            "solution": [
+                "Understand the characteristics of mammals.",
+                "Know that mammals are typically warm-blooded and give live birth.",
+                "Realize that sharks lay eggs and are cold-blooded.",
+                "Conclude that sharks are not mammals."
               ]
             }
-          }
+          
         ]
       }
     const [questionData,setQuestionData] = useState(data["Assignment 1"])
