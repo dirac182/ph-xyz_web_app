@@ -5,8 +5,9 @@ import { useState } from "react";
 import FlagButton from "./FlagButton";
 import {FiFlag} from "react-icons/fi";
 import Button from "../Misc/Button.js"
+import QuestionIcon from "./QuestionIcon";
 
-function QuestionArea({questionIndex,setQuestionIndex,answerData,setAnswerData,questionSubmit}) {
+function QuestionArea({isCorrect,questionIndex,setQuestionIndex,answerData,setAnswerData,questionSubmit}) {
     const { questionData } = useDataContext();
     const [flaggedIndex, setFlaggedIndex] = useState([])
 
@@ -29,13 +30,15 @@ function QuestionArea({questionIndex,setQuestionIndex,answerData,setAnswerData,q
      }
 
 
-    const renderedAnswerChoices = questionData[questionIndex].choices.map((choice,answerIndex) => {
-
-        return(
-           <div key={choice} className=" content-start items-center px-5">
-              <AnswerChoice answerData={answerData} setAnswerData={setAnswerData} questionIndex={questionIndex} answerIndex={answerIndex} >{choice}</AnswerChoice>
-           </div>
-        )
+    const renderedAnswerChoices = isCorrect[questionIndex] === 0    
+     ?<div>Wrong</div>
+     : isCorrect[questionIndex] === 1 
+     ? <div>Correct</div>
+     : questionData[questionIndex].choices.map((choice,answerIndex) => {
+      return(
+         <div key={choice} className=" content-start items-center px-5">
+            <AnswerChoice answerData={answerData} setAnswerData={setAnswerData} questionIndex={questionIndex} answerIndex={answerIndex} >{choice}</AnswerChoice>
+         </div>)
      })
 
      const renderedQuestions = questionData.map((question,index) => {
@@ -51,8 +54,12 @@ function QuestionArea({questionIndex,setQuestionIndex,answerData,setAnswerData,q
      })
     return (
         <div className="w-3/5 border-x-2 border-dashed border-indigo-500">
-            <div className="flex py-10 justify-center">
-               {renderedQuestions}
+            <div className="flex space-x-72 items-center pt-10 pl-20">
+               <QuestionIcon qIndex={questionIndex} isCorrect={isCorrect}/>
+               <div className="flex items-center px-5">
+                  {renderedQuestions}
+               </div>
+               
             </div>
             <div className="flex justify-end">
                 <div className="pr-6">
@@ -60,7 +67,7 @@ function QuestionArea({questionIndex,setQuestionIndex,answerData,setAnswerData,q
                 </div>
             </div>
             <div className="grid pt-5 justify-items-center">
-               <div className="flex border-2 border-indigo-500 rounded-lg p-5 bg-indigo-100 w-3/5 text-center">
+               <div className="flex border-2 border-indigo-500 rounded-lg p-5 bg-indigo-100 w-3/5 text-center text-xl">
                   {questionData[questionIndex].text}
                </div>
                   <div className="grid w-5/6 grid-cols-2 place-content-evenly gap-4 pt-10 justify-items-center ">
@@ -68,7 +75,7 @@ function QuestionArea({questionIndex,setQuestionIndex,answerData,setAnswerData,q
                   </div>           
             </div>
             <div className="flex justify-center pt-10">
-                     <Button onClick={questionSubmit} primary rounded submit>Submit Answer</Button>
+                  <Button onClick={questionSubmit} qIndex={questionIndex} primary rounded submit>Submit Answer</Button>
             </div>    
          </div>
     )
