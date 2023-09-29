@@ -13,12 +13,12 @@ function Footer() {
                     <div className="relative left-16 flex content-center pt-3 items-center text-5xl text-white cursor-pointer">
                         <GiUnbalanced className="relative right-2 bottom-3" />
                         <div className="pr-2 border-indigo-500 border-l-2">
-                            <p className="relative ml-2 text-center" >ZYX</p>
+                            <p className="relative ml-2 text-center" >ph-ZYX</p>
                         </div>
                     </div>
                 </a>
                 <span className="flex items-center">
-                    <p>© {thisYear} My React App</p>
+                    <p>© {thisYear} ZYX inc.</p>
                 </span>
                 <span className="flex items-center">   
                     <Link className="no-underline text-indigo-100 text-xl px-3" to="/demo/teacher">Privacy Policy</Link>

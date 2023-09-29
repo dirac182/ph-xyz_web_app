@@ -25,7 +25,7 @@ function DemoSetup() {
    }
    
    const handleCreatePage = (name,questions,timedBool,timeLimit,dueDate,dueTime) => {
-         console.log(name,questions,timedBool,timeLimit,dueDate,dueTime)
+         console.log(name,selectedTopics,questions,timedBool,timeLimit,dueDate,dueTime)
    }
 
    const handleExpandButton = (event) => {
@@ -56,7 +56,7 @@ function DemoSetup() {
    ];
 
    return(
-       <div className="landing-page-container h-screen w-full pr-6">
+       <div className="landing-page-container h-screen w-full pr-6 bg-indigo-200">
          <div className="landing-page-sidebar h-full w-full">
             <Sidebar onCreate={handleCreatePage} onDelete={handleRemoveTopic} addedTopics={selectedTopics}/>
          </div>

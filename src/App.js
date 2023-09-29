@@ -1,4 +1,4 @@
-import Navbar from "./components/Misc/Navbar";
+import MyNavbar from "./components/Misc/Navbar";
 import Route from "./components/Misc/Route";
 import About from "./pages/About";
 import Landing from "./pages/Landing";
@@ -6,19 +6,23 @@ import Faq from "./pages/Faq";
 import DemoSetup from "./pages/DemoSetup"
 import DemoWorksheet from "./pages/DemoWorksheet";
 import Footer from "./components/Misc/Footer";
+import TeacherLanding from "./pages/TeacherLanding";
 
 
 function App() {
     return(
         <div className="font-sans flex flex-col min-h-screen">
-            <Navbar />
+            <MyNavbar />
             <Route path="/">
                 <Landing/>
             </Route>
-            <Route path="/demo/teacher">
+            <Route path="/app/teacher">
+                <TeacherLanding/>
+            </Route>
+            <Route path="/app/teacher/create">
                 <DemoSetup/>
             </Route>
-            <Route path="/demo/student">
+            <Route path="/app/student">
                 <DemoWorksheet/>
             </Route>
             <Route path="/about">

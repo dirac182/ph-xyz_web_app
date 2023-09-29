@@ -77,7 +77,7 @@ function UnitDropdown({children, topics, onAdd, onDelete, checkedBoxes, icon, ex
 
     return (
     <div className="w-full p-4 ">
-        <div className="flex cursor-pointer text-lg font-medium p-4 bg-indigo-200 border-2 border-indigo-500 rounded-lg " onClick={handleClick}>
+        <div className="flex cursor-pointer text-lg font-medium p-4 bg-white border-2 border-indigo-500 rounded-lg shadow-xl shadow-indigo-500/40" onClick={handleClick}>
         {handleIcon(icon)}<span className="flex justify-center items-center p-2 whitespace-nowrap"> {children}</span>
         </div>
         {renderedItems}
