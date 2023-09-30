@@ -1,6 +1,6 @@
 import { useState,useEffect } from "react";
 
-function Checkbox({topic, onAdd, onDelete, checkedBoxes}) {
+function Checkbox({topic, onAdd, onDelete, checkedBoxes, dispatch}) {
     const [checked, setChecked] = useState(false);
 
     useEffect(() =>{
@@ -23,9 +23,11 @@ function Checkbox({topic, onAdd, onDelete, checkedBoxes}) {
         if (!checked){
             console.log("Checked")
             onAdd(topic)
+            dispatch({type:"add-topic",payload:{id:topic.id,topic:topic.topic}})
         } else {
             console.log("Unchecked")
             onDelete(topic.id)
+            dispatch({type:"delete-topic",payload: topic.id})
         }
     } 
     return (

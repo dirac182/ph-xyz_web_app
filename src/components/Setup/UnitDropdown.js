@@ -5,7 +5,7 @@ import {MdRocketLaunch} from "react-icons/md";
 import {PiWaveSineDuotone} from "react-icons/pi"
 import{BsTornado} from "react-icons/bs"
 
-function UnitDropdown({children, topics, onAdd, onDelete, checkedBoxes, icon, expand}) {
+function UnitDropdown({children, topics, onAdd, onDelete, checkedBoxes, icon, expand, dispatch}) {
     const [isExpanded, setIsExpanded] = useState(false);
 
     const handleClick = () => {
@@ -24,7 +24,7 @@ function UnitDropdown({children, topics, onAdd, onDelete, checkedBoxes, icon, ex
 
         return(
             <div className="" key={topic.id}>
-                {isExpanded && <Checkbox checkedBoxes={checkedBoxes} onAdd={onAdd} onDelete={onDelete} topic={topic}/>}
+                {isExpanded && <Checkbox dispatch={dispatch} checkedBoxes={checkedBoxes} onAdd={onAdd} onDelete={onDelete} topic={topic}/>}
             </div>
         )
     })

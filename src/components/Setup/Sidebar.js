@@ -1,30 +1,13 @@
 import SidebarTopic from "./SidebarTopic";
 import SidebarForm from "./SidebarForm";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
-function Sidebar({addedTopics, onDelete, onCreate}) {
-    const [topicQuestionPair, setTopicQuestionPair] = useState([]);
-
-    // const handleTopicAdd = (topic,questionAmount) => {
-    //     const update = [...topicQuestionPair,{"topic":topic,"questionAmount":questionAmount}];
-    //     setTopicQuestionPair(update)
-    // }
-
-    // const handleTopicDelete = (topic,questionAmount) => {
-    //     const update = [...topicQuestionPair,{"topic":topic,"questionAmount":questionAmount}];
-    //     setTopicQuestionPair(update)
-    // }
-
-    // const handleQuestionDecrease = (topic,questionAmount) => {
-    //     const update = topicQuestionPair.map((topicQuestion) => {
-    //         return index !== indexToRemove;
-    //       });
-    // }
+function Sidebar({addedTopics, onDelete, onCreate, dispatch, tqPair}) {
 
     const renderedTopics = addedTopics.map((topic) =>{
             return (
                 <div key={topic.topic}>
-                    <SidebarTopic onDelete={onDelete} topic={topic} />
+                    <SidebarTopic dispatch={dispatch} onDelete={onDelete} topic={topic} />
                 </div>
                  )
         })
@@ -36,7 +19,7 @@ function Sidebar({addedTopics, onDelete, onCreate}) {
     return (
         <div className="bg-white">
             <div>
-                <SidebarForm onCreate={onCreate} />
+                <SidebarForm tqPair={tqPair} onCreate={onCreate} />
             </div>
             <div className="border-r-2 border-b-2 border-indigo-300">
                 {topicHeader}

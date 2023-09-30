@@ -1,12 +1,17 @@
 import {MdOutlineCancel} from "react-icons/md"
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
-function SidebarTopic({topic, onDelete}) {
+function SidebarTopic({topic, onDelete, dispatch}) {
     const [questionAmount,setQuestionAmount] = useState(1);
 
     const handleRemoveClick = () =>{
         onDelete(topic.id);
+        dispatch({type:"delete-topic",payload: topic.id})
     }
+
+    useEffect(() => {
+        dispatch({type:"change-questions", payload: {id: topic.id, amount: questionAmount}})
+    },[questionAmount])
 
     return (
         <div className="flex p-3 border-indigo-300 border-b-2 border-r-2 content-center justify-between bg-indigo-100">

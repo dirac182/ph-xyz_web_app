@@ -2,7 +2,7 @@ import Button from "../Misc/Button";
 import {useState} from "react";
 import TimedDropdown from "./TimedDropdown";
 
-function SidebarForm({onCreate}) {
+function SidebarForm({onCreate, tqPair}) {
     const today = new Date().toJSON().slice(0,10);
 
     const [name, setName] = useState("");
@@ -12,6 +12,8 @@ function SidebarForm({onCreate}) {
     const [timeHour, setTimeHour] = useState(11);
     const [timeMinute, setTimeMinute] = useState(59);
     const [timeButtonText, setTimeButtontext] = useState("PM");
+    const [userID, setUserID] = useState(123)
+    const [status, setStatus] = useState(true)
 
     const handleTimeButtonClick = (event) => {
         event.preventDefault();
@@ -31,7 +33,7 @@ function SidebarForm({onCreate}) {
     const handleSubmit = (event) => {
         event.preventDefault();
         const dueTime = `${timeHour}:${timeMinute} ${timeButtonText}`;
-        onCreate(name,timedCheck,timeLimit,date, dueTime);
+        onCreate(name,userID,tqPair,timedCheck,timeLimit,date,dueTime,status);
     }
 
     return(
