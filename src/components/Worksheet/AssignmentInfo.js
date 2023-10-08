@@ -24,7 +24,7 @@ function AssignmentInfo({isCorrect }) {
 
 
     return (
-        <div className="w-1/5 pt-10 text-center">
+        <div className="w-1/5 pt-10 text-center bg-indigo-200">
             <div className="text-3xl py-4">
                Assignment Name
             </div>

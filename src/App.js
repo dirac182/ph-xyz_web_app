@@ -22,6 +22,9 @@ function App() {
             <Route path="/app/teacher/create">
                 <DemoSetup/>
             </Route>
+            <Route path="/app/teacher/edit">
+                <DemoSetup/>
+            </Route>
             <Route path="/app/student">
                 <DemoWorksheet/>
             </Route>

@@ -33,6 +33,8 @@ function SidebarForm({onCreate, tqPair}) {
     const handleSubmit = (event) => {
         event.preventDefault();
         const dueTime = `${timeHour}:${timeMinute} ${timeButtonText}`;
+        const date = new Date(`${date}T`)
+
         onCreate(name,userID,tqPair,timedCheck,timeLimit,date,dueTime,status);
     }
 

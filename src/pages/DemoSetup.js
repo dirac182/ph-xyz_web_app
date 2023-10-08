@@ -12,9 +12,7 @@ function DemoSetup() {
    const [expandBool, setExpandBool] = useState(false);
    const [dropdownSelection, setDropdownSelection] = useState(null)
 
-//Gonna try useReducer to manage selected topics and amount of questions per topic
 //TopicList will hold each topic, questions will hold the amount of questions each topic has corresponding to the index.
-
    const reducer = (state, action) => {
       //This takes topic id and topic
       if (action.type === "add-topic"){
@@ -46,10 +44,6 @@ function DemoSetup() {
    } 
 
    const [tqPair,dispatch] = useReducer(reducer, [])
-
-   // useEffect(()=> {
-   //    console.log(topics);
-   // },[topics])
 
    const handleAddTopic = (topic) => {
       const updatedTopics = [...selectedTopics,topic];

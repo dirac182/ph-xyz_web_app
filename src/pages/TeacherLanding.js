@@ -1,8 +1,15 @@
 import AssignmentTable from "../components/AssignmentTable";
 import Button from "../components/Misc/Button";
 import Link from "../components/Misc/Link";
+import useDataContext from "../hooks/use-data-context";
+import { useEffect } from "react";
 
 function TeacherLanding() {
+    const { fetchAssignments } = useDataContext();
+
+    useEffect(()=> {
+        fetchAssignments();
+    },[])
 
     const data = [
         {edit:"button", name: "Kinematics", skills: "Circular Motion",type:"assignment", status: "posted", dueDate: "Jun 15, 2022 at 08:00 am" },

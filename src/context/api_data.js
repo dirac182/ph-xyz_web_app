@@ -72,10 +72,6 @@ function DataProvider({children}) {
     const [assignments, setAssignments] = useState([]);
     
 
-    useEffect(() => {
-      fetchAssignments()
-    },[])
-
     const fetchAssignments = async () => {
       const response = await axios.get("http://localhost:5000/get/assignments");
       console.log(response.data)
@@ -84,7 +80,8 @@ function DataProvider({children}) {
 
     const valuesToShare = {
         questionData,
-        assignments
+        assignments,
+        fetchAssignments
     }
 
       return (
