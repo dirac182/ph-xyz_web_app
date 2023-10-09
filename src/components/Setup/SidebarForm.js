@@ -1,5 +1,5 @@
 import Button from "../Misc/Button";
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import TimedDropdown from "./TimedDropdown";
 import Link from "../Misc/Link";
 
@@ -15,6 +15,7 @@ function SidebarForm({onCreate, tqPair}) {
     const [timeButtonText, setTimeButtontext] = useState("PM");
     const [userID, setUserID] = useState(123)
     const [status, setStatus] = useState(true)
+    const [qTotal,setqTotal] = useState(0)
 
     const handleTimeButtonClick = (event) => {
         event.preventDefault();
@@ -25,6 +26,14 @@ function SidebarForm({onCreate, tqPair}) {
         }
     }
 
+    useEffect(() => {
+        var total = 0
+        tqPair.map((pair,index)=>{
+            total = total + parseInt(pair.questions);
+        })
+        setqTotal(total);
+    },[tqPair])
+
     const checkToggle = (
             <div>
                 {timedCheck && <TimedDropdown time={timeLimit} setTime={setTimeLimit} />}
@@ -34,16 +43,13 @@ function SidebarForm({onCreate, tqPair}) {
     const handleSubmit = (event) => {
         event.preventDefault();
         var time = parseInt(timeHour)
-        console.log(time);
         if (timeButtonText==="PM"){
             time = 12+time;
         }
         if (timeHour < 10 && timeButtonText === "AM"){
             time = "0"+time;
         }
-        console.log(time);
         const newDate = new Date(`${date}T${time}:${timeMinute}:00`)
-        console.log(newDate);
         onCreate(name,userID,tqPair,timedCheck,timeLimit,newDate,status);
 
     }
@@ -67,7 +73,7 @@ function SidebarForm({onCreate, tqPair}) {
             
             <div className="items-start">
                 <label className="text-md pr-2">Number of Questions:</label>
-                <input className="w-12 h-8 border border-2 text-center rounded border-indigo-300" type="number" min="1" max="10" />
+                <label className="text-md pr-2">{qTotal}</label>
             </div>
             
             <div>

@@ -3,7 +3,7 @@ import {BiEditAlt, BiSpreadsheet} from "react-icons/bi";
 import Button from "./Misc/Button";
 import Link from "./Misc/Link";
 
-function AssignmentTable ({data}) {
+function AssignmentTable () {
     const { assignments } = useDataContext();
 
     const handleEditButton = () => {
@@ -28,7 +28,7 @@ function AssignmentTable ({data}) {
                                 <thead>
                                     <tr className="border-b-2">
                                         <th>Skill</th>
-                                        <th># of ?</th>
+                                        <th>Questions</th>
                                     </tr>
                                 </thead>
                                 <tbody>

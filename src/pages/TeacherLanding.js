@@ -11,13 +11,6 @@ function TeacherLanding() {
         fetchAssignments();
     },[])
 
-    const data = [
-        {edit:"button", name: "Kinematics", skills: "Circular Motion",type:"assignment", status: "posted", dueDate: "Jun 15, 2022 at 08:00 am" },
-        {edit:"button", name: "Dynamics", skills: "Motion",type:"assignment", status: "Not posted", dueDate: "Jun 15, 2022 at 09:00 am" },
-        {edit:"button", name: "Torque", skills: "Circular ",type:"Quiz", status: "posted", dueDate: "Jun 15, 2022 at 10:00 am" },
-        {edit:"button", name: "Kinematics", skills: "Circular Motion",type:"assignment", status: "posted", dueDate: "Jun 15, 2022 at 12:00 am" },
-    ]
-
     const handleCreateAssignment = () => {
 
     }
@@ -28,7 +21,7 @@ function TeacherLanding() {
                 <p className="text-5xl">Assignment List</p>
             </div>
             <div className="flex justify-center py-6">
-                <AssignmentTable data={data} />
+                <AssignmentTable />
             </div>
             <div className="flex justify-center">
                 <Link to="/app/teacher/create">

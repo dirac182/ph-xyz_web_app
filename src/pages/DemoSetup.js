@@ -6,7 +6,7 @@ import Button from "../components/Misc/Button";
 import SortDropdown from "../components/Setup/SortDropdown";
 import axios from "axios";
 
-function DemoSetup() {
+function DemoSetup({isEdit}) {
    const [selectedTopics, setSelectedTopics] = useState([])
    const [expandButtonText, setExpandButtonText] = useState("Expand All");
    const [expandBool, setExpandBool] = useState(false);
