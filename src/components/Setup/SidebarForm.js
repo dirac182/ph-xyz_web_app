@@ -1,6 +1,7 @@
 import Button from "../Misc/Button";
 import {useState} from "react";
 import TimedDropdown from "./TimedDropdown";
+import Link from "../Misc/Link";
 
 function SidebarForm({onCreate, tqPair}) {
     const today = new Date().toJSON().slice(0,10);
@@ -32,10 +33,19 @@ function SidebarForm({onCreate, tqPair}) {
 
     const handleSubmit = (event) => {
         event.preventDefault();
-        const dueTime = `${timeHour}:${timeMinute} ${timeButtonText}`;
-        const date = new Date(`${date}T`)
+        var time = parseInt(timeHour)
+        console.log(time);
+        if (timeButtonText==="PM"){
+            time = 12+time;
+        }
+        if (timeHour < 10 && timeButtonText === "AM"){
+            time = "0"+time;
+        }
+        console.log(time);
+        const newDate = new Date(`${date}T${time}:${timeMinute}:00`)
+        console.log(newDate);
+        onCreate(name,userID,tqPair,timedCheck,timeLimit,newDate,status);
 
-        onCreate(name,userID,tqPair,timedCheck,timeLimit,date,dueTime,status);
     }
 
     return(
@@ -44,7 +54,7 @@ function SidebarForm({onCreate, tqPair}) {
             
             <div className="col-span-2 md:col-span-2">
                 <span className="p-4 flex items-center justify-center">
-                    <Button className="text-2xl w-full md:w-96 shadow-lg shadow-indigo-500/40 hover:bg-indigo-700" primary rounded>Create Workpage</Button>
+                        <Button type="submit" className="text-2xl w-full md:w-96 shadow-lg shadow-indigo-500/40 hover:bg-indigo-700" primary rounded>Create Workpage</Button>
                 </span>
             </div>
             

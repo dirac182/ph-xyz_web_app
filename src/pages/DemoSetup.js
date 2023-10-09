@@ -58,7 +58,7 @@ function DemoSetup() {
       console.log(selectedTopics)
    }
    
-   const handleCreatePage = async (name,userID,tqPair,quiz,timeLimit,dueDate,dueTime,status) => {
+   const handleCreatePage = async (name,userID,tqPair,quiz,timeLimit,dueDate,status) => {
       const response = await axios.post("http://localhost:5000/createAssignment", {
          name,
          userID,
@@ -66,10 +66,9 @@ function DemoSetup() {
          quiz,
          timeLimit,
          dueDate,
-         dueTime,
          status
       } );
-      console.log(name,userID,tqPair,quiz,timeLimit,dueDate,dueTime,status)
+      console.log(name,userID,tqPair,quiz,timeLimit,dueDate,status)
       console.log(response.data)
    }
 
