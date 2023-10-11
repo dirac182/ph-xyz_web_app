@@ -1,62 +1,49 @@
 import UnitDropdown from "../components/Setup/UnitDropdown";
-import { useState, useReducer, useEffect } from "react";
+import { useState } from "react";
 import Sidebar from "../components/Setup/Sidebar";
 import Searchbar from "../components/Setup/Seachbar";
 import Button from "../components/Misc/Button";
 import SortDropdown from "../components/Setup/SortDropdown";
 import axios from "axios";
 
-function DemoSetup({isEdit}) {
-   const [selectedTopics, setSelectedTopics] = useState([])
+function DemoSetup() {
    const [expandButtonText, setExpandButtonText] = useState("Expand All");
    const [expandBool, setExpandBool] = useState(false);
    const [dropdownSelection, setDropdownSelection] = useState(null)
 
-//TopicList will hold each topic, questions will hold the amount of questions each topic has corresponding to the index.
-   const reducer = (state, action) => {
-      //This takes topic id and topic
-      if (action.type === "add-topic"){
-         console.log("added-topic",action.payload)
-         return (
-            [...state, {"id": action.payload.id, "topic": action.payload.topic, "questions": 1}]
-         )
-         //this takes a topic id
-      } else if (action.type === "delete-topic") {
-         console.log("deleted-topic",action.payload)
-         return(
-            state.filter((topic) => {
-               return topic.id !== action.payload
-            })
-         )
-         //This takes topic id and amount of questions
-      } else if (action.type === "change-questions"){
-         console.log("changed-question amount",action.payload)
-         return(
-            state.map((topic) => {
-               return(
-               topic.id === action.payload.id ? {...topic, questions : action.payload.amount} : topic
-               )
-            })
-         )
-      } else {
-         return state;
-      }
-   } 
+// //TopicList will hold each topic, questions will hold the amount of questions each topic has corresponding to the index.
+//    const reducer = (state, action) => {
+//       //This takes topic id and topic
+//       if (action.type === "add-topic"){
+//          console.log("added-topic",action.payload)
+//          return (
+//             [...state, {"id": action.payload.id, "topic": action.payload.topic, "questions": 1}]
+//          )
+//          //this takes a topic id
+//       } else if (action.type === "delete-topic") {
+//          console.log("deleted-topic",action.payload)
+//          return(
+//             state.filter((topic) => {
+//                return topic.id !== action.payload
+//             })
+//          )
+//          //This takes topic id and amount of questions
+//       } else if (action.type === "change-questions"){
+//          console.log("changed-question amount",action.payload)
+//          return(
+//             state.map((topic) => {
+//                return(
+//                topic.id === action.payload.id ? {...topic, questions : action.payload.amount} : topic
+//                )
+//             })
+//          )
+//       } else {
+//          return state;
+//       }
+//    } 
 
-   const [tqPair,dispatch] = useReducer(reducer, [])
+//    const [tqPair,dispatch] = useReducer(reducer, [])
 
-   const handleAddTopic = (topic) => {
-      const updatedTopics = [...selectedTopics,topic];
-      setSelectedTopics(updatedTopics);
-   }
-
-   const handleRemoveTopic = (topicIdToRemove) => {
-      const updatedTopics = selectedTopics.filter((topic) => {
-         return topic.id !== topicIdToRemove
-      })
-      setSelectedTopics(updatedTopics);
-      console.log(selectedTopics)
-   }
    
    const handleCreatePage = async (name,userID,tqPair,quiz,timeLimit,dueDate,status) => {
       const response = await axios.post("http://localhost:5000/createAssignment", {
@@ -102,7 +89,7 @@ function DemoSetup({isEdit}) {
    return(
        <div className="landing-page-container h-screen w-full pr-6 bg-indigo-200">
          <div className="landing-page-sidebar h-full w-full">
-            <Sidebar tqPair={tqPair} dispatch={dispatch} onCreate={handleCreatePage} onDelete={handleRemoveTopic} addedTopics={selectedTopics}/>
+            <Sidebar onCreate={handleCreatePage} />
          </div>
          
          <div>
@@ -115,13 +102,13 @@ function DemoSetup({isEdit}) {
                </span>
             </div>
          <div className="landing-page-body">
-            <UnitDropdown dispatch={dispatch} expand={expandBool} icon="GiCatapult" checkedBoxes = {selectedTopics} onAdd={handleAddTopic} onDelete={handleRemoveTopic} topics={unitOneTopics}>Unit 1: Kinematics</UnitDropdown>            
-            <UnitDropdown dispatch={dispatch} expand={expandBool} icon="GiUnbalanced" checkedBoxes = {selectedTopics} onAdd={handleAddTopic} onDelete={handleRemoveTopic} topics={unitTwoTopics}>Unit 2: Dynamics</UnitDropdown>            
-            <UnitDropdown dispatch={dispatch} expand={expandBool} icon="GiMoonOrbit" checkedBoxes = {selectedTopics} onAdd={handleAddTopic} onDelete={handleRemoveTopic} topics={unitThreeTopics}>Unit 3: Circular Motion and Gravitation</UnitDropdown>            
-            <UnitDropdown dispatch={dispatch} expand={expandBool} icon="MdRocketLaunch" checkedBoxes = {selectedTopics} onAdd={handleAddTopic} onDelete={handleRemoveTopic} topics={unitFourTopics}>Unit 4: Energy</UnitDropdown>            
-            <UnitDropdown dispatch={dispatch} expand={expandBool} icon="GiPendulumSwing" checkedBoxes = {selectedTopics} onAdd={handleAddTopic} onDelete={handleRemoveTopic} topics={unitFiveTopics}>Unit 5: Momentum</UnitDropdown>            
-            <UnitDropdown dispatch={dispatch} expand={expandBool} icon="PiWaveSineDuotone" checkedBoxes = {selectedTopics} onAdd={handleAddTopic} onDelete={handleRemoveTopic} topics={unitSixTopics}>Unit 6: Simple Harmonic Motion</UnitDropdown>            
-            <UnitDropdown dispatch={dispatch} expand={expandBool} icon="BsTornado" checkedBoxes = {selectedTopics} onAdd={handleAddTopic} onDelete={handleRemoveTopic} topics={unitSevenTopics}>Unit 7: Torque and Rotational Motion</UnitDropdown>
+            <UnitDropdown expand={expandBool} icon="GiCatapult" topics={unitOneTopics}>Unit 1: Kinematics</UnitDropdown>            
+            <UnitDropdown expand={expandBool} icon="GiUnbalanced" topics={unitTwoTopics}>Unit 2: Dynamics</UnitDropdown>            
+            <UnitDropdown expand={expandBool} icon="GiMoonOrbit" topics={unitThreeTopics}>Unit 3: Circular Motion and Gravitation</UnitDropdown>            
+            <UnitDropdown expand={expandBool} icon="MdRocketLaunch" topics={unitFourTopics}>Unit 4: Energy</UnitDropdown>            
+            <UnitDropdown expand={expandBool} icon="GiPendulumSwing" topics={unitFiveTopics}>Unit 5: Momentum</UnitDropdown>            
+            <UnitDropdown expand={expandBool} icon="PiWaveSineDuotone" topics={unitSixTopics}>Unit 6: Simple Harmonic Motion</UnitDropdown>            
+            <UnitDropdown expand={expandBool} icon="BsTornado" topics={unitSevenTopics}>Unit 7: Torque and Rotational Motion</UnitDropdown>
          </div>
          </div>
        </div>

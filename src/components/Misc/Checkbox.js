@@ -1,10 +1,14 @@
 import { useState,useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { addTopic, removeTopic } from "../../store";
 
-function Checkbox({topic, onAdd, onDelete, checkedBoxes, dispatch}) {
+function Checkbox({topic}) {
     const [checked, setChecked] = useState(false);
+    const dispatch = useDispatch();
+    const tqPair = useSelector(state => state.assignment.tqPair)
 
     useEffect(() =>{
-        checkedBoxes.map((listItem) =>{
+        tqPair.map((listItem) =>{
             if (listItem.id === topic.id){
                 setChecked(true);
                 }
@@ -12,7 +16,7 @@ function Checkbox({topic, onAdd, onDelete, checkedBoxes, dispatch}) {
         }, [])
 
     useEffect(()=> {
-        const isNotInArray = checkedBoxes.every(item => item.id !== topic.id);
+        const isNotInArray = tqPair.every(item => item.id !== topic.id);
         if (isNotInArray) {
             setChecked(false);
         }
@@ -21,13 +25,9 @@ function Checkbox({topic, onAdd, onDelete, checkedBoxes, dispatch}) {
     const handleChange = () => {
         setChecked(!checked);
         if (!checked){
-            console.log("Checked")
-            onAdd(topic)
-            dispatch({type:"add-topic",payload:{id:topic.id,topic:topic.topic}})
+            dispatch(addTopic({id:topic.id,topic:topic.topic}))
         } else {
-            console.log("Unchecked")
-            onDelete(topic.id)
-            dispatch({type:"delete-topic",payload: topic.id})
+            dispatch(removeTopic(topic.id))
         }
     } 
     return (
