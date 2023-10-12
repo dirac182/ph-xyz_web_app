@@ -1,6 +1,6 @@
 import AssignmentTable from "../components/AssignmentTable";
 import Button from "../components/Misc/Button";
-import Link from "../components/Misc/Link";
+import { Link } from 'react-router-dom';
 import useDataContext from "../hooks/use-data-context";
 import { useEffect } from "react";
 

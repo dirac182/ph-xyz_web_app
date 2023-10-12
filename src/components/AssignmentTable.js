@@ -1,6 +1,6 @@
 import useDataContext from "../hooks/use-data-context";
 import {BiEditAlt, BiSpreadsheet} from "react-icons/bi";
-import Link from "./Misc/Link";
+import { Link } from 'react-router-dom';
 import { useFetchAssignmentsQuery } from "../store";
 import { useSelector } from "react-redux";
 

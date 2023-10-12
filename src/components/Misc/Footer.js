@@ -1,5 +1,5 @@
 import {GiUnbalanced} from "react-icons/gi"
-import Link from "./Link.js";
+import { Link } from 'react-router-dom';
 import { useState } from "react";
 
 function Footer() {

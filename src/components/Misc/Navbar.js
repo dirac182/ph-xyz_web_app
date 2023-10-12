@@ -1,9 +1,7 @@
 import React from "react";
 import Button  from "./Button.js";
-import Link from "./Link.js";
+import { Link } from 'react-router-dom';
 import {GiUnbalanced} from "react-icons/gi"
-import Route from "./Route.js";
-import Landing from "../../pages/Landing.js";
 import {HiMenu} from "react-icons/hi"
 import { useState } from "react";
 
