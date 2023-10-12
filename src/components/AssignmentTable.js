@@ -1,22 +1,31 @@
 import useDataContext from "../hooks/use-data-context";
 import {BiEditAlt, BiSpreadsheet} from "react-icons/bi";
-import Button from "./Misc/Button";
 import Link from "./Misc/Link";
+import { useFetchAssignmentsQuery } from "../store";
+import { useSelector } from "react-redux";
 
 function AssignmentTable () {
     const { assignments } = useDataContext();
+    const user = useSelector(state => state.assignment.userId)
+    const {data,error,isFetching} = useFetchAssignmentsQuery(user);
 
     const handleEditButton = () => {
 
     }
-    
-    const renderedRows = assignments.map((assignment) => {
-        const isQuiz = assignment.quiz ? "Quiz" : "Assignment";
-        const isPosted = assignment.status ? "Posted" : "NotPosted";
+
+    let renderedRows;
+    if(isFetching) {
+        renderedRows = <div>Fetching</div>
+    } else if (error) {
+        renderedRows = <div>Error Loading Albums</div>
+    } else {
+        renderedRows = data.map((assignment) => {
+            const isQuiz = assignment.quiz ? "Quiz" : "Assignment";
+            const isPosted = assignment.status ? "Posted" : "NotPosted";
 
         return(
             <tr className="border-b" key={assignment._id}>
-                <td className="p-3"><Link to="/app/teacher/create"><button onClick={handleEditButton}><BiEditAlt/></button></Link></td>
+                <td className="p-3"><button onClick={handleEditButton}><BiEditAlt/></button></td>
                 <td className="p-3">{assignment.assignmentName}</td>
                 <td className="p-3">
                     <div className="relative">
@@ -50,6 +59,7 @@ function AssignmentTable () {
             </tr>
         )
     })
+}
 
     return(
         <table className="table-auto border-spacing-2">

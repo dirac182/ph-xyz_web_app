@@ -6,7 +6,6 @@ import TimedDropdown from "./TimedDropdown";
 
 
 function SidebarForm({onCreate}) {
-    const today = new Date().toJSON().slice(0,10);
     const dispatch = useDispatch();
     const assignmentName = useSelector(state => state.assignment.assignmentName);
     const tqPair = useSelector(state => state.assignment.tqPair)

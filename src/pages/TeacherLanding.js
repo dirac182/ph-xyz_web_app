@@ -6,6 +6,7 @@ import { useEffect } from "react";
 
 function TeacherLanding() {
     const { fetchAssignments } = useDataContext();
+    
 
     useEffect(()=> {
         fetchAssignments();

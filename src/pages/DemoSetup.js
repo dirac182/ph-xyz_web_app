@@ -10,40 +10,6 @@ function DemoSetup() {
    const [expandButtonText, setExpandButtonText] = useState("Expand All");
    const [expandBool, setExpandBool] = useState(false);
    const [dropdownSelection, setDropdownSelection] = useState(null)
-
-// //TopicList will hold each topic, questions will hold the amount of questions each topic has corresponding to the index.
-//    const reducer = (state, action) => {
-//       //This takes topic id and topic
-//       if (action.type === "add-topic"){
-//          console.log("added-topic",action.payload)
-//          return (
-//             [...state, {"id": action.payload.id, "topic": action.payload.topic, "questions": 1}]
-//          )
-//          //this takes a topic id
-//       } else if (action.type === "delete-topic") {
-//          console.log("deleted-topic",action.payload)
-//          return(
-//             state.filter((topic) => {
-//                return topic.id !== action.payload
-//             })
-//          )
-//          //This takes topic id and amount of questions
-//       } else if (action.type === "change-questions"){
-//          console.log("changed-question amount",action.payload)
-//          return(
-//             state.map((topic) => {
-//                return(
-//                topic.id === action.payload.id ? {...topic, questions : action.payload.amount} : topic
-//                )
-//             })
-//          )
-//       } else {
-//          return state;
-//       }
-//    } 
-
-//    const [tqPair,dispatch] = useReducer(reducer, [])
-
    
    const handleCreatePage = async (name,userID,tqPair,quiz,timeLimit,dueDate,status) => {
       const response = await axios.post("http://localhost:5000/createAssignment", {
