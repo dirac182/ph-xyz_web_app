@@ -20,7 +20,7 @@ function Checkbox({topic}) {
         if (isNotInArray) {
             setChecked(false);
         }
-    },[topic])
+    },[tqPair])
 
     const handleChange = () => {
         setChecked(!checked);

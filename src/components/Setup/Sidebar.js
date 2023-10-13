@@ -1,9 +1,8 @@
 import SidebarTopic from "./SidebarTopic";
 import SidebarForm from "./SidebarForm";
-
 import { useSelector } from "react-redux/es/hooks/useSelector";
 
-function Sidebar({ onCreate }) {
+function Sidebar({ userId, assignmentId }) {
     const tqPair = useSelector(state => state.assignment.tqPair)
     const renderedTopics = tqPair.map((pair) =>{
             return (
@@ -20,7 +19,7 @@ function Sidebar({ onCreate }) {
     return (
         <div className="bg-white">
             <div>
-                <SidebarForm onCreate={onCreate} />
+                <SidebarForm assignmentId={assignmentId} userId={userId} />
             </div>
             <div className="border-r-2 border-b-2 border-indigo-300">
                 {topicHeader}

@@ -2,10 +2,24 @@ import { createSlice, nanoid } from "@reduxjs/toolkit";
 
 const today = new Date().toJSON().slice(0,10);
 
+const initialState = {
+    assignmentId: "",
+    userId: 123,
+    assignmentName: "",
+    tqPair: [],
+    isQuiz: false,
+    timeLimit: 20,
+    status: true,
+    dueDate: today,
+    timeHr: 11,
+    timeMin: 59,
+    isPm: true,
+};
+
 const assignmentSlice = createSlice({
     name:"assignment",
     initialState: {
-        assignmentId: nanoid(),
+        assignmentId: "",
         userId: 123,
         assignmentName: "",
         tqPair: [],
@@ -34,14 +48,19 @@ const assignmentSlice = createSlice({
         },
         changeQuestions(state,action) {
             //Assumption: action.payload === {"id": 1.2, "questions": 3}
-            state.tqPair.map((topic) => {
-                return(
-                topic.id === action.payload.id ? {...topic, questions : action.payload.amount} : topic
-                )
-             })
+            const updatedPair = state.tqPair.map((pair) => {
+                if (pair.id === action.payload.id) {
+                    return { ...pair,  "questions": action.payload.questions}
+                }
+                return pair;
+            });
+            state.tqPair = updatedPair
+        },
+        updateTqPair(state,action){
+            state.tqPair = action.payload;
         },
         setIsQuiz(state,action){
-            state.isQuiz = !state.isQuiz;
+            state.isQuiz = action.payload;
         },
         setTimeLimit(state,action){
             state.timeLimit = action.payload;
@@ -50,16 +69,35 @@ const assignmentSlice = createSlice({
             state.dueDate = action.payload;
         },
         setTimeHr(state,action){
-            state.timeHr = action.payload;
+            if (action.payload === 0){
+                state.timeHr = 12
+            }else{
+                state.timeHr = action.payload;
+            }
+           
         },
         setTimeMin(state,action){
             state.timeMin = action.payload;
         },
         setIsPm(state,action){
-            state.isPm = !state.isPm;
+            state.isPm = action.payload;
+        },
+        setAssignmentId(state,action){
+            state.assignmentId = action.payload;
+        },
+        reset: () => initialState,
+        edit(state,action){
+            state.assignmentId = action.payload.assignmentId;
+            state.assignmentName = action.payload.assignmentName;
+            state.tqPair = action.payload.tqPair;
+            state.isQuiz = action.payload.isQuiz;
+            state.timeLimit = action.payload.timeLimit;
+            state.dueDate = action.payload.dueDate;
+            state.timeHr = action.payload.timeHr;
+            state.timeMin = action.payload.timeMin;
         }
     }
 })
 
-export const {changeName, addTqPair, removeTqPair, setIsQuiz, setTimeLimit, setDueDate, setIsPm, setTimeMin, setTimeHr, addTopic, removeTopic, changeQuestions} = assignmentSlice.actions;
+export const {changeName, addTqPair, removeTqPair, setIsQuiz, setTimeLimit, setDueDate, setIsPm, setTimeMin, setTimeHr, addTopic, removeTopic, changeQuestions, updateTqPair, reset, edit} = assignmentSlice.actions;
 export const assignmentReducer = assignmentSlice.reducer;

@@ -10,7 +10,6 @@ function MyNavbar () {
 
     const toggleMobileMenu = () => {
         setMenuToggle(!menuToggle);
-        console.log("Click");
     }
 
     return(

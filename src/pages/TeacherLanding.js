@@ -3,9 +3,12 @@ import Button from "../components/Misc/Button";
 import { Link } from 'react-router-dom';
 import useDataContext from "../hooks/use-data-context";
 import { useEffect } from "react";
+import { useDispatch } from "react-redux";
+import { reset } from "../store";
 
 function TeacherLanding() {
     const { fetchAssignments } = useDataContext();
+    const dispatch = useDispatch()
     
 
     useEffect(()=> {
@@ -13,7 +16,7 @@ function TeacherLanding() {
     },[])
 
     const handleCreateAssignment = () => {
-
+        dispatch(reset());
     }
 
     return(

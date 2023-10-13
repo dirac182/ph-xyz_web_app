@@ -4,7 +4,7 @@ import { useDispatch } from "react-redux";
 import { changeQuestions, removeTopic } from "../../store";
 
 function SidebarTopic({pair}) {
-    const [questionAmount,setQuestionAmount] = useState(1);
+    const [questionAmount,setQuestionAmount] = useState(pair.questions);
     const dispatch = useDispatch();
 
     const handleRemoveClick = () =>{
@@ -12,7 +12,7 @@ function SidebarTopic({pair}) {
     }
 
     useEffect(() => {
-        dispatch(changeQuestions({id: pair.id, amount: questionAmount}))
+        dispatch(changeQuestions({id: pair.id, questions: questionAmount}))
     },[questionAmount])
 
     return (

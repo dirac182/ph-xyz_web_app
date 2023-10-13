@@ -1,5 +1,5 @@
 import { configureStore } from "@reduxjs/toolkit";
-import { assignmentReducer, changeName, setIsQuiz, setIsPm, setDueDate, setTimeHr, setTimeMin, setTimeLimit, addTopic, removeTopic, changeQuestions } from "./slices/assignmentSlice";
+import { assignmentReducer, changeName, setIsQuiz, setIsPm, setDueDate, setTimeHr, setTimeMin, setTimeLimit, addTopic, removeTopic, changeQuestions, updateTqPair, reset, edit } from "./slices/assignmentSlice";
 import {setupListeners} from "@reduxjs/toolkit/query";
 import { assignmentsApi } from "./apis/assignmentsApi";
 
@@ -16,5 +16,5 @@ const store = configureStore({
 
 setupListeners(store.dispatch);
 
-export {store, changeName, setIsQuiz, setIsPm, setDueDate, setTimeHr, setTimeMin, setTimeLimit, addTopic, removeTopic, changeQuestions};
-export { useFetchAssignmentsQuery } from "./apis/assignmentsApi"
+export {store, changeName, setIsQuiz, setIsPm, setDueDate, setTimeHr, setTimeMin, setTimeLimit, addTopic, removeTopic, changeQuestions, updateTqPair, reset, edit};
+export { useFetchAssignmentsQuery, useFetchAssignmentByIdQuery, useCreateAssignmentMutation, useEditAssignmentMutation, useDeleteAssignmentMutation } from "./apis/assignmentsApi"

@@ -5,25 +5,13 @@ import Searchbar from "../components/Setup/Seachbar";
 import Button from "../components/Misc/Button";
 import SortDropdown from "../components/Setup/SortDropdown";
 import axios from "axios";
+import { useParams } from 'react-router-dom';
 
 function DemoSetup() {
    const [expandButtonText, setExpandButtonText] = useState("Expand All");
    const [expandBool, setExpandBool] = useState(false);
    const [dropdownSelection, setDropdownSelection] = useState(null)
-   
-   const handleCreatePage = async (name,userID,tqPair,quiz,timeLimit,dueDate,status) => {
-      const response = await axios.post("http://localhost:5000/createAssignment", {
-         name,
-         userID,
-         tqPair,
-         quiz,
-         timeLimit,
-         dueDate,
-         status
-      } );
-      console.log(name,userID,tqPair,quiz,timeLimit,dueDate,status)
-      console.log(response.data)
-   }
+   const { userId, assignmentId } = useParams();
 
    const handleExpandButton = (event) => {
       event.preventDefault();
@@ -55,7 +43,7 @@ function DemoSetup() {
    return(
        <div className="landing-page-container h-screen w-full pr-6 bg-indigo-200">
          <div className="landing-page-sidebar h-full w-full">
-            <Sidebar onCreate={handleCreatePage} />
+            <Sidebar assignmentId={assignmentId} userId={userId} />
          </div>
          
          <div>

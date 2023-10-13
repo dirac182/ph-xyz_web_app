@@ -1,31 +1,59 @@
-import useDataContext from "../hooks/use-data-context";
-import {BiEditAlt, BiSpreadsheet} from "react-icons/bi";
+import {BiEditAlt, BiSpreadsheet, BiTrash} from "react-icons/bi";
 import { Link } from 'react-router-dom';
-import { useFetchAssignmentsQuery } from "../store";
-import { useSelector } from "react-redux";
+import { useFetchAssignmentsQuery, useDeleteAssignmentMutation } from "../store";
+import { useSelector, useDispatch } from "react-redux";
+import { edit } from "../store";
 
 function AssignmentTable () {
-    const { assignments } = useDataContext();
+    const dispatch = useDispatch();
     const user = useSelector(state => state.assignment.userId)
     const {data,error,isFetching} = useFetchAssignmentsQuery(user);
-
-    const handleEditButton = () => {
-
-    }
+    const [deleteAssignment, { isFetchingDelete, isErrorDelete, dataDelete }] = useDeleteAssignmentMutation();
 
     let renderedRows;
     if(isFetching) {
-        renderedRows = <div>Fetching</div>
+        renderedRows = <tr><td><div>Fetching</div></td></tr>
     } else if (error) {
-        renderedRows = <div>Error Loading Albums</div>
+        renderedRows = <tr><td><div>Error Loading Albums</div></td></tr>
     } else {
         renderedRows = data.map((assignment) => {
             const isQuiz = assignment.quiz ? "Quiz" : "Assignment";
             const isPosted = assignment.status ? "Posted" : "NotPosted";
 
+            const handleEditClick = () => {
+                var day = assignment.dueDate
+                var date = day.slice(0,10);
+                var hour = 11
+                var isPm = true
+                var minute = parseInt(day.slice(14,16));
+                if (parseInt(day.slice(11,13)) > 12){
+                    hour = parseInt(day.slice(11,13)) - 12;
+                    isPm = true;
+                } else{
+                    hour = parseInt(day.slice(11,13));
+                    isPm = false;
+                }
+                dispatch(edit({
+                    assignmentId: assignment.assignmentID,
+                    assignmentName: assignment.assignmentName,
+                    tqPair: assignment.tqPair,
+                    isQuiz: assignment.quiz,
+                    timeLimit: assignment.timeLimit,
+                    dueDate: date,
+                    timeHr: hour,
+                    timeMin: minute,
+                    isPm: isPm,
+                }))
+                console.log(assignment.tqPair)
+            }
+            const handleDeleteClick = () => {
+                const data = {userId:user, assignmentId: assignment.assignmentID};
+                deleteAssignment(data);
+            }
+
         return(
             <tr className="border-b" key={assignment._id}>
-                <td className="p-3"><button onClick={handleEditButton}><BiEditAlt/></button></td>
+                <td className="p-3"><Link to={`/app/teacher/edit/${assignment.userID}/${assignment.assignmentID}`}><button onClick={handleEditClick}><BiEditAlt/></button></Link></td>
                 <td className="p-3">{assignment.assignmentName}</td>
                 <td className="p-3">
                     <div className="relative">
@@ -49,13 +77,13 @@ function AssignmentTable () {
                             ))}
                                 </tbody>
                             </table>
-                            
                         </div>
                     </div>
                 </td>
                 <td className="p-3">{isQuiz}</td>
                 <td className="p-3">{isPosted}</td>
                 <td className="p-3">{assignment.dueDate}</td>
+                <td className="p-3"><button onClick={handleDeleteClick}><BiTrash/></button></td>
             </tr>
         )
     })
@@ -71,6 +99,7 @@ function AssignmentTable () {
                     <th>Type</th>
                     <th>Status</th>
                     <th>Due Date</th>
+                    <th>Delete</th>
                 </tr>
             </thead>
             <tbody>

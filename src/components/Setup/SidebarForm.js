@@ -1,37 +1,50 @@
 import Button from "../Misc/Button";
 import { useDispatch, useSelector } from "react-redux";
-import { changeName, setIsQuiz, setIsPm, setDueDate, setTimeHr, setTimeMin } from "../../store";
 import {useEffect, useState} from "react";
 import TimedDropdown from "./TimedDropdown";
+import { useCreateAssignmentMutation, useEditAssignmentMutation } from "../../store";
+import { changeName, setIsQuiz, setIsPm, setDueDate, setTimeHr, setTimeMin } from "../../store";
+import { useNavigate } from "react-router-dom";
 
-
-function SidebarForm({onCreate}) {
+function SidebarForm({ userId, assignmentId}) {
+    const navigate = useNavigate();
     const dispatch = useDispatch();
-    const assignmentName = useSelector(state => state.assignment.assignmentName);
-    const tqPair = useSelector(state => state.assignment.tqPair)
-    const isQuiz = useSelector(state => state.assignment.isQuiz);
-    const dueDate = useSelector(state => state.assignment.dueDate);
-    const timeHr = useSelector(state => state.assignment.timeHr);
-    const timeMin = useSelector(state => state.assignment.timeMin);
-
-    const [timedCheck, setTimedCheck]  = useState(false);
+    const buttonText = assignmentId ? "Edit Workpage" : "Create Workpage"
+    const [createAssignment, { isFetchingCreate, isErrorCreate, dataCreate }] = useCreateAssignmentMutation();
+    const [editAssignment, { isFetchingEdit, isErrorEdit, dataEdit }] = useEditAssignmentMutation();
+    // To change when I add unique users
+    const uId = useSelector(state => state.assignment.userId);
+    var assignmentName = useSelector(state => state.assignment.assignmentName);
+    var tqPair = useSelector(state => state.assignment.tqPair)
+    var isQuiz = useSelector(state => state.assignment.isQuiz);
+    var timeLimit = useSelector(state => state.assignment.timeLimit)
+    var dueDate = useSelector(state => state.assignment.dueDate);
+    var timeHr = useSelector(state => state.assignment.timeHr);
+    var timeMin = useSelector(state => state.assignment.timeMin);
+    var status = useSelector(state => state.assignment.status);
     const [timeButtonText, setTimeButtontext] = useState("PM");
     const [qTotal,setqTotal] = useState(0)
 
+    useEffect(()=> {
+        console.log(timeHr);
+    },[])
+    
+
     const handleTimeButtonClick = (event) => {
         event.preventDefault();
-        dispatch(setIsPm())
         if(timeButtonText === "PM"){
             setTimeButtontext("AM");
+            dispatch(setIsPm(false));
         } else if (timeButtonText ==="AM") {
             setTimeButtontext("PM");
+            dispatch(setIsPm(true));
         }
     }
 
     //This Changes the total amount of questions
     useEffect(() => {
         var total = 0
-        tqPair.map((pair,index)=>{
+        tqPair.map((pair)=>{
             total = total + parseInt(pair.questions);
         })
         setqTotal(total);
@@ -39,30 +52,37 @@ function SidebarForm({onCreate}) {
 
     const checkToggle = (
             <div>
-                {timedCheck && <TimedDropdown />}
+                {isQuiz && <TimedDropdown />}
             </div>
         )
 
-    // const handleSubmit = (event) => {
-    //     event.preventDefault();
-    //     var time = parseInt(timeHour)
-    //     if (timeButtonText==="PM"){
-    //         time = 12+time;
-    //     }
-    //     if (timeHour < 10 && timeButtonText === "AM"){
-    //         time = "0"+time;
-    //     }
-    //     const newDate = new Date(`${date}T${time}:${timeMinute}:00`)
-    //     onCreate(name,userID,tqPair,timedCheck,timeLimit,newDate,status);
-    // }
+    const HandleSubmit = (event) => {
+        event.preventDefault();
+        var time = parseInt(timeHr)
+        if (timeButtonText==="PM"){
+            time = 12+time;
+        }
+        if (timeHr < 10 && timeButtonText === "AM"){
+            time = "0"+time;
+        }
+        const newDate = new Date(`${dueDate}T${time}:${timeMin}:00`)
+        if (assignmentId){
+            const editedData = {"userId": uId, "assignmentId": assignmentId, "name": assignmentName, "tqPair": tqPair, "isQuiz": isQuiz, "timeLimit": timeLimit, "dueDate": newDate, "status": status};
+            editAssignment(editedData)
+        }else{
+            const createData = {"userId": uId, "name": assignmentName, "tqPair": tqPair, "isQuiz": isQuiz, "timeLimit": timeLimit, "dueDate": newDate, "status": status};
+            createAssignment(createData);
+        }
+        navigate("/app/teacher")
+    }
 
     return(
-        <form className="border-r-2 py-6 border-b-2 border-indigo-300">
+        <form onSubmit={HandleSubmit} className="border-r-2 py-6 border-b-2 border-indigo-300">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4 items-center justify-items-center">
             
             <div className="col-span-2 md:col-span-2">
                 <span className="p-4 flex items-center justify-center">
-                        <Button type="submit" className="text-2xl w-full md:w-96 shadow-lg shadow-indigo-500/40 hover:bg-indigo-700" primary rounded>Create Workpage</Button>
+                        <Button type="submit" className="text-2xl w-full md:w-96 shadow-lg shadow-indigo-500/40 hover:bg-indigo-700" primary rounded>{buttonText}</Button>
                 </span>
             </div>
             
@@ -80,7 +100,7 @@ function SidebarForm({onCreate}) {
             
             <div>
                 <label className="text-md pl-4 pr-2">Timed Quiz</label>
-                <input type="checkbox" onChange={() => {dispatch(setIsQuiz());setTimedCheck(!timedCheck)}} value={isQuiz} />
+                <input type="checkbox" onChange={() => {dispatch(setIsQuiz(!isQuiz))}} checked={isQuiz} />
                 {checkToggle}
             </div>
             
