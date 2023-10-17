@@ -1,14 +1,27 @@
 import {BiEditAlt, BiSpreadsheet, BiTrash} from "react-icons/bi";
 import { Link } from 'react-router-dom';
-import { useFetchAssignmentsQuery, useDeleteAssignmentMutation } from "../store";
+import { useFetchAssignmentsQuery, useDeleteAssignmentMutation, useFetchQuestionByTopicMutation } from "../store";
 import { useSelector, useDispatch } from "react-redux";
-import { edit } from "../store";
+import { edit, addQuestion, resetQuestions } from "../store";
+import { useFetchAllQuestionIDsQuery } from "../store";
 
 function AssignmentTable () {
     const dispatch = useDispatch();
     const user = useSelector(state => state.assignment.userId)
+    const questions = useSelector(state => state.workpage.questions)
     const {data,error,isFetching} = useFetchAssignmentsQuery(user);
+    
     const [deleteAssignment, { isFetchingDelete, isErrorDelete, dataDelete }] = useDeleteAssignmentMutation();
+    const [fetchQuestion, {isFetchingQuestion, isErrorQuestion, questionData}] = useFetchQuestionByTopicMutation();
+
+    // if (isFetchingQ) {
+    //     console.log("Fetching QIDs");
+    // } else if (QError) {
+    //     console.log("Error fetching QIDs");
+    // } else if (QData) {
+    //     console.log(QData);
+    // }
+    
 
     let renderedRows;
     if(isFetching) {
@@ -16,6 +29,7 @@ function AssignmentTable () {
     } else if (error) {
         renderedRows = <tr><td><div>Error Loading Albums</div></td></tr>
     } else {
+        
         renderedRows = data.map((assignment) => {
             const isQuiz = assignment.quiz ? "Quiz" : "Assignment";
             const isPosted = assignment.status ? "Posted" : "NotPosted";
@@ -50,11 +64,29 @@ function AssignmentTable () {
                 const data = {userId:user, assignmentId: assignment.assignmentID};
                 deleteAssignment(data);
             }
+            const handleAssignmentClick = async () => {
+                dispatch(resetQuestions());
+                var updatedQuestions = []
+                await Promise.all(assignment.tqPair.map(async (pair) =>  {
+                    var topicQs = [];
+                    for (let i = 0; i < pair.questions; i++){
+                        const q = await fetchQuestion((pair.id).toString());
+                        console.log(q.data)
+                        topicQs.push(q.data);
+                        }
+                    // dispatch(addQuestion(topicQs));
+                    console.log("topicQs",topicQs);
+                    updatedQuestions.push(topicQs)
+                    }))
+                dispatch(addQuestion(updatedQuestions));
+                console.log("updatedQuestions:",updatedQuestions);
+                console.log("questionsState", questions)
+            }
 
         return(
             <tr className="border-b" key={assignment._id}>
                 <td className="p-3"><Link to={`/app/teacher/edit/${assignment.userID}/${assignment.assignmentID}`}><button onClick={handleEditClick}><BiEditAlt/></button></Link></td>
-                <td className="p-3">{assignment.assignmentName}</td>
+                <td className="p-3"><p className="cursor-pointer hover:underline" onClick={handleAssignmentClick}>{assignment.assignmentName}</p></td>
                 <td className="p-3">
                     <div className="relative">
                         <div className="skills-icon text-xl">

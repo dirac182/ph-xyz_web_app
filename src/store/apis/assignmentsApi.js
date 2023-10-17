@@ -1,5 +1,4 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
-import { nanoid } from "@reduxjs/toolkit";
 
 const assignmentsApi = createApi({
     reducerPath: "assignments",
@@ -9,6 +8,7 @@ const assignmentsApi = createApi({
     endpoints(builder) {
         return {
             fetchAssignments: builder.query({
+                providesTags: ["Assignments"],
                 query: (user) => {
                     return {
                         url: `/get/assignments`,
@@ -17,28 +17,10 @@ const assignmentsApi = createApi({
                         },
                         method: "GET",
                     }
-                },
-                providesTags: (result, error, assignments) => {
-                    const tags = result.map((assignment) => {
-                        return { type: 'Assignment', id: assignment.assignmentID }
-                    });
-                    tags.push({type: "Assignment", id: result.userID})
-                    return tags;
-                }
-            }),
-            fetchAssignmentById: builder.query({
-                query: ({userId,assignmentId}) => {
-                    return {
-                        url: `/get/assignmentById`,
-                        params: {
-                            userId,
-                            assignmentId
-                        },
-                        method: "GET",
-                    }
                 }
             }),
             createAssignment: builder.mutation({
+                invalidatesTags: ["Assignments"],
                 query: (data) => {
                     return{
                         url: "/create/assignment",
@@ -51,14 +33,13 @@ const assignmentsApi = createApi({
                             timeLimit: data.timeLimit,
                             dueDate: data.dueDate,
                             status: data.status,
+                            questionSet: data.questionSet
                         }
                     }
                 },
-                invalidatesTags: (result,error,assignment) => {
-                    return [{ type: 'Assignment', id: 'LIST' }]
-                }
             }),
             editAssignment: builder.mutation({
+                invalidatesTags: ["Assignments"],
                 query: (data) => {
                     return{
                         url: "/edit/assignment",
@@ -74,14 +55,13 @@ const assignmentsApi = createApi({
                             timeLimit: data.timeLimit,
                             dueDate: data.dueDate,
                             status: data.status,
+                            questionSet: data.questionSet
                         }
                     }
                 },
-                invalidatesTags: (result,error,assignment) => {
-                    return [{ type: 'Assignment', id: 'LIST' }]
-                }
             }),
             deleteAssignment: builder.mutation({
+                invalidatesTags: ["Assignments"],
                 query: (data) => {
                     return {
                         url: "/delete/assignment",
@@ -91,15 +71,14 @@ const assignmentsApi = createApi({
                             assignmentID: data.assignmentId,
                         }
                     }
-                },
-                invalidatesTags: (result,error,assignment) => {
-                    return [{ type: 'Assignment', id: assignment.assignmentId }]
-                }
-                
+                },                
             })
         }
     }
 })
+        
+    
 
-export const { useFetchAssignmentsQuery, useFetchAssignmentByIdQuery, useCreateAssignmentMutation, useEditAssignmentMutation, useDeleteAssignmentMutation } = assignmentsApi;
+
+export const { useFetchAssignmentsQuery, useCreateAssignmentMutation, useEditAssignmentMutation, useDeleteAssignmentMutation } = assignmentsApi;
 export { assignmentsApi };

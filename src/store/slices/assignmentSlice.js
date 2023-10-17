@@ -1,4 +1,4 @@
-import { createSlice, nanoid } from "@reduxjs/toolkit";
+import { createSlice } from "@reduxjs/toolkit";
 
 const today = new Date().toJSON().slice(0,10);
 
@@ -14,6 +14,7 @@ const initialState = {
     timeHr: 11,
     timeMin: 59,
     isPm: true,
+    questionSet: [],
 };
 
 const assignmentSlice = createSlice({
@@ -30,6 +31,7 @@ const assignmentSlice = createSlice({
         timeHr: 11,
         timeMin: 59,
         isPm: true,
+        questionSet:[]
     },
     reducers: {
         changeName(state,action) {
@@ -95,9 +97,12 @@ const assignmentSlice = createSlice({
             state.dueDate = action.payload.dueDate;
             state.timeHr = action.payload.timeHr;
             state.timeMin = action.payload.timeMin;
+        },
+        setQuestionSet(state,action){
+            state.questionSet = action.payload;
         }
     }
 })
 
-export const {changeName, addTqPair, removeTqPair, setIsQuiz, setTimeLimit, setDueDate, setIsPm, setTimeMin, setTimeHr, addTopic, removeTopic, changeQuestions, updateTqPair, reset, edit} = assignmentSlice.actions;
+export const { setQuestionSet ,changeName, addTqPair, removeTqPair, setIsQuiz, setTimeLimit, setDueDate, setIsPm, setTimeMin, setTimeHr, addTopic, removeTopic, changeQuestions, updateTqPair, reset, edit} = assignmentSlice.actions;
 export const assignmentReducer = assignmentSlice.reducer;

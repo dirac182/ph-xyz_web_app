@@ -2,8 +2,8 @@ import Button from "../Misc/Button";
 import { useDispatch, useSelector } from "react-redux";
 import {useEffect, useState} from "react";
 import TimedDropdown from "./TimedDropdown";
-import { useCreateAssignmentMutation, useEditAssignmentMutation } from "../../store";
-import { changeName, setIsQuiz, setIsPm, setDueDate, setTimeHr, setTimeMin } from "../../store";
+import { useFetchAllQuestionIDsQuery ,useCreateAssignmentMutation, useEditAssignmentMutation } from "../../store";
+import { setQuestionSet,setQIDs, changeName, setIsQuiz, setIsPm, setDueDate, setTimeHr, setTimeMin } from "../../store";
 import { useNavigate } from "react-router-dom";
 
 function SidebarForm({ userId, assignmentId}) {
@@ -12,6 +12,7 @@ function SidebarForm({ userId, assignmentId}) {
     const buttonText = assignmentId ? "Edit Workpage" : "Create Workpage"
     const [createAssignment, { isFetchingCreate, isErrorCreate, dataCreate }] = useCreateAssignmentMutation();
     const [editAssignment, { isFetchingEdit, isErrorEdit, dataEdit }] = useEditAssignmentMutation();
+    const { data,error,isFetching } = useFetchAllQuestionIDsQuery();
     // To change when I add unique users
     const uId = useSelector(state => state.assignment.userId);
     var assignmentName = useSelector(state => state.assignment.assignmentName);
@@ -22,13 +23,36 @@ function SidebarForm({ userId, assignmentId}) {
     var timeHr = useSelector(state => state.assignment.timeHr);
     var timeMin = useSelector(state => state.assignment.timeMin);
     var status = useSelector(state => state.assignment.status);
+    var QIDs = useSelector(state => state.workpage.QIDs);
+    var questionSet = useSelector(state => state.assignment.questionSet);
     const [timeButtonText, setTimeButtontext] = useState("PM");
     const [qTotal,setqTotal] = useState(0)
 
-    useEffect(()=> {
-        console.log(timeHr);
-    },[])
-    
+    // if(isFetching){
+    //     console.log("Fetching QIDs")
+    // } else if (error){
+    //     console.log(error);
+    // } else {
+    //     const QIDList = data;
+    //     var allQs = []
+    //     QIDList.map(element => {
+    //         allQs.push(element.QID)
+    //     })
+    //     dispatch(setQIDs(allQs));
+    //     console.log(allQs);
+    // }
+
+    useEffect(() => {
+        if (!isFetching && !error && data) {
+            const QIDList = data;
+            var allQs = [];
+            QIDList.map(element => {
+                allQs.push(element.QID);
+            });
+            dispatch(setQIDs(allQs));
+            console.log(allQs);
+        }
+    }, [isFetching, error, data, dispatch]);
 
     const handleTimeButtonClick = (event) => {
         event.preventDefault();
@@ -58,6 +82,34 @@ function SidebarForm({ userId, assignmentId}) {
 
     const HandleSubmit = (event) => {
         event.preventDefault();
+        
+        const seenQuestionIds = new Set();
+
+        const newQuestionSet = tqPair.map(pair => {
+            // Convert the id to string for matching
+            const topicId = String(pair.id);
+
+            // Filter the questionIds based on the topicId and ensure no duplicates
+            const matchingIds = QIDs.filter(qId => {
+                const qTopicId = qId.split('T')[1].split('-')[0];
+                if (qTopicId === topicId && !seenQuestionIds.has(qId)) {
+                    seenQuestionIds.add(qId);
+                    return true;
+                }
+                return false;
+            });
+
+            // Return the desired format for each tqPair element
+            return {
+                topicId: pair.id,
+                topic: pair.topic,
+                QIDArray: matchingIds.slice(0, pair.questions)
+            };
+        });
+
+        console.log(newQuestionSet);
+        dispatch(setQuestionSet(newQuestionSet));
+
         var time = parseInt(timeHr)
         if (timeButtonText==="PM"){
             time = 12+time;
@@ -67,10 +119,10 @@ function SidebarForm({ userId, assignmentId}) {
         }
         const newDate = new Date(`${dueDate}T${time}:${timeMin}:00`)
         if (assignmentId){
-            const editedData = {"userId": uId, "assignmentId": assignmentId, "name": assignmentName, "tqPair": tqPair, "isQuiz": isQuiz, "timeLimit": timeLimit, "dueDate": newDate, "status": status};
+            const editedData = {"userId": uId, "assignmentId": assignmentId, "name": assignmentName, "tqPair": tqPair, "isQuiz": isQuiz, "timeLimit": timeLimit, "dueDate": newDate, "status": status, "questionSet": newQuestionSet};
             editAssignment(editedData)
         }else{
-            const createData = {"userId": uId, "name": assignmentName, "tqPair": tqPair, "isQuiz": isQuiz, "timeLimit": timeLimit, "dueDate": newDate, "status": status};
+            const createData = {"userId": uId, "name": assignmentName, "tqPair": tqPair, "isQuiz": isQuiz, "timeLimit": timeLimit, "dueDate": newDate, "status": status, "questionSet": newQuestionSet };
             createAssignment(createData);
         }
         navigate("/app/teacher")

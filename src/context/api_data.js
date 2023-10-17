@@ -43,22 +43,16 @@ const data = {
       }
     ,
     {
-      "text": "The animal kingdom is vast and diverse. Different species belong to different classifications. Mammals are one such category, known for certain characteristics. Which of the following is not a mammal?",
+      "text": "Two blocks are connected by a light rope that goes over a frictionless pulley. Block A, with a mass of 1.0 kg, is placed on a horizontal table surface with kinetic friction coefficient of 0.10 between the block and the table. Block B, with a mass of 2.0 kg, is suspended vertically off the edge of the table. If Block A is released from rest, what will be its acceleration?",
       "image": "path/to/image3.jpg",
       "choices": [
-        "Vestibulum quis lacus ut dui sodales cursus vitae id sapien. In quis nulla ac diam aliquet euismod eget eget tellus. Nam accumsan mattis laoreet. Phasellus ullamcorper risus lorem, et gravida turpis sollicitudin nec.",
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur ornare semper tristique. Curabitur nisi nisi, condimentum et eros id, accumsan convallis ligula. Praesent et vestibulum libero, eget viverra eros. Vestibulum odio arcu, malesuada vitae vestibulum et, faucibus porta elit. Maecenas odio dui, mattis et diam nec, ullamcorper scelerisque arcu.",
-        "Quisque magna ligula, semper sit amet vehicula posuere, tempor sed nulla. Pellentesque porttitor lacus purus. Nam at velit cursus, scelerisque lorem non, varius lectus. ",
-        "Shark"
+        "9.8 m/s^2", "4.9 m/s^2", "6.2 m/s^2", "3.2 m/s^2", "1.4 m/s^2"
       ],
-      "correctAnswer": "Shark",
-      "correctAnswerIndex":[3],
-      "skills": ["3.C.1", "3.C.2", "4.A.3", "5.B.1"],
+      "correctAnswer": "6.2 m/s^2",
+      "correctAnswerIndex":[2],
+      "skills": ["3.A.1", "3.A.1.1", "SP2", "SP 2.2"],
       "solution": [
-          "Understand the characteristics of mammals.",
-          "Know that mammals are typically warm-blooded and give live birth.",
-          "Realize that sharks lay eggs and are cold-blooded.",
-          "Conclude that sharks are not mammals."
+        "Using Newton's Second Law and considering the forces on the 2 kg block, we get the equation: Tension = \(2 kg \times 9.8 m/s^2 - 2 kg \times a\). For the 3 kg block, the equation is: Tension = \(3 kg \times a\). Equating the two tensions and solving for 'a', we get \(a = 3.9 m/s^2\)."
         ]
       }
     

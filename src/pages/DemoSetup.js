@@ -4,7 +4,6 @@ import Sidebar from "../components/Setup/Sidebar";
 import Searchbar from "../components/Setup/Seachbar";
 import Button from "../components/Misc/Button";
 import SortDropdown from "../components/Setup/SortDropdown";
-import axios from "axios";
 import { useParams } from 'react-router-dom';
 
 function DemoSetup() {
