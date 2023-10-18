@@ -22,6 +22,7 @@ function SidebarForm({ userId, assignmentId}) {
     var dueDate = useSelector(state => state.assignment.dueDate);
     var timeHr = useSelector(state => state.assignment.timeHr);
     var timeMin = useSelector(state => state.assignment.timeMin);
+    var isPm = useSelector(state => state.assignment.isPm);
     var status = useSelector(state => state.assignment.status);
     var QIDs = useSelector(state => state.workpage.QIDs);
     var questionSet = useSelector(state => state.assignment.questionSet);
@@ -50,7 +51,6 @@ function SidebarForm({ userId, assignmentId}) {
                 allQs.push(element.QID);
             });
             dispatch(setQIDs(allQs));
-            console.log(allQs);
         }
     }, [isFetching, error, data, dispatch]);
 
@@ -63,6 +63,7 @@ function SidebarForm({ userId, assignmentId}) {
             setTimeButtontext("PM");
             dispatch(setIsPm(true));
         }
+        console.log(isPm);
     }
 
     //This Changes the total amount of questions
@@ -87,7 +88,7 @@ function SidebarForm({ userId, assignmentId}) {
 
         const newQuestionSet = tqPair.map(pair => {
             // Convert the id to string for matching
-            const topicId = String(pair.id);
+            const topicId = String(pair.topicId);
 
             // Filter the questionIds based on the topicId and ensure no duplicates
             const matchingIds = QIDs.filter(qId => {
@@ -101,13 +102,11 @@ function SidebarForm({ userId, assignmentId}) {
 
             // Return the desired format for each tqPair element
             return {
-                topicId: pair.id,
+                topicId: pair.topicId,
                 topic: pair.topic,
                 QIDArray: matchingIds.slice(0, pair.questions)
             };
         });
-
-        console.log(newQuestionSet);
         dispatch(setQuestionSet(newQuestionSet));
 
         var time = parseInt(timeHr)
@@ -119,10 +118,11 @@ function SidebarForm({ userId, assignmentId}) {
         }
         const newDate = new Date(`${dueDate}T${time}:${timeMin}:00`)
         if (assignmentId){
-            const editedData = {"userId": uId, "assignmentId": assignmentId, "name": assignmentName, "tqPair": tqPair, "isQuiz": isQuiz, "timeLimit": timeLimit, "dueDate": newDate, "status": status, "questionSet": newQuestionSet};
+            const editedData = {"userId": uId, "assignmentId": assignmentId, "name": assignmentName, "tqPair": tqPair, "isQuiz": isQuiz, "timeLimit": timeLimit, "dueDate": newDate, "timeHr": timeHr, "timeMin": timeMin, "isPm": !isPm, "status": status, "questionSet": newQuestionSet};
             editAssignment(editedData)
         }else{
-            const createData = {"userId": uId, "name": assignmentName, "tqPair": tqPair, "isQuiz": isQuiz, "timeLimit": timeLimit, "dueDate": newDate, "status": status, "questionSet": newQuestionSet };
+            const createData = {"userId": uId, "name": assignmentName, "tqPair": tqPair, "isQuiz": isQuiz, "timeLimit": timeLimit, "dueDate": newDate, "timeHr": timeHr, "timeMin": timeMin, "isPm": !isPm, "status": status, "questionSet": newQuestionSet };
+            console.log(createData);
             createAssignment(createData);
         }
         navigate("/app/teacher")

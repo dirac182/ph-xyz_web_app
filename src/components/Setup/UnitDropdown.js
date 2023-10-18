@@ -21,7 +21,6 @@ function UnitDropdown({children, topics, icon, expand}) {
     },[expand])
 
     const renderedItems = topics.map((topic) => {
-
         return(
             <div className="" key={topic.id}>
                 {isExpanded && <Checkbox topic={topic}/>}

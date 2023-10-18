@@ -1,29 +1,28 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { setQuestionSet } from "./assignmentSlice";
 
 const initialState = {
-    questions: [],
+    questionArray: [[]],
     QIDs: [""]
 }
 
 const workpageSlice = createSlice({
     name: "workpage",
     initialState: {
+        questionArray: [[]],
         questions: [],
     },
     reducers: {
-        addQuestion(state,action){
-            console.log("Add Question",action.payload)
-            state.questions.push(action.payload)
-        },
-        resetQuestions(state,action){
-            console.log("RESET")
-            state.questions = []
-        },
         setQIDs(state,action) { 
             state.QIDs = action.payload;
         }
+    },
+    extraReducers(builder) {
+        builder.addCase(setQuestionSet, (state,action) => {
+            state.questionArray = action.payload;
+        })
     }
 })
 
-export const { setQIDs ,addQuestion, resetQuestions } = workpageSlice.actions; 
+export const { setQIDs } = workpageSlice.actions; 
 export const workpageReducer = workpageSlice.reducer;

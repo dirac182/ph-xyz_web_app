@@ -1,14 +1,15 @@
 import {BiEditAlt, BiSpreadsheet, BiTrash} from "react-icons/bi";
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useFetchAssignmentsQuery, useDeleteAssignmentMutation, useFetchQuestionByTopicMutation } from "../store";
 import { useSelector, useDispatch } from "react-redux";
-import { edit, addQuestion, resetQuestions } from "../store";
+import { edit, setQuestionSet } from "../store";
 import { useFetchAllQuestionIDsQuery } from "../store";
 
 function AssignmentTable () {
+    const navigate = useNavigate();
     const dispatch = useDispatch();
     const user = useSelector(state => state.assignment.userId)
-    const questions = useSelector(state => state.workpage.questions)
+    const questionArray = useSelector(state => state.workpage.questionArray)
     const {data,error,isFetching} = useFetchAssignmentsQuery(user);
     
     const [deleteAssignment, { isFetchingDelete, isErrorDelete, dataDelete }] = useDeleteAssignmentMutation();
@@ -37,16 +38,9 @@ function AssignmentTable () {
             const handleEditClick = () => {
                 var day = assignment.dueDate
                 var date = day.slice(0,10);
-                var hour = 11
-                var isPm = true
-                var minute = parseInt(day.slice(14,16));
-                if (parseInt(day.slice(11,13)) > 12){
-                    hour = parseInt(day.slice(11,13)) - 12;
-                    isPm = true;
-                } else{
-                    hour = parseInt(day.slice(11,13));
-                    isPm = false;
-                }
+                var hour = assignment.timeHr;
+                var isPm = assignment.isPm;
+                var minute = assignment.timeMin;
                 dispatch(edit({
                     assignmentId: assignment.assignmentID,
                     assignmentName: assignment.assignmentName,
@@ -64,24 +58,15 @@ function AssignmentTable () {
                 const data = {userId:user, assignmentId: assignment.assignmentID};
                 deleteAssignment(data);
             }
-            const handleAssignmentClick = async () => {
-                dispatch(resetQuestions());
-                var updatedQuestions = []
-                await Promise.all(assignment.tqPair.map(async (pair) =>  {
-                    var topicQs = [];
-                    for (let i = 0; i < pair.questions; i++){
-                        const q = await fetchQuestion((pair.id).toString());
-                        console.log(q.data)
-                        topicQs.push(q.data);
-                        }
-                    // dispatch(addQuestion(topicQs));
-                    console.log("topicQs",topicQs);
-                    updatedQuestions.push(topicQs)
-                    }))
-                dispatch(addQuestion(updatedQuestions));
-                console.log("updatedQuestions:",updatedQuestions);
-                console.log("questionsState", questions)
+            const handleAssignmentClick = () => {
+                dispatch(setQuestionSet(assignment.questionSet));
+                navigate("/app/student");
             }
+            //Handles date format
+            // const yearString = assignment.dueDate.slice(0,4);
+            // const monthString = assignment.dueDate.slice(5,7);
+            // const dayString = assignment.dueDate.slice(8,10);
+            // const isPmText = assignment.isPm ? "AM" : "PM"
 
         return(
             <tr className="border-b" key={assignment._id}>

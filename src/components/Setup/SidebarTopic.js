@@ -8,11 +8,11 @@ function SidebarTopic({pair}) {
     const dispatch = useDispatch();
 
     const handleRemoveClick = () =>{
-        dispatch(removeTopic(pair.id))
+        dispatch(removeTopic(pair.topicId))
     }
 
     useEffect(() => {
-        dispatch(changeQuestions({id: pair.id, questions: questionAmount}))
+        dispatch(changeQuestions({id: pair.topicId, questions: questionAmount}))
     },[questionAmount])
 
     return (
@@ -23,7 +23,7 @@ function SidebarTopic({pair}) {
                     {pair.topic}
                 </p>
             </div>
-            <input className="w-12 h-8 border border-2 text-center rounded border-indigo-300" onChange={(event)=>{setQuestionAmount(event.target.value)}} value={questionAmount} type="number" min="1" max="10" />
+            <input className="w-12 h-8 border border-2 text-center rounded border-indigo-300" onChange={(event)=>{setQuestionAmount(event.target.value)}} value={questionAmount} type="number" min="1" max="5" />
         </div>
     )
 }

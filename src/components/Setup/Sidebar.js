@@ -5,12 +5,12 @@ import { useSelector } from "react-redux/es/hooks/useSelector";
 function Sidebar({ userId, assignmentId }) {
     const tqPair = useSelector(state => state.assignment.tqPair)
     const renderedTopics = tqPair.map((pair) =>{
-            return (
-                <div key={pair.id}>
-                    <SidebarTopic pair={pair} />
-                </div>
-                 )
-        })
+        return (
+            <div key={pair.topicId}>
+                <SidebarTopic pair={pair} />
+            </div>
+                )
+    })
 
     const topicHeader = tqPair.length === 0 
     ? <div className="flex justify-center text-2xl"><div>Click on Dropdown to Add Topics</div></div>

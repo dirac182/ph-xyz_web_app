@@ -3,7 +3,7 @@ import { setQuestionSet ,assignmentReducer, changeName, setIsQuiz, setIsPm, setD
 import {setupListeners} from "@reduxjs/toolkit/query";
 import { assignmentsApi } from "./apis/assignmentsApi";
 import { questionsApi } from "./apis/questionsApi";
-import { setQIDs, workpageReducer, addQuestion, resetQuestions } from "./slices/workpageSlice";
+import { setQIDs, workpageReducer } from "./slices/workpageSlice";
 
 
 const store = configureStore({
@@ -22,6 +22,6 @@ const store = configureStore({
 
 setupListeners(store.dispatch);
 
-export { setQuestionSet ,setQIDs ,resetQuestions, addQuestion, store, changeName, setIsQuiz, setIsPm, setDueDate, setTimeHr, setTimeMin, setTimeLimit, addTopic, removeTopic, changeQuestions, updateTqPair, reset, edit};
+export { setQuestionSet ,setQIDs , store, changeName, setIsQuiz, setIsPm, setDueDate, setTimeHr, setTimeMin, setTimeLimit, addTopic, removeTopic, changeQuestions, updateTqPair, reset, edit};
 export { useFetchAssignmentsQuery, useCreateAssignmentMutation, useEditAssignmentMutation, useDeleteAssignmentMutation } from "./apis/assignmentsApi"
 export { useFetchAllQuestionIDsQuery,useFetchQuestionByTopicMutation } from "./apis/questionsApi";

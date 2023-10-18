@@ -14,7 +14,7 @@ const initialState = {
     timeHr: 11,
     timeMin: 59,
     isPm: true,
-    questionSet: [],
+    questionSet: [[]],
 };
 
 const assignmentSlice = createSlice({
@@ -31,7 +31,7 @@ const assignmentSlice = createSlice({
         timeHr: 11,
         timeMin: 59,
         isPm: true,
-        questionSet:[]
+        questionSet:[[]]
     },
     reducers: {
         changeName(state,action) {
@@ -39,19 +39,19 @@ const assignmentSlice = createSlice({
         },
         addTopic(state,action){
             //Assumption: action.payload === {"id": 1.2, "topic": "Energy", "questions": 2}
-            state.tqPair.push({"id": action.payload.id, "topic": action.payload.topic, "questions": 1})
+            state.tqPair.push({"topicId": action.payload.topicId, "topic": action.payload.topic, "questions": 1})
         },
         removeTopic(state,action){
             //Assumption: action.payload ===  1.2
             const updated = state.tqPair.filter((pair)=> {
-                return pair.id !== action.payload
+                return pair.topicId !== action.payload
             })
             state.tqPair = updated
         },
         changeQuestions(state,action) {
             //Assumption: action.payload === {"id": 1.2, "questions": 3}
             const updatedPair = state.tqPair.map((pair) => {
-                if (pair.id === action.payload.id) {
+                if (pair.topicId === action.payload.id) {
                     return { ...pair,  "questions": action.payload.questions}
                 }
                 return pair;
@@ -97,6 +97,7 @@ const assignmentSlice = createSlice({
             state.dueDate = action.payload.dueDate;
             state.timeHr = action.payload.timeHr;
             state.timeMin = action.payload.timeMin;
+            state.isPm = action.payload.isPm
         },
         setQuestionSet(state,action){
             state.questionSet = action.payload;

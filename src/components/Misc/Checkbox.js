@@ -9,14 +9,14 @@ function Checkbox({topic}) {
 
     useEffect(() =>{
         tqPair.map((listItem) =>{
-            if (listItem.id === topic.id){
+            if (listItem.topicId === topic.id){
                 setChecked(true);
                 }
             })
-        }, [])
+        }, [tqPair])
 
     useEffect(()=> {
-        const isNotInArray = tqPair.every(item => item.id !== topic.id);
+        const isNotInArray = tqPair.every(item => item.topicId !== topic.id);
         if (isNotInArray) {
             setChecked(false);
         }
@@ -25,7 +25,7 @@ function Checkbox({topic}) {
     const handleChange = () => {
         setChecked(!checked);
         if (!checked){
-            dispatch(addTopic({id:topic.id,topic:topic.topic}))
+            dispatch(addTopic({topicId:topic.id,topic:topic.topic}))
         } else {
             dispatch(removeTopic(topic.id))
         }

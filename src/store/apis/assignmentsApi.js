@@ -32,6 +32,9 @@ const assignmentsApi = createApi({
                             quiz: data.isQuiz,
                             timeLimit: data.timeLimit,
                             dueDate: data.dueDate,
+                            timeHr: data.timeHr,
+                            timeMin: data.timeMin,
+                            isPm: data.isPm,
                             status: data.status,
                             questionSet: data.questionSet
                         }
@@ -54,6 +57,9 @@ const assignmentsApi = createApi({
                             quiz: data.isQuiz,
                             timeLimit: data.timeLimit,
                             dueDate: data.dueDate,
+                            timeHr: data.timeHr,
+                            timeMin: data.timeMin,
+                            isPm: data.isPm,
                             status: data.status,
                             questionSet: data.questionSet
                         }
