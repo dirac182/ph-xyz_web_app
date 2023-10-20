@@ -76,7 +76,6 @@ const assignmentSlice = createSlice({
             }else{
                 state.timeHr = action.payload;
             }
-           
         },
         setTimeMin(state,action){
             state.timeMin = action.payload;
@@ -101,9 +100,20 @@ const assignmentSlice = createSlice({
         },
         setQuestionSet(state,action){
             state.questionSet = action.payload;
-        }
+        },
+        assignmentSetup(state,action) {
+            state.assignmentId = action.payload.assignmentId;
+            state.assignmentName = action.payload.assignmentName;
+            state.tqPair = action.payload.tqPair;
+            state.isQuiz = action.payload.isQuiz;
+            state.timeLimit = action.payload.timeLimit;
+            state.dueDate = action.payload.dueDate;
+            state.timeHr = action.payload.timeHr;
+            state.timeMin = action.payload.timeMin;
+            state.isPm = action.payload.isPm
+        },
     }
 })
 
-export const { setQuestionSet ,changeName, addTqPair, removeTqPair, setIsQuiz, setTimeLimit, setDueDate, setIsPm, setTimeMin, setTimeHr, addTopic, removeTopic, changeQuestions, updateTqPair, reset, edit} = assignmentSlice.actions;
+export const { assignmentSetup, setQuestionSet ,changeName, addTqPair, removeTqPair, setIsQuiz, setTimeLimit, setDueDate, setIsPm, setTimeMin, setTimeHr, addTopic, removeTopic, changeQuestions, updateTqPair, reset, edit} = assignmentSlice.actions;
 export const assignmentReducer = assignmentSlice.reducer;

@@ -1,9 +1,9 @@
 import { configureStore } from "@reduxjs/toolkit";
-import { setQuestionSet ,assignmentReducer, changeName, setIsQuiz, setIsPm, setDueDate, setTimeHr, setTimeMin, setTimeLimit, addTopic, removeTopic, changeQuestions, updateTqPair, reset, edit } from "./slices/assignmentSlice";
+import { assignmentSetup, setQuestionSet ,assignmentReducer, changeName, setIsQuiz, setIsPm, setDueDate, setTimeHr, setTimeMin, setTimeLimit, addTopic, removeTopic, changeQuestions, updateTqPair, reset, edit } from "./slices/assignmentSlice";
 import {setupListeners} from "@reduxjs/toolkit/query";
 import { assignmentsApi } from "./apis/assignmentsApi";
 import { questionsApi } from "./apis/questionsApi";
-import { setQIDs, workpageReducer } from "./slices/workpageSlice";
+import { setIsFocused, setIsCorrect, setIsFlagged, setSelectedAnswer, setTopicIndex, setQuestionIndex, setWorkpageData, setQIDs, workpageReducer } from "./slices/workpageSlice";
 
 
 const store = configureStore({
@@ -21,7 +21,6 @@ const store = configureStore({
 });
 
 setupListeners(store.dispatch);
-
-export { setQuestionSet ,setQIDs , store, changeName, setIsQuiz, setIsPm, setDueDate, setTimeHr, setTimeMin, setTimeLimit, addTopic, removeTopic, changeQuestions, updateTqPair, reset, edit};
-export { useFetchAssignmentsQuery, useCreateAssignmentMutation, useEditAssignmentMutation, useDeleteAssignmentMutation } from "./apis/assignmentsApi"
-export { useFetchAllQuestionIDsQuery,useFetchQuestionByTopicMutation } from "./apis/questionsApi";
+export { setIsFocused, setIsCorrect, setIsFlagged, setSelectedAnswer, setTopicIndex, setQuestionIndex, setWorkpageData, assignmentSetup, setQuestionSet ,setQIDs , store, changeName, setIsQuiz, setIsPm, setDueDate, setTimeHr, setTimeMin, setTimeLimit, addTopic, removeTopic, changeQuestions, updateTqPair, reset, edit};
+export { useFetchAssignmentByIdQuery, useFetchAssignmentsQuery, useCreateAssignmentMutation, useEditAssignmentMutation, useDeleteAssignmentMutation } from "./apis/assignmentsApi"
+export {  useFetchQuestionSetByIdsQuery, useFetchAllQuestionIDsQuery, useFetchQuestionByTopicMutation } from "./apis/questionsApi";

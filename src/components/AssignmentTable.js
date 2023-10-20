@@ -2,7 +2,7 @@ import {BiEditAlt, BiSpreadsheet, BiTrash} from "react-icons/bi";
 import { Link, useNavigate } from 'react-router-dom';
 import { useFetchAssignmentsQuery, useDeleteAssignmentMutation, useFetchQuestionByTopicMutation } from "../store";
 import { useSelector, useDispatch } from "react-redux";
-import { edit, setQuestionSet } from "../store";
+import { edit, setQuestionSet, assignmentSetup } from "../store";
 import { useFetchAllQuestionIDsQuery } from "../store";
 
 function AssignmentTable () {
@@ -59,8 +59,19 @@ function AssignmentTable () {
                 deleteAssignment(data);
             }
             const handleAssignmentClick = () => {
+                dispatch(assignmentSetup({
+                    assignmentId: assignment.assignmentID,
+                    assignmentName: assignment.assignmentName,
+                    tqPair: assignment.tqPair,
+                    isQuiz: assignment.quiz,
+                    timeLimit: assignment.timeLimit,
+                    dueDate: assignment.dueDate.slice(0,10),
+                    timeHr: assignment.timeHr,
+                    timeMin: assignment.timeMin,
+                    isPm:  assignment.isPm,
+                }))
                 dispatch(setQuestionSet(assignment.questionSet));
-                navigate("/app/student");
+                navigate(`/app/student/${assignment.assignmentID}`);
             }
             //Handles date format
             // const yearString = assignment.dueDate.slice(0,4);

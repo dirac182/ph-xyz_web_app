@@ -1,10 +1,12 @@
-import useDataContext from "../../hooks/use-data-context.js";
 import SkillBubble from "./SkillBubble.js";
+import { useSelector } from "react-redux";
 
-function SkillArea({questionIndex}) {
-    const { questionData } = useDataContext();
+function SkillArea() {
+   const workpageData = useSelector(state => state.workpage.workpageData);
+   const topicIndex = useSelector(state => state.workpage.topicIndex);
+   const questionIndex = useSelector(state => state.workpage.questionIndex); 
 
-    const renderedSkills = questionData[questionIndex].skills.map((skill,index) => {
+    const renderedSkills = workpageData[topicIndex][questionIndex].question.skills.map((skill,index) => {
         return (
            <div key={skill}>
               <SkillBubble>{skill}</SkillBubble>

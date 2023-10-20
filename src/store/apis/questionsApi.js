@@ -26,9 +26,20 @@ const questionsApi = createApi({
                     }
                 }
             }),
+            fetchQuestionSetByIds: builder.query({
+                query: (Ids) => {
+                    return {
+                        url: "/get/questionSetByIds",
+                        params: {
+                            IdSet: Ids
+                        },
+                        method: "GET"
+                    }
+                }
+            })
         }
     }
 });
 
-export const { useFetchAllQuestionIDsQuery,useFetchQuestionByTopicMutation } = questionsApi;
+export const { useFetchQuestionSetByIdsQuery, useFetchAllQuestionIDsQuery, useFetchQuestionByTopicMutation } = questionsApi;
 export { questionsApi };

@@ -1,40 +1,49 @@
 import { useEffect, useRef, useState } from "react";
+import { setSelectedAnswer } from "../../store";
+import { useDispatch, useSelector } from "react-redux";
 
 
-function AnswerChoice({children,questionIndex,answerIndex,setAnswerData,answerData,...rest}) {
+function AnswerChoice({children,answerIndex,isAnswered,...rest}) {
+    const dispatch = useDispatch();
+    const workpageData = useSelector(state => state.workpage.workpageData);
+    const topicIndex = useSelector(state => state.workpage.topicIndex);
+    const questionIndex = useSelector(state => state.workpage.questionIndex);
     const [isChecked, setIsChecked] = useState(false)
-    // const isChecked = useRef(false)
 
     useEffect(() => {
-        if(answerData[questionIndex] === null || answerData[questionIndex] !== answerIndex ){
-            setIsChecked(false)
-        } 
-       },[answerData])
-
-    useEffect(() => {
-        if(answerData[questionIndex] === answerIndex){
+        if(workpageData[topicIndex][questionIndex].selectedAnswerIndex === null || workpageData[topicIndex][questionIndex].selectedAnswerIndex !== answerIndex ){
+            setIsChecked(false);
+        } else {
             setIsChecked(true);
         }
-    },[questionIndex])
+       },[workpageData])
 
     const handleChange = () => {
         setIsChecked(!isChecked)
-        if(isChecked === true) {
-            setAnswerData(questionIndex,null)
-        } else if (isChecked === false) {
-            console.log(answerIndex)
-            setAnswerData(questionIndex,answerIndex);
-        }
+        dispatch(setSelectedAnswer(answerIndex));
     }
 
-    const classes = isChecked ? "bg-indigo-300 flex p-3 font-normal border-2 border-indigo-500 items-center cursor-pointer" : "flex p-3 font-normal bg-gray-50 hover:bg-indigo-300 border-2 border-indigo-500 items-center cursor-pointer"
+    const nonAnsweredClasses = isChecked ? "bg-indigo-300 flex p-3 font-normal border-2 border-indigo-500 items-center cursor-pointer" : "flex p-3 font-normal bg-gray-50 hover:bg-indigo-300 border-2 border-indigo-500 items-center cursor-pointer"
+
+    const answeredClasses = answerIndex !== workpageData[topicIndex][questionIndex].question.correctChoiceIndex ? "flex p-3 font-normal border-2 border-indigo-500 items-center bg-red-200" : "flex p-3 font-normal border-2 border-indigo-500 items-center bg-green-200"
+
+    const renderedChoice = isAnswered 
+    ? 
+    (<div {...rest} className={answeredClasses}>
+        <p className="pl-2" >{children}</p>
+    </div>)
+    :
+    (<div {...rest} onClick={handleChange} className={nonAnsweredClasses}>
+        <input onChange={handleChange} checked={isChecked} type="checkbox"/>
+        <p className="pl-2" >{children}</p>
+    </div>);
 
     
     return(
-        <div {...rest} onClick={handleChange} className={classes}>
-            <input onChange={handleChange} checked={isChecked} type="checkbox"/>
-            <p className="pl-2" >{children}</p>
+        <div>
+            {renderedChoice}
         </div>
+        
     )
 }
 

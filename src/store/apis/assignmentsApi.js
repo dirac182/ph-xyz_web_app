@@ -19,6 +19,19 @@ const assignmentsApi = createApi({
                     }
                 }
             }),
+            fetchAssignmentById: builder.query({
+                providesTags: ["Assignments"],
+                query: (data) => {
+                    return {
+                        url: `/get/assignmentById`,
+                        params: {
+                            userId: data.userId,
+                            assignmentId: data.assignmentId
+                        },
+                        method: "GET",
+                    }
+                }
+            }),
             createAssignment: builder.mutation({
                 invalidatesTags: ["Assignments"],
                 query: (data) => {
@@ -86,5 +99,5 @@ const assignmentsApi = createApi({
     
 
 
-export const { useFetchAssignmentsQuery, useCreateAssignmentMutation, useEditAssignmentMutation, useDeleteAssignmentMutation } = assignmentsApi;
+export const { useFetchAssignmentByIdQuery, useFetchAssignmentsQuery, useCreateAssignmentMutation, useEditAssignmentMutation, useDeleteAssignmentMutation } = assignmentsApi;
 export { assignmentsApi };

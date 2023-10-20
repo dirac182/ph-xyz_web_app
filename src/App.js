@@ -18,7 +18,7 @@ function App() {
                 <Route path="/app/teacher" element={<TeacherLanding/>}/>
                 <Route path="/app/teacher/create" element={<DemoSetup/>}/>
                 <Route path="/app/teacher/edit/:userId/:assignmentId" element={<DemoSetup/>}/>
-                <Route path="/app/student" element={<DemoWorksheet/>}/>
+                <Route path="/app/student/:assignmentId" element={<DemoWorksheet/>}/>
                 <Route path="/about" element={<About/>}/>
                 <Route path="/faq" element={<Faq />}/>
             </Routes>

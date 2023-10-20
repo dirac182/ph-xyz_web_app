@@ -1,24 +1,26 @@
 import { useEffect, useState} from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { setIsFlagged } from "../../store";
 
-function FlagButton({children,index,flagOn,flagOff,flaggedIndex,...rest}) {
+function FlagButton({children, ...rest}) {
+    const dispatch = useDispatch();
     const [clickedToggle, setClickToggle] = useState(false)
+    const workpageData = useSelector(state => state.workpage.workpageData);
+    const topicIndex = useSelector(state => state.workpage.topicIndex);
+    const questionIndex = useSelector(state => state.workpage.questionIndex); 
 
     const handleClick = () => {
-        if(!clickedToggle) {
-            flagOn(index)
-        } else {
-            flagOff(index)
-        }
         setClickToggle(!clickedToggle);
+        dispatch(setIsFlagged(!clickedToggle))
     }
 
     useEffect(()=> {
-        if(flaggedIndex.includes(index)) {
+        if(workpageData[topicIndex][questionIndex].isFlagged) {
             setClickToggle(true);
         } else {
             setClickToggle(false);
         }
-    },[index])
+    },[topicIndex, questionIndex])
 
     const classes = clickedToggle ? "flex items-center justify-center px-3 py-1.5 rounded border-2 border-red-700 bg-red-500" : "flex items-center justify-center px-3 py-1.5 rounded border-2 border-gray-400"
 
