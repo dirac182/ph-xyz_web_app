@@ -18,10 +18,13 @@ function AssignmentInfo() {
    const [correctQuestions, setCorrectQuestions] = useState(0);
 
    const renderedSubjects = questionSet.map((subject,index) => {
+      const amountCompleted = 0;
+
       const handleQuestionSetChange = () => {
          dispatch(setTopicIndex(index));
          setSelectedSubjectIndex(index);
       }
+      
       const classes = selectedSubjectIndex === index ? "flex justify-between border-y-2 border-indigo-200 bg-indigo-800 text-white p-4 cursor-pointer hover:bg-indigo-800" : "flex justify-between border-y-2 border-indigo-200 bg-indigo-500 text-white p-4 cursor-pointer hover:bg-indigo-800"
       return (
          <div onClick={handleQuestionSetChange} className={classes} key={subject._id}>
@@ -64,7 +67,7 @@ function AssignmentInfo() {
             <div className="text-lg py-2 pb-10">
                Grade: {Math.floor((correctQuestions/totalQuestions)*100)}%
             </div>
-            <div className="text-xl py-4">
+            <div className="text-xl ">
                   Problem Set
             </div>
             <div className="flex px-4 justify-between">

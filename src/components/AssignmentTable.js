@@ -4,6 +4,7 @@ import { useFetchAssignmentsQuery, useDeleteAssignmentMutation, useFetchQuestion
 import { useSelector, useDispatch } from "react-redux";
 import { edit, setQuestionSet, assignmentSetup } from "../store";
 import { useFetchAllQuestionIDsQuery } from "../store";
+import Skeleton from 'react-loading-skeleton'
 
 function AssignmentTable () {
     const navigate = useNavigate();
@@ -26,7 +27,7 @@ function AssignmentTable () {
 
     let renderedRows;
     if(isFetching) {
-        renderedRows = <tr><td><div>Fetching</div></td></tr>
+        renderedRows = <tr><Skeleton count={3} /></tr>
     } else if (error) {
         renderedRows = <tr><td><div>Error Loading Albums</div></td></tr>
     } else {
@@ -34,6 +35,7 @@ function AssignmentTable () {
         renderedRows = data.map((assignment) => {
             const isQuiz = assignment.quiz ? "Quiz" : "Assignment";
             const isPosted = assignment.status ? "Posted" : "NotPosted";
+            const isPmText = assignment.isPm ? "PM" : "AM"
 
             const handleEditClick = () => {
                 var day = assignment.dueDate
@@ -110,7 +112,7 @@ function AssignmentTable () {
                 </td>
                 <td className="p-3">{isQuiz}</td>
                 <td className="p-3">{isPosted}</td>
-                <td className="p-3">{assignment.dueDate}</td>
+                <td className="p-3">{assignment.dueDate.slice(0,10)} at {assignment.timeHr}:{assignment.timeMin} {isPmText}</td>
                 <td className="p-3"><button onClick={handleDeleteClick}><BiTrash/></button></td>
             </tr>
         )

@@ -6,6 +6,7 @@ import QuestionIcon from "./QuestionIcon";
 import SubmitButton from "./SubmitButton";
 import Solution from "./Solution";
 import { useSelector, useDispatch } from "react-redux";
+import { InlineMath } from 'react-katex';
 
 function QuestionArea() {
    const dispatch = useDispatch();
@@ -34,6 +35,16 @@ function QuestionArea() {
            </div>
         )
      })
+
+     const renderedSolution = workpageData[topicIndex][questionIndex].isCorrect !== null 
+     ? <Solution data={workpageData[topicIndex][questionIndex].question.solution} />
+     : <div></div>
+
+     const renderedImage = workpageData[topicIndex][questionIndex].question.image
+     ? <div className="pb-6"><img src={workpageData[topicIndex][questionIndex].question.image} /></div>
+     :<div></div>
+     const questionText = workpageData[topicIndex][questionIndex].question.text;
+
     return (
         <div className="w-3/5 border-x-2 border-dashed border-indigo-500">
             <div className="flex space-x-72 items-center pt-10 pl-20">
@@ -49,11 +60,17 @@ function QuestionArea() {
                 </div>
             </div>
             <div className="grid pt-5 justify-items-center">
+               <div>
+                  {renderedImage}
+               </div>
                <div className="flex border-2 border-indigo-500 rounded-lg p-5 bg-indigo-100 w-3/5 text-center text-xl">
-                  {workpageData[topicIndex][questionIndex].question.text}
+                  {questionText}
                </div>
                   <div className="grid w-5/6 grid-cols-2 place-content-evenly gap-4 pt-10 justify-items-center">
                      {renderedAnswerChoices}
+                  </div>
+                  <div className="flex py-7 justify-center w-2/4">
+                     {renderedSolution}
                   </div>           
             </div>
             <div className="flex justify-center pt-10">

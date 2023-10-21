@@ -1,34 +1,30 @@
 import classNames from "classnames";
-import { useEffect } from "react";
+import { useDispatch } from "react-redux";
+import { setSkillId } from "../../store";
 
 function SkillBubble({children,index,onClick,...rest}) {
-    
+    const dispatch = useDispatch()
     var style = ""
 
-    if (children.substring(0,1) === "1"){
+    if (children.substring(0,2) === "EU"){
         style = "bg-red-600"
-    } else if (children.substring(0,1) === "2"){
+    } else if (children.substring(1,2) === "EK"){
         style = "bg-blue-600"
-    } else if (children.substring(0,1) === "3"){
+    } else if (children.substring(0,2) === "LO"){
         style = "bg-green-600"
-    } else if (children.substring(0,1) === "4"){
+    } else if (children.substring(0,2) === "SP"){
         style = "bg-yellow-600"
-    } else if (children.substring(0,1) === "5"){
-        style = "bg-purple-600"
-    } else if (children.substring(0,1) === "6"){
-        style = "bg-stone-600"
-    } else if (children.substring(0,1) === "7"){
-        style = "bg-cyan-600"
-    }else if (children.substring(0,1) === "S"){
-        style = "bg-emerald-400"
+    } 
+    var classes = classNames("flex text-white px-2 py-1 font-normal bg-blue-600 hover:bg-indigo-300 border-2 rounded-full border-indigo-500 items-center cursor-pointer",style)
+
+    const handleSkillClick = () => {
+        dispatch(setSkillId(children));
     }
 
-    var classes = classNames("flex text-white px-2 py-1 font-normal bg-gray-50 hover:bg-indigo-300 border-2 rounded-full border-indigo-500 items-center cursor-pointer",style)
-
     return(
-        <span {...rest} className={classes}>
-            <p className="relative right-1 pl-2">{children.replace(/\s+/g, '')}</p>
-        </span>
+        <button onClick={handleSkillClick} {...rest} className={classes}>
+            <p className="relative right-1 pl-2">{children}</p>
+        </button>
     )
 }
 

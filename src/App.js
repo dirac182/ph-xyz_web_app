@@ -11,7 +11,7 @@ import TeacherLanding from "./pages/TeacherLanding";
 
 function App() {
     return(
-        <div className="font-sans flex flex-col min-h-screen">
+        <div className="flex flex-col min-h-screen">
             <MyNavbar />
             <Routes>
                 <Route path="/" element={<Landing/>}/>
@@ -22,7 +22,6 @@ function App() {
                 <Route path="/about" element={<About/>}/>
                 <Route path="/faq" element={<Faq />}/>
             </Routes>
-            <Footer />
         </div>
     )
 };

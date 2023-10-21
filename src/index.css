@@ -2,6 +2,30 @@
 @tailwind components;
 @tailwind utilities;
 
+h1 {
+  font-size: 2em; /* or 32px typically */
+  font-weight: bold; /* or 700 */
+  margin: 0.67em 0;
+}
+
+h2 {
+  font-size: 1.5em; /* or 24px typically */
+  font-weight: bold; /* or 700 */
+  margin: 0.83em 0;
+}
+
+h3 {
+  font-size: 1.17em; /* or 18.8px typically */
+  font-weight: bold; /* or 700 */
+  margin: 1em 0;
+}
+
+h4 {
+  font-size: 1em; /* or 16px, which is the base font-size for most browsers */
+  font-weight: bold; /* or 700 */
+  margin: 1.33em 0;
+}
+
 .landing-page-container {
   display: grid;
   grid-template-columns: 1fr 2fr;
@@ -20,10 +44,9 @@
 }
 .skill-area {
   display: grid;
-  gap:1rem;
-  grid-template-columns: repeat(auto-fill, minmax(50px, 1fr));
-  align-items: start;
-  justify-items: start;
+  grid-template-columns: repeat(auto-fill, minmax(85px, 1fr));
+  align-items: center;
+  justify-items: center;
 }
 .skills-icon {
   cursor: pointer;

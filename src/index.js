@@ -1,4 +1,6 @@
 import "./index.css"
+import 'katex/dist/katex.min.css';
+import 'react-loading-skeleton/dist/skeleton.css'
 import React from "react";
 import ReactDOM from "react-dom/client";
 import { BrowserRouter, Routes, Route } from 'react-router-dom'

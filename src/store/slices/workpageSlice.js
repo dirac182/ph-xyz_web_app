@@ -9,6 +9,7 @@ const workpageSlice = createSlice({
         workpageData: [],
         topicIndex: 0,
         questionIndex: 0,
+        skillId: ""
     },
     reducers: {
         setTopicIndex(state,action){
@@ -35,6 +36,9 @@ const workpageSlice = createSlice({
         },
         setIsFocused(state,action){
             state.workpageData[state.topicIndex][state.questionIndex].isFocused = action.payload;
+        },
+        setSkillId(state,action){
+            state.skillId = action.payload
         }
     },
     extraReducers(builder) {
@@ -45,5 +49,5 @@ const workpageSlice = createSlice({
     }
 })
 
-export const { setIsFocused, setIsCorrect, setIsFlagged, setSelectedAnswer, setTopicIndex, setQuestionIndex, setWorkpageData, setQIDs } = workpageSlice.actions; 
+export const { setSkillId, setIsFocused, setIsCorrect, setIsFlagged, setSelectedAnswer, setTopicIndex, setQuestionIndex, setWorkpageData, setQIDs } = workpageSlice.actions; 
 export const workpageReducer = workpageSlice.reducer;

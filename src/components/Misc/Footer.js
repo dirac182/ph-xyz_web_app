@@ -7,7 +7,7 @@ function Footer() {
     const [thisYear, setThisYear] =useState(year.getFullYear())
 
     return (
-        <div className="pt-2">
+        <div className="">
             <footer className="flex flex-wrap bg-indigo-700 h-16 justify-between text-center">
                 <a href="/">
                     <div className="relative left-16 flex content-center pt-3 items-center text-5xl text-white cursor-pointer">

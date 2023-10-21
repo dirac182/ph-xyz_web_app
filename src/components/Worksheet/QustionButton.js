@@ -20,7 +20,6 @@ function QuestionButton({index, ...rest}) {
     },[workpageData[topicIndex][questionIndex].isFlagged])
 
     useEffect(()=> {
-        console.log(questionIndex, index)
         if (questionIndex === index){
             setFocus(true);
         }else{

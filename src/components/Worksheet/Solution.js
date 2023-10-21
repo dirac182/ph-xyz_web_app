@@ -1,35 +1,19 @@
-import useDataContext from "../../hooks/use-data-context";
-import { useEffect } from "react";
+import JsxParser from 'react-jsx-parser';
 
-function Solution({onClick, isCorrect, qIndex}) {
-    const { questionData } = useDataContext();
-    var stepNumber = 0;
-
-    const renderedSolution = questionData[qIndex].solution.map((step)=> {
-        stepNumber += 1;
-        return (
-            <div className="flex">
-                <div className="">
-                    <p>Step {stepNumber}:</p>
-                </div>
-                <div>
-                    {step}
-                </div>
-            </div>
-        )
-    })
-
+function Solution({data}) {
+    const jsxString = data;
+    console.log(data);
     //This finds any LAtex after each render of whatever is in the parenthesis.
-    useEffect(()=>{
-        if( typeof window?.MathJax !== "undefined"){
-          window.MathJax.typesetClear()
-          window.MathJax.typeset()
-        }
-      },[isCorrect])
+    // useEffect(()=>{
+    //     if( typeof window?.MathJax !== "undefined"){
+    //       window.MathJax.typesetClear()
+    //       window.MathJax.typeset()
+    //     }
+    //   },[isCorrect])
 
     return (
-        <div className="text-xl ">
-            Solutions coming soon!
+        <div className="flex justify-center text-xl">
+            <JsxParser jsx={jsxString}/>
         </div>
     )
 }
