@@ -23,7 +23,7 @@ function SkillBubble({children,index,onClick,...rest}) {
 
     return(
         <button onClick={handleSkillClick} {...rest} className={classes}>
-            <p className="relative right-1 pl-2">{children}</p>
+            <p className="relative right-1 pl-2 text-sm">{children}</p>
         </button>
     )
 }

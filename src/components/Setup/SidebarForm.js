@@ -29,20 +29,6 @@ function SidebarForm({ userId, assignmentId}) {
     const [timeButtonText, setTimeButtontext] = useState("PM");
     const [qTotal,setqTotal] = useState(0)
 
-    // if(isFetching){
-    //     console.log("Fetching QIDs")
-    // } else if (error){
-    //     console.log(error);
-    // } else {
-    //     const QIDList = data;
-    //     var allQs = []
-    //     QIDList.map(element => {
-    //         allQs.push(element.QID)
-    //     })
-    //     dispatch(setQIDs(allQs));
-    //     console.log(allQs);
-    // }
-
     useEffect(() => {
         if (!isFetching && !error && data) {
             const QIDList = data;
@@ -130,22 +116,21 @@ function SidebarForm({ userId, assignmentId}) {
 
     return(
         <form onSubmit={HandleSubmit} className="border-r-2 py-6 border-b-2 border-indigo-300">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 items-center justify-items-center">
-            
-            <div className="col-span-2 md:col-span-2">
-                <span className="p-4 flex items-center justify-center">
-                        <Button type="submit" className="text-2xl w-full md:w-96 shadow-lg shadow-indigo-500/40 hover:bg-indigo-700" primary rounded>{buttonText}</Button>
-                </span>
+        <div className="grid lg:grid-cols-2 lg:gap-3 md:grid-cols-1 md:gap-1 items-center justify-items-center">
+ 
+            <div className="flex w-full items-center justify-center lg:col-span-2 p-4">
+                    <Button type="submit" className="text-2xl w-9/12 shadow-lg shadow-indigo-500/40 hover:bg-indigo-700" primary rounded>{buttonText}</Button>
             </div>
             
-            <div className="flex flex-col md:flex-row justify-center items-center col-span-2 text-2xl p-4">
+            <div className="flex justify-center items-center text-2xl lg:col-span-2 md:col-span-2 text-center">
                 <label>Assignment Name:</label>
-                <span className="pl-2">
-                    <input className="border border-2 w-full md:w-auto text-center rounded border-indigo-300" onChange={(event)=>{dispatch(changeName(event.target.value))}} type="text" value={assignmentName} required />
-                </span>
             </div>
-            
-            <div className="items-start">
+
+            <div className="flex items-center justify-center w-full p-2 lg:col-span-2 md:col-span-2">
+                <input className="w-9/12 border border-2 text-center rounded border-indigo-300" onChange={(event)=>{dispatch(changeName(event.target.value))}} type="text" value={assignmentName} required />
+            </div>
+
+            <div className="text-center">
                 <label className="text-md pr-2">Number of Questions:</label>
                 <label className="text-md pr-2">{qTotal}</label>
             </div>
@@ -156,20 +141,22 @@ function SidebarForm({ userId, assignmentId}) {
                 {checkToggle}
             </div>
             
-            <div className="flex flex-col md:flex-row items-center justify-center text-xl">
-                <label className="mb-2 md:mb-0 md:pr-3">Due Date:</label>
-                <input className="border border-2 w-full md:w-auto text-center rounded border-indigo-300" type="date" onChange={(event) => {dispatch(setDueDate(event.target.value))}} value={dueDate} />
-            </div>
-            
-            <div className="flex flex-col md:flex-row items-center justify-center text-xl">
-                <div className="flex mb-2 md:mb-0">
-                    <input className="w-20 border border-2 text-center rounded border-indigo-300" onChange={(event)=> {dispatch(setTimeHr(event.target.value))}} value={timeHr} type="number" max="12" min="1" />
-                    <label className="px-2 text-3xl">:</label>
-                    <input className="w-20 border border-2 text-center rounded border-indigo-300" onChange={(event)=> {dispatch(setTimeMin(event.target.value))}} value={timeMin} type="number" max="59" min="00" />
+            <div className="flex w-full col-span-2 md:flex-row items-center justify-center text-center text-xl">
+                <div>
+                    <label className="pr-4">Due Date:</label>
+                    <input className="border border-2 text-center rounded border-indigo-300" type="date" onChange={(event) => {dispatch(setDueDate(event.target.value))}} value={dueDate} />
                 </div>
-                <Button className="mt-2 md:mt-0 md:ml-4 hover:bg-gray-400" onClick={handleTimeButtonClick} time>{timeButtonText}</Button>
+                
             </div>
             
+            <div className="flex items-center col-span-2 justify-center text-xl">
+                <div className="flex pr-6">
+                    <input className="border border-2 text-center rounded border-indigo-300" onChange={(event)=> {dispatch(setTimeHr(event.target.value))}} value={timeHr} type="number" max="12" min="1" />
+                    <label className="px-2 text-3xl">:</label>
+                    <input className="border border-2 text-center rounded border-indigo-300" onChange={(event)=> {dispatch(setTimeMin(event.target.value))}} value={timeMin} type="number" max="59" min="00" />
+                </div>
+                <Button className="hover:bg-gray-400" onClick={handleTimeButtonClick} time>{timeButtonText}</Button>
+            </div>
         </div>
     </form>
     )

@@ -47,15 +47,14 @@ function QuestionArea() {
 
     return (
         <div className="w-3/5 border-x-2 border-dashed border-indigo-500">
-            <div className="flex space-x-72 items-center pt-10 pl-20">
-               <QuestionIcon />
-               <div className="flex items-center px-5">
+            <div className="flex pt-10 justify-around justify-items-center">
+               <div className="flex items-center ">
+                  <QuestionIcon />
+               </div>
+               <div className="flex items-center px-5 min-w-fit">
                   {renderedQuestionButtons}
                </div>
-               
-            </div>
-            <div className="flex justify-end">
-                <div className="pr-6">
+               <div className="flex items-center">
                     <FlagButton ><FiFlag/></FlagButton>
                 </div>
             </div>
@@ -69,11 +68,11 @@ function QuestionArea() {
                   <div className="grid w-5/6 grid-cols-2 place-content-evenly gap-4 pt-10 justify-items-center">
                      {renderedAnswerChoices}
                   </div>
-                  <div className="flex py-7 justify-center w-2/4">
+                  <div className="flex pt-7 justify-center w-2/4">
                      {renderedSolution}
                   </div>           
             </div>
-            <div className="flex justify-center pt-10">
+            <div className="flex justify-center pt-3 pb-60">
                   <SubmitButton />
             </div>    
          </div>

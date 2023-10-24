@@ -4,7 +4,6 @@ import { useFetchAssignmentsQuery, useDeleteAssignmentMutation, useFetchQuestion
 import { useSelector, useDispatch } from "react-redux";
 import { edit, setQuestionSet, assignmentSetup } from "../store";
 import { useFetchAllQuestionIDsQuery } from "../store";
-import Skeleton from 'react-loading-skeleton'
 
 function AssignmentTable () {
     const navigate = useNavigate();
@@ -27,7 +26,7 @@ function AssignmentTable () {
 
     let renderedRows;
     if(isFetching) {
-        renderedRows = <tr><Skeleton count={3} /></tr>
+        renderedRows = <tr><td><div>Fetching Assignments...</div></td></tr>
     } else if (error) {
         renderedRows = <tr><td><div>Error Loading Albums</div></td></tr>
     } else {

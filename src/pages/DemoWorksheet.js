@@ -53,7 +53,7 @@ function DemoWorksheet() {
     workpageContent = <div>Error fetching Data</div>
   } else if (dataFetched) {
     console.log(workpageData)
-    workpageContent = <div className="flex grid-cols-3 h-screen"><AssignmentInfo />
+    workpageContent = <div className="flex grid-cols-3 h-full"><AssignmentInfo />
     <QuestionArea />
     <SkillArea /></div>
   }

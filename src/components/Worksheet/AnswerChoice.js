@@ -35,7 +35,7 @@ function AnswerChoice({children,answerIndex,isAnswered,...rest}) {
     :
     (<div {...rest} onClick={handleChange} className={nonAnsweredClasses}>
         <input onChange={handleChange} checked={isChecked} type="checkbox"/>
-        <p className="pl-2" >{children}</p>
+        <p className="pl-2 text-lg" >{children}</p>
     </div>);
 
     
