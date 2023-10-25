@@ -4,13 +4,28 @@ import { Link } from 'react-router-dom';
 import {GiUnbalanced} from "react-icons/gi"
 import {HiMenu} from "react-icons/hi"
 import { useState } from "react";
+import Modal from "./Modal.js";
 
 function MyNavbar () {
     const [menuToggle, setMenuToggle] = useState(false);
+    const [showModal, setShowModal] = useState(false);
 
     const toggleMobileMenu = () => {
         setMenuToggle(!menuToggle);
     }
+
+    const toggleModal = () => {
+        setShowModal(true)
+    }
+
+    const handleModalClose = () => {
+        setShowModal(false)
+    }
+
+    const actionBar = <div><Link to="http://localhost:5002/auth/google"><Button primary>Login</Button></Link></div>
+    const modal = <Modal onClose={handleModalClose} actionBar={actionBar} >
+        <p>Login through Google</p> 
+         </Modal>;
 
     return(
 <div className="relative h-20 flex flex-wrap justify-between items-center bg-white shadow-lg shadow-indigo-500/40">
@@ -33,8 +48,8 @@ function MyNavbar () {
     </span>
 
     <span className="hidden md:flex w-34 h-10 items-center pr-6">
-        <Button className="h-8 w-23 text-sm mx-2" primary>Login</Button>
-        <Button className="h-8 w-26 text-sm mx-2" primary outline>Sign Up</Button>
+        <Button onClick={toggleModal} className="h-8 w-23 text-sm mx-2" primary>Login</Button>
+        {/* <Button className="h-8 w-26 text-sm mx-2" primary outline>Sign Up</Button> */}
     </span>
 
     {/* Mobile Menu - Hamburger Icon (You'll need to handle its functionality) */}
@@ -49,10 +64,11 @@ function MyNavbar () {
         <Link className="block py-2 px-4 no-underline text-indigo-500" to="/about">About</Link>
         <Link className="block py-2 px-4 no-underline text-indigo-500" to="/faq">FAQ</Link>
         <div className="flex flex-col justify-around py-2 px-4">
-            <Button className="h-8 w-full text-sm mx-2" rounded primary>Login</Button>
-            <Button className="h-8 w-full text-sm mx-2" rounded primary outline>Sign Up</Button>
+            <Button onClick={toggleModal} className="h-8 w-full text-sm mx-2" rounded primary>Login</Button>
+            {/* <Button className="h-8 w-full text-sm mx-2" rounded primary outline>Sign Up</Button> */}
         </div>
     </div>
+    {showModal && modal}
 </div>
   )
 };
