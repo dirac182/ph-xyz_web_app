@@ -72,3 +72,41 @@ h4 {
 .relative:hover .skills-list {
   display: block;
 }
+
+.user-dropdown-panel{
+  position: absolute;
+  top: 100%;
+  right: 0;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  padding: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  z-index: 1;
+  display: none;
+  overflow-y: auto;
+}
+
+.user-dropdown:hover + .user-dropdown-panel {
+  display: block;
+}
+.user-icon:hover .user-dropdown-panel {
+  display: block;
+}
+
+.diagonal-line {
+  position: relative;
+  width: 100%;
+  height: 100vh; /* Full height of the viewport */
+  overflow: hidden; /* Ensures the line doesn't extend outside the container */
+}
+
+.diagonal-line::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: 0; /* Start from the bottom left */
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(to top right, transparent 50.5%, #6366F1 49%, #6366F1 51%, transparent 50.5%); /* Indigo-500 color */
+  transform: rotate(90deg); /* Adjust the angle of the line */
+}

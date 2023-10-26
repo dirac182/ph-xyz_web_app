@@ -5,8 +5,12 @@ import {GiUnbalanced} from "react-icons/gi"
 import {HiMenu} from "react-icons/hi"
 import { useState } from "react";
 import Modal from "./Modal.js";
+import {AiOutlineGoogle} from "react-icons/ai";
+import { useSelector } from "react-redux";
+import UserDropdown from "./UserDropdown.js";
 
 function MyNavbar () {
+    const userId = useSelector(state => state.user.userId);
     const [menuToggle, setMenuToggle] = useState(false);
     const [showModal, setShowModal] = useState(false);
 
@@ -21,10 +25,10 @@ function MyNavbar () {
     const handleModalClose = () => {
         setShowModal(false)
     }
-
-    const actionBar = <div><Link to="http://localhost:5002/auth/google"><Button primary>Login</Button></Link></div>
+    console.log(userId);
+    const actionBar = <div><Link to="http://localhost:5002/auth/google"><Button primary><span className="text-lg pr-2"><AiOutlineGoogle/></span>| Login with Google</Button></Link></div>
     const modal = <Modal onClose={handleModalClose} actionBar={actionBar} >
-        <p>Login through Google</p> 
+        <p>Already have an account? Login!</p> 
          </Modal>;
 
     return(
@@ -47,9 +51,12 @@ function MyNavbar () {
         <Link className="no-underline text-indigo-500 text-xl px-3" to="/faq">FAQ</Link>
     </span>
 
-    <span className="hidden md:flex w-34 h-10 items-center pr-6">
+    <span className={`w-34 h-10 items-center pr-6 ${userId ? 'hidden' : 'flex'}`}>
         <Button onClick={toggleModal} className="h-8 w-23 text-sm mx-2" primary>Login</Button>
-        {/* <Button className="h-8 w-26 text-sm mx-2" primary outline>Sign Up</Button> */}
+        <Link to="/register"><Button className="h-8 w-23 text-sm mx-2" primary outline>Register</Button></Link>
+    </span>
+    <span className={`user-icon w-34 h-10 items-center pr-6 ${userId ? 'flex' : 'hidden'}`}>
+        <UserDropdown />
     </span>
 
     {/* Mobile Menu - Hamburger Icon (You'll need to handle its functionality) */}
