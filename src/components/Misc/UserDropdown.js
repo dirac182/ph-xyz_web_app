@@ -6,7 +6,7 @@ function UserDropdown() {
     const userFirstName = useSelector(state => state.user.firstName); 
     const isTeacher = useSelector(state => state.user.isTeacher);
     const userId = useSelector(state => state.user.userId);
-    const dashboardLink = isTeacher ? `/dashboard/teacher/${userId}` : `/dashboard/student/${userId}`
+    const dashboardLink = isTeacher ? `/dashboard/${userId}` : `/dashboard/${userId}`
 
     return(
         <div className="flex flex-col relative">

@@ -5,6 +5,7 @@ import TimedDropdown from "./TimedDropdown";
 import { useFetchAllQuestionIDsQuery ,useCreateAssignmentMutation, useEditAssignmentMutation } from "../../store";
 import { setQuestionSet,setQIDs, changeName, setIsQuiz, setIsPm, setDueDate, setTimeHr, setTimeMin } from "../../store";
 import { useNavigate } from "react-router-dom";
+import SelectClassDropdown from "./SelectClassDropdown";
 
 function SidebarForm({ userId, assignmentId}) {
     const navigate = useNavigate();
@@ -14,7 +15,8 @@ function SidebarForm({ userId, assignmentId}) {
     const [editAssignment, { isFetchingEdit, isErrorEdit, dataEdit }] = useEditAssignmentMutation();
     const { data,error,isFetching } = useFetchAllQuestionIDsQuery();
     // To change when I add unique users
-    const uId = useSelector(state => state.assignment.userId);
+    const uId = useSelector(state => state.user.userId);
+    const teacherClassrooms = useSelector(state => state.user.teacherClassrooms);
     var assignmentName = useSelector(state => state.assignment.assignmentName);
     var tqPair = useSelector(state => state.assignment.tqPair)
     var isQuiz = useSelector(state => state.assignment.isQuiz);
@@ -26,6 +28,7 @@ function SidebarForm({ userId, assignmentId}) {
     var status = useSelector(state => state.assignment.status);
     var QIDs = useSelector(state => state.workpage.QIDs);
     var questionSet = useSelector(state => state.assignment.questionSet);
+    var classes = useSelector(state => state.assignment.classes);
     const [timeButtonText, setTimeButtontext] = useState("PM");
     const [qTotal,setqTotal] = useState(0)
 
@@ -104,14 +107,14 @@ function SidebarForm({ userId, assignmentId}) {
         }
         const newDate = new Date(`${dueDate}T${time}:${timeMin}:00`)
         if (assignmentId){
-            const editedData = {"userId": uId, "assignmentId": assignmentId, "name": assignmentName, "tqPair": tqPair, "isQuiz": isQuiz, "timeLimit": timeLimit, "dueDate": newDate, "timeHr": timeHr, "timeMin": timeMin, "isPm": !isPm, "status": status, "questionSet": newQuestionSet};
+            const editedData = {"userId": uId, "assignmentId": assignmentId, "name": assignmentName, "tqPair": tqPair, "isQuiz": isQuiz, "timeLimit": timeLimit, "dueDate": newDate, "timeHr": timeHr, "timeMin": timeMin, "isPm": !isPm, "status": status, "questionSet": newQuestionSet, "classes":classes};
             editAssignment(editedData)
         }else{
-            const createData = {"userId": uId, "name": assignmentName, "tqPair": tqPair, "isQuiz": isQuiz, "timeLimit": timeLimit, "dueDate": newDate, "timeHr": timeHr, "timeMin": timeMin, "isPm": !isPm, "status": status, "questionSet": newQuestionSet };
+            const createData = {"userId": uId, "name": assignmentName, "tqPair": tqPair, "isQuiz": isQuiz, "timeLimit": timeLimit, "dueDate": newDate, "timeHr": timeHr, "timeMin": timeMin, "isPm": !isPm, "status": status, "questionSet": newQuestionSet, "classes":classes };
             console.log(createData);
             createAssignment(createData);
         }
-        navigate("/app/teacher")
+        navigate(`/dashboard/${uId}`)
     }
 
     return(
@@ -130,16 +133,16 @@ function SidebarForm({ userId, assignmentId}) {
                 <input className="w-9/12 border border-2 text-center rounded border-indigo-300" onChange={(event)=>{dispatch(changeName(event.target.value))}} type="text" value={assignmentName} required />
             </div>
 
-            <div className="text-center">
+            <div className="text-center col-span-2">
                 <label className="text-md pr-2">Number of Questions:</label>
                 <label className="text-md pr-2">{qTotal}</label>
             </div>
             
-            <div>
+            {/* <div>
                 <label className="text-md pl-4 pr-2">Timed Quiz</label>
                 <input type="checkbox" onChange={() => {dispatch(setIsQuiz(!isQuiz))}} checked={isQuiz} />
                 {checkToggle}
-            </div>
+            </div> */}
             
             <div className="flex w-full col-span-2 md:flex-row items-center justify-center text-center text-xl">
                 <div>
@@ -156,6 +159,10 @@ function SidebarForm({ userId, assignmentId}) {
                     <input className="border border-2 text-center rounded border-indigo-300" onChange={(event)=> {dispatch(setTimeMin(event.target.value))}} value={timeMin} type="number" max="59" min="00" />
                 </div>
                 <Button className="hover:bg-gray-400" onClick={handleTimeButtonClick} time>{timeButtonText}</Button>
+            </div>
+            <div className="flex text-justify col-span-2">
+                <label>Select Classes:</label>
+                <SelectClassDropdown/>
             </div>
         </div>
     </form>

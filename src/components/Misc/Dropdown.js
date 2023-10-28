@@ -32,7 +32,7 @@ function Dropdown({options, value, onChange}) {
 
     const renderedOptions = options.map((options) => {
         return <div className="hover:bg-sky-100 rounded cursor-pointer p-1" onClick={() => {handleOptionClick(options)}} key={options.value}>
-            {options.label}
+            {options}
         </div>
     });
 
