@@ -160,7 +160,7 @@ function SidebarForm({ userId, assignmentId}) {
                 </div>
                 <Button className="hover:bg-gray-400" onClick={handleTimeButtonClick} time>{timeButtonText}</Button>
             </div>
-            <div className="flex text-justify col-span-2">
+            <div className="flex text-justify col-span-2 w-2/5">
                 <label>Select Classes:</label>
                 <SelectClassDropdown/>
             </div>

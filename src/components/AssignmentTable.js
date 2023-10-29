@@ -48,6 +48,7 @@ function AssignmentTable () {
                     timeHr: hour,
                     timeMin: minute,
                     isPm: isPm,
+                    classes: assignment.classes
                 }))
                 console.log(assignment.tqPair)
             }

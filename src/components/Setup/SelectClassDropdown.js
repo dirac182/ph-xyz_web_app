@@ -1,15 +1,19 @@
 import {useState , useEffect, useRef} from "react";
 import {GoChevronDown, GoCheck} from "react-icons/go";
 import Panel from "../Misc/Panel"
-import { useSelector } from "react-redux";
-import { changeAssignmentClasses } from "../../store";
+import { useDispatch, useSelector } from "react-redux";
+import { changeAssignmentClasses, useFetchTeacherClassroomsQuery } from "../../store";
 
 function Dropdown() {
+    const dispatch = useDispatch();
     const [isOpen, setIsOpen] = useState(false);
     const divEl = useRef();
     const teacherClassrooms = useSelector(state => state.user.teacherClassrooms)
+    const userId = useSelector(state => state.user.userId)
     const [options, setOptions] = useState([])
     const classes = useSelector(state => state.assignment.classes);
+    const {data,error,isFetching} = useFetchTeacherClassroomsQuery(userId);
+    
 
     useEffect(() => {
         const handler = (event) => {
@@ -31,35 +35,44 @@ function Dropdown() {
     }
 
     const handleOptionClick = (choice) =>{
+        
         if (classes.includes(choice)){
             const updatedOptions = classes.filter(c => {
                 return c !== choice;
             })
             setOptions(updatedOptions);
-            changeAssignmentClasses(updatedOptions)
+            dispatch(changeAssignmentClasses(updatedOptions))
         }else{
             const updatedOptions = [...classes,choice];
             setOptions(updatedOptions);
-            changeAssignmentClasses(updatedOptions)
+            dispatch(changeAssignmentClasses(updatedOptions))
         }
         console.log(classes)
     }
 
-    const renderedOptions = teacherClassrooms.map((el) => {
+    let renderedOptions;
+    if(isFetching) {
+        renderedOptions = <div>Fetching Classrooms...</div>
+    } else if (error) {
+        renderedOptions = <div>Error Loading Classrooms</div>
+    } else {
+        renderedOptions = data.teacherClassrooms.map(el => {
         var isSelected = false;
         if (classes.includes(el.className)){
             isSelected = true
         }else {
             isSelected = false
         }
-        return <div className="flex justify-between hover:bg-sky-100 rounded cursor-pointer p-1" onClick={() => {handleOptionClick(el.className)}} key={el.classId}>
+        return (
+        <div className="flex justify-between hover:bg-sky-100 rounded cursor-pointer p-1" onClick={() => {handleOptionClick(el.className)}} key={el.classId}>
             {el.className}
             {isSelected && <GoCheck/>}
-        </div>
-    });
+        </div>)
+        })}
+
 
     return(
-        <div ref={divEl} className="w-4/5 relative">
+        <div ref={divEl} className="w-full relative">
             <Panel className="flex justify-between items-center cursor-pointer" onClick={handleClick}>{"Select..."} <GoChevronDown className="text-lg"/></Panel>
             {isOpen && <Panel className="absoulte top-full">{renderedOptions}</Panel>}
         </div>

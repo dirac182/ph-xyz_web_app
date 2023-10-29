@@ -49,7 +49,8 @@ const assignmentsApi = createApi({
                             timeMin: data.timeMin,
                             isPm: data.isPm,
                             status: data.status,
-                            questionSet: data.questionSet
+                            questionSet: data.questionSet,
+                            classes: data.classes
                         }
                     }
                 },
@@ -74,7 +75,8 @@ const assignmentsApi = createApi({
                             timeMin: data.timeMin,
                             isPm: data.isPm,
                             status: data.status,
-                            questionSet: data.questionSet
+                            questionSet: data.questionSet,
+                            classes: data.classes
                         }
                     }
                 },
