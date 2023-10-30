@@ -2,7 +2,7 @@ import Button from "../Misc/Button";
 import { useDispatch, useSelector } from "react-redux";
 import {useEffect, useState} from "react";
 import TimedDropdown from "./TimedDropdown";
-import { useFetchAllQuestionIDsQuery ,useCreateAssignmentMutation, useEditAssignmentMutation } from "../../store";
+import { useUpdateClassroomAssignmentMutation, useFetchAllQuestionIDsQuery ,useCreateAssignmentMutation, useEditAssignmentMutation } from "../../store";
 import { setQuestionSet,setQIDs, changeName, setIsQuiz, setIsPm, setDueDate, setTimeHr, setTimeMin } from "../../store";
 import { useNavigate } from "react-router-dom";
 import SelectClassDropdown from "./SelectClassDropdown";
@@ -13,6 +13,7 @@ function SidebarForm({ userId, assignmentId}) {
     const buttonText = assignmentId ? "Edit Workpage" : "Create Workpage"
     const [createAssignment, { isFetchingCreate, isErrorCreate, dataCreate }] = useCreateAssignmentMutation();
     const [editAssignment, { isFetchingEdit, isErrorEdit, dataEdit }] = useEditAssignmentMutation();
+    const [updateClassAssignment, { a, b, c }] = useUpdateClassroomAssignmentMutation();
     const { data,error,isFetching } = useFetchAllQuestionIDsQuery();
     // To change when I add unique users
     const uId = useSelector(state => state.user.userId);
@@ -109,10 +110,16 @@ function SidebarForm({ userId, assignmentId}) {
         if (assignmentId){
             const editedData = {"userId": uId, "assignmentId": assignmentId, "name": assignmentName, "tqPair": tqPair, "isQuiz": isQuiz, "timeLimit": timeLimit, "dueDate": newDate, "timeHr": timeHr, "timeMin": timeMin, "isPm": !isPm, "status": status, "questionSet": newQuestionSet, "classes":classes};
             editAssignment(editedData)
+            const classData = {"userId": uId, "assignmentId": assignmentId, "assignedClasses": classes}
+            console.log(classData);
+            updateClassAssignment(classData)
         }else{
-            const createData = {"userId": uId, "name": assignmentName, "tqPair": tqPair, "isQuiz": isQuiz, "timeLimit": timeLimit, "dueDate": newDate, "timeHr": timeHr, "timeMin": timeMin, "isPm": !isPm, "status": status, "questionSet": newQuestionSet, "classes":classes };
-            console.log(createData);
+            const aId = "aid" + Math.random().toString(16).slice(2)
+            const createData = {"userId": uId, "assignmentId": aId, "name": assignmentName, "tqPair": tqPair, "isQuiz": isQuiz, "timeLimit": timeLimit, "dueDate": newDate, "timeHr": timeHr, "timeMin": timeMin, "isPm": !isPm, "status": status, "questionSet": newQuestionSet, "classes":classes };
             createAssignment(createData);
+            const classData = {"userId": uId, "assignmentId": aId, "assignedClasses": classes};
+            console.log(classData);
+            updateClassAssignment(classData)
         }
         navigate(`/dashboard/${uId}`)
     }

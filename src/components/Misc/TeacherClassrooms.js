@@ -22,19 +22,19 @@ function TeacherClassrooms() {
     } else if (error) {
         renderedRooms = <tr><td><div>Error Loading Classrooms</div></td></tr>
     } else {
-        console.log(data)
-        renderedRooms = data ? data.teacherClassrooms.map(room => {
+        // console.log(data)
+        renderedRooms = data ? data.classes.map(room => {
 
         const handleDeleteClass = (event) => {
                 event.preventDefault();
-                deleteClassroom({userId:userId, classId: room.classId});
+                deleteClassroom({userId:userId, classId: room._id});
             }
 
         return(
-            <tr className="border-b text-center" key={room.classId}>
-                <td className=""><button><BiEditAlt/></button></td>
+            <tr className="border-b text-center" key={room._id}>
+                {/* <td className=""><button><BiEditAlt/></button></td> */}
                 <td className=""><p className="cursor-pointer hover:underline">{room.className}</p></td>
-                <td className=""><p>{room.classId}</p></td>
+                <td className=""><p>{room.joinCode}</p></td>
                 <td className="">{room.students.length}</td>
                 <td className="">{room.assignments.length}</td>
                 <td className=""><button onClick={handleDeleteClass}><BiTrash/></button></td>
@@ -50,15 +50,12 @@ function TeacherClassrooms() {
         setNewClassText("")
     }
 
-    
-
     const handleCreateClass = (event) => {
         event.preventDefault();
         console.log(newClassText, userId);
         const data = {userId:userId, className:newClassText}
         createClassroom(data)
         setToggleDropdown(!toggleDropdown);
-
     }
 
     return (
@@ -67,7 +64,7 @@ function TeacherClassrooms() {
            <table className="table-auto border-spacing-2">
                 <thead>
                     <tr className="border-b-2">
-                        <th className="px-2">Edit</th>
+                        {/* <th className="px-2">Edit</th> */}
                         <th className="px-2">Classroom Name</th>
                         <th className="px-2">Class Code</th>
                         <th className="px-2">Students</th>

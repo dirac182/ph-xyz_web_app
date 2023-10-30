@@ -67,6 +67,7 @@ function AssignmentTable () {
                     timeHr: assignment.timeHr,
                     timeMin: assignment.timeMin,
                     isPm:  assignment.isPm,
+                    classes: assignment.classes
                 }))
                 dispatch(setQuestionSet(assignment.questionSet));
                 navigate(`/app/student/${assignment.assignmentID}`);

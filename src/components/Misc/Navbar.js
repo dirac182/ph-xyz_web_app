@@ -29,11 +29,15 @@ function MyNavbar () {
    } else {
       if(data){
          console.log(data);
-         dispatch(setUserState({id:data.googleId, email:data.username, firstName:data.firstName, lastName:data.lastName, isTeacher:data.isTeacher,teacherClassrooms:data.teacherClassrooms,studentClassrooms:data.studentClassrooms}))
+         dispatch(setUserState({id:data._id, email:data.username, firstName:data.firstName, lastName:data.lastName, isTeacher:data.isTeacher,teacherClassrooms:data.teacherClassrooms,studentClassrooms:data.studentClassrooms}))
       } else{
          console.log("NO ONE is logged in.")
       }
    }
+
+//    useEffect((data) => {
+//     dispatch(setUserState({id:data._id, email:data.username, firstName:data.firstName, lastName:data.lastName, isTeacher:data.isTeacher,teacherClassrooms:data.teacherClassrooms,studentClassrooms:data.studentClassrooms}))
+//    },[data,error,isFetching])
 
     useEffect(() => {
         const handler = (event) => {
@@ -65,7 +69,7 @@ function MyNavbar () {
     const handleModalClose = () => {
         setShowModal(false)
     }
-    console.log(userId);
+    
     const actionBar = <div><Link to="http://localhost:5002/auth/google"><Button primary><span className="text-lg pr-2"><AiOutlineGoogle/></span>| Login with Google</Button></Link></div>
     const modal = <Modal onClose={handleModalClose} actionBar={actionBar} >
         <p>Already have an account? Login!</p> 

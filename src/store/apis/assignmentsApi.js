@@ -40,6 +40,7 @@ const assignmentsApi = createApi({
                         method: "POST",
                         body: {
                             userID: data.userId,
+                            assignmentId: data.assignmentId,
                             name: data.name,
                             tqPair: data.tqPair,
                             quiz: data.isQuiz,

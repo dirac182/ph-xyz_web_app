@@ -56,15 +56,15 @@ function Dropdown() {
     } else if (error) {
         renderedOptions = <div>Error Loading Classrooms</div>
     } else {
-        renderedOptions = data.teacherClassrooms.map(el => {
+        renderedOptions = data.classes.map(el => {
         var isSelected = false;
-        if (classes.includes(el.className)){
+        if (classes.includes(el._id)){
             isSelected = true
         }else {
             isSelected = false
         }
         return (
-        <div className="flex justify-between hover:bg-sky-100 rounded cursor-pointer p-1" onClick={() => {handleOptionClick(el.className)}} key={el.classId}>
+        <div className="flex justify-between hover:bg-sky-100 rounded cursor-pointer p-1" onClick={() => {handleOptionClick(el._id)}} key={el._id}>
             {el.className}
             {isSelected && <GoCheck/>}
         </div>)
