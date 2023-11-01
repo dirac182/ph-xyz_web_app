@@ -33,4 +33,4 @@ export { changeAssignmentClasses, setUserState, setSkillId, setIsFocused, setIsC
 export { useFetchAssignmentByIdQuery, useFetchAssignmentsQuery, useCreateAssignmentMutation, useEditAssignmentMutation, useDeleteAssignmentMutation } from "./apis/assignmentsApi"
 export {  useFetchQuestionSetByIdsQuery, useFetchAllQuestionIDsQuery, useFetchQuestionByTopicMutation } from "./apis/questionsApi";
 export { useGetUserQuery } from "./apis/usersApi"
-export {  useFetchClassByIdQuery, useCheckJoinCodeMutation, useUpdateClassroomAssignmentMutation, useCreateClassroomMutation, useDeleteClassroomMutation, useFetchTeacherClassroomsQuery } from "./apis/classesApi"
+export {  useAddStudentToClassroomMutation, useFetchStudentClassroomsQuery, useFetchClassByIdQuery, useCheckJoinCodeMutation, useUpdateClassroomAssignmentMutation, useCreateClassroomMutation, useDeleteClassroomMutation, useFetchTeacherClassroomsQuery } from "./apis/classesApi"

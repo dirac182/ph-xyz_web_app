@@ -9,8 +9,7 @@ const userSlice = createSlice({
         firstName: "",
         lastName: "",
         isTeacher: null,
-        teacherClassrooms: [{}],
-        studentClassrooms:[{}]
+        studentClasses:[]
     },
     reducers: {
         setUserState(state,action){
@@ -20,7 +19,7 @@ const userSlice = createSlice({
             state.lastName = action.payload.lastName;
             state.isTeacher = action.payload.isTeacher;
             state.teacherClassrooms = action.payload.teacherClassrooms;
-            state.studentClassrooms = action.payload.studentClassrooms;
+            state.studentClasses = action.payload.studentClasses;
         },
     }
 })

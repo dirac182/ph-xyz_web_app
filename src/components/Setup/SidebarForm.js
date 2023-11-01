@@ -107,7 +107,7 @@ function SidebarForm({ userId, assignmentId}) {
         }
         const newDate = new Date(`${dueDate}T${time}:${timeMin}:00`)
         if (assignmentId){
-            const editedData = {"userId": uId, "assignmentId": assignmentId, "name": assignmentName, "tqPair": tqPair, "isQuiz": isQuiz, "timeLimit": timeLimit, "dueDate": newDate, "timeHr": timeHr, "timeMin": timeMin, "isPm": !isPm, "status": status, "questionSet": newQuestionSet, "classes":classes};
+            const editedData = {"userId": uId, "assignmentId": assignmentId, "name": assignmentName, "tqPair": tqPair, "isQuiz": isQuiz, "timeLimit": timeLimit, "dueDate": newDate, "timeHr": timeHr, "timeMin": timeMin, "isPm": isPm, "status": status, "questionSet": newQuestionSet, "classes":classes};
             editAssignment(editedData)
             const classData = {"userId": uId, "assignmentId": assignmentId, "assignedClasses": classes}
             console.log(classData);
@@ -115,7 +115,7 @@ function SidebarForm({ userId, assignmentId}) {
             navigate(`/dashboard/${uId}`)
         }else{
             const aId = "aid" + Math.random().toString(16).slice(2)
-            const createdData = {"userId": uId, "name": assignmentName, "tqPair": tqPair, "isQuiz": isQuiz, "timeLimit": timeLimit, "dueDate": newDate, "timeHr": timeHr, "timeMin": timeMin, "isPm": !isPm, "status": status, "questionSet": newQuestionSet, "classes":classes };
+            const createdData = {"userId": uId, "name": assignmentName, "tqPair": tqPair, "isQuiz": isQuiz, "timeLimit": timeLimit, "dueDate": newDate, "timeHr": timeHr, "timeMin": timeMin, "isPm": isPm, "status": status, "questionSet": newQuestionSet, "classes":classes };
             createAssignment(createdData);
         }
     }

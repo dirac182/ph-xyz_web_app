@@ -36,6 +36,19 @@ const classesApi = createApi({
                     }
                 }
             }),
+            addStudentToClassroom: builder.mutation({
+                invalidatesTags: ["Classrooms"],
+                query: (data) => {
+                    return {
+                        url: "/classes/add_student_to_classroom",
+                        method: "POST",
+                        body: {
+                            userId: data.userId,
+                            classCode: data.classCode
+                        }
+                    }
+                }
+            }),
             fetchTeacherClassrooms: builder.query({
                 providesTags: ["Classrooms"],
                 query: (userId) => {
@@ -44,6 +57,18 @@ const classesApi = createApi({
                         method: "GET",
                         params: {
                             userId:userId
+                        }
+                    }
+                }
+            }),
+            fetchStudentClassrooms: builder.query({
+                providesTags: ["studentClassrooms"],
+                query: (classesArray) => {
+                    return {
+                        url: `/classes/get_student_classrooms`,
+                        method: "GET",
+                        params: {
+                            classesArray
                         }
                     }
                 }
@@ -90,5 +115,5 @@ const classesApi = createApi({
     }
 });
 
-export const { useFetchClassByIdQuery, useCheckJoinCodeMutation, useUpdateClassroomAssignmentMutation, useCreateClassroomMutation, useDeleteClassroomMutation, useFetchTeacherClassroomsQuery } = classesApi;
+export const { useAddStudentToClassroomMutation, useFetchStudentClassroomsQuery, useFetchClassByIdQuery, useCheckJoinCodeMutation, useUpdateClassroomAssignmentMutation, useCreateClassroomMutation, useDeleteClassroomMutation, useFetchTeacherClassroomsQuery } = classesApi;
 export { classesApi };

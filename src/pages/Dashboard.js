@@ -1,6 +1,7 @@
 import { useSelector } from "react-redux";
 import TeacherClassrooms from "../components/Misc/TeacherClassrooms";
 import AssignmentTable from "../components/AssignmentTable";
+import StudentAssignments from "../components/Misc/StudentAssignments";
 
 function TeacherDashboard() {
     const userFirstName = useSelector(state => state.user.firstName)
@@ -26,8 +27,7 @@ function TeacherDashboard() {
         {renderedAccountInfo}
     </div>
     :<div>
-        <div>My Classes</div>
-        <div>My Assignments</div>
+        <div className="p-4"><StudentAssignments/></div>
         {renderedAccountInfo}
     </div>
 
