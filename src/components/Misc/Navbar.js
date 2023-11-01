@@ -21,23 +21,21 @@ function MyNavbar () {
     const dispatch = useDispatch()
     const {data,error,isFetching} = useGetUserQuery();
 
-   if (isFetching){
-      console.log("Fetching User Data")
-   } else if (error){
-      console.log(error)
-      console.log("Error Fetching User Data")
-   } else {
-      if(data){
-         console.log(data);
-         dispatch(setUserState({id:data._id, email:data.username, firstName:data.firstName, lastName:data.lastName, isTeacher:data.isTeacher,teacherClassrooms:data.teacherClassrooms,studentClassrooms:data.studentClassrooms}))
-      } else{
-         console.log("NO ONE is logged in.")
-      }
-   }
-
-//    useEffect((data) => {
-//     dispatch(setUserState({id:data._id, email:data.username, firstName:data.firstName, lastName:data.lastName, isTeacher:data.isTeacher,teacherClassrooms:data.teacherClassrooms,studentClassrooms:data.studentClassrooms}))
-//    },[data,error,isFetching])
+    useEffect(() => {
+        if (isFetching){
+            console.log("Fetching User Data")
+        } else if (error){
+            console.log(error)
+            console.log("Error Fetching User Data")
+        } else {
+            if(data){
+                console.log(data);
+                dispatch(setUserState({id:data._id, email:data.username, firstName:data.firstName, lastName:data.lastName, isTeacher:data.isTeacher,teacherClassrooms:data.teacherClassrooms,studentClassrooms:data.studentClassrooms}))
+            } else{
+                console.log("NO ONE is logged in.")
+            }
+        }
+    },[isFetching, error, data, dispatch])
 
     useEffect(() => {
         const handler = (event) => {

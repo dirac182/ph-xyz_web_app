@@ -1,12 +1,14 @@
 import { useSelector, useDispatch } from "react-redux";
 import { useState } from "react";
 import Button from "./Button";
+import { useNavigate } from "react-router-dom";
 import { BiCheck, BiEditAlt, BiSpreadsheet, BiTrash } from "react-icons/bi";
 import { RxCross2 } from "react-icons/rx"
 import { useParams } from 'react-router-dom';
 import { useCreateClassroomMutation, useDeleteClassroomMutation, useFetchTeacherClassroomsQuery } from "../../store";
 
 function TeacherClassrooms() {
+    const navigate = useNavigate();
     const dispatch = useDispatch();
     const classrooms = useSelector(state => state.user.teacherClassrooms);
     const [createClassroom, { a, b, c }] = useCreateClassroomMutation();
@@ -26,17 +28,42 @@ function TeacherClassrooms() {
         renderedRooms = data ? data.classes.map(room => {
 
         const handleDeleteClass = (event) => {
-                event.preventDefault();
-                deleteClassroom({userId:userId, classId: room._id});
+            event.preventDefault();
+            deleteClassroom({userId:userId, classId: room._id});
             }
+        const handleClassClick = () => {
+            navigate(`/class/${userId}/${room._id}`);
+        }
 
         return(
             <tr className="border-b text-center" key={room._id}>
                 {/* <td className=""><button><BiEditAlt/></button></td> */}
-                <td className=""><p className="cursor-pointer hover:underline">{room.className}</p></td>
+                <td className=""><p onClick={handleClassClick} className="cursor-pointer hover:underline">{room.className}</p></td>
                 <td className=""><p>{room.joinCode}</p></td>
                 <td className="">{room.students.length}</td>
-                <td className="">{room.assignments.length}</td>
+                <td className="">
+                    <div className="relative">
+                    <div className="skills-icon text-xl">
+                            <span>{room.assignments.length}</span>
+                        </div>
+                        <div className="skills-list hidden">
+                            <table className="table-auto">
+                                <thead>
+                                    <tr className="border-b-2">
+                                        <th>Assignments</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {room.assignments.map((a, index) => (
+                                    <tr className="border-b" key={index}>
+                                        <td className="p-3">{a.assignmentName}</td>
+                                    </tr>
+                            ))}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </td>
                 <td className=""><button onClick={handleDeleteClass}><BiTrash/></button></td>
             </tr>
         )
@@ -59,7 +86,7 @@ function TeacherClassrooms() {
     }
 
     return (
-        <div className="overflow-x-auto max-w-2xl">
+        <div className="max-w-2xl">
             <p className="text-5xl text-center underline pb-3">My Classrooms</p>
            <table className="table-auto border-spacing-2">
                 <thead>

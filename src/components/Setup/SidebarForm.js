@@ -11,9 +11,8 @@ function SidebarForm({ userId, assignmentId}) {
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const buttonText = assignmentId ? "Edit Workpage" : "Create Workpage"
-    const [createAssignment, { isFetchingCreate, isErrorCreate, dataCreate }] = useCreateAssignmentMutation();
-    const [editAssignment, { isFetchingEdit, isErrorEdit, dataEdit }] = useEditAssignmentMutation();
-    const [updateClassAssignment, { a, b, c }] = useUpdateClassroomAssignmentMutation();
+    const [createAssignment, { data: createAssignmentData, isLoading: isLoadingCreateAssignment }] = useCreateAssignmentMutation();    const [editAssignment, { isFetchingEdit, isErrorEdit, dataEdit }] = useEditAssignmentMutation();
+    const [updateClassAssignment, { data: updateClassAssignmenttData, isLoading: isLoadingupdateClassAssignment }] = useUpdateClassroomAssignmentMutation();
     const { data,error,isFetching } = useFetchAllQuestionIDsQuery();
     // To change when I add unique users
     const uId = useSelector(state => state.user.userId);
@@ -113,16 +112,25 @@ function SidebarForm({ userId, assignmentId}) {
             const classData = {"userId": uId, "assignmentId": assignmentId, "assignedClasses": classes}
             console.log(classData);
             updateClassAssignment(classData)
+            navigate(`/dashboard/${uId}`)
         }else{
             const aId = "aid" + Math.random().toString(16).slice(2)
-            const createData = {"userId": uId, "assignmentId": aId, "name": assignmentName, "tqPair": tqPair, "isQuiz": isQuiz, "timeLimit": timeLimit, "dueDate": newDate, "timeHr": timeHr, "timeMin": timeMin, "isPm": !isPm, "status": status, "questionSet": newQuestionSet, "classes":classes };
-            createAssignment(createData);
-            const classData = {"userId": uId, "assignmentId": aId, "assignedClasses": classes};
-            console.log(classData);
-            updateClassAssignment(classData)
+            const createdData = {"userId": uId, "name": assignmentName, "tqPair": tqPair, "isQuiz": isQuiz, "timeLimit": timeLimit, "dueDate": newDate, "timeHr": timeHr, "timeMin": timeMin, "isPm": !isPm, "status": status, "questionSet": newQuestionSet, "classes":classes };
+            createAssignment(createdData);
         }
-        navigate(`/dashboard/${uId}`)
     }
+
+    useEffect(() => {
+        if(createAssignmentData){
+            console.log(createAssignmentData);
+            const aId = createAssignmentData
+            const classData = {"userId": uId, "assignmentId": aId, "assignedClasses": classes};
+            console.log(classData) 
+            updateClassAssignment(classData)
+            navigate(`/dashboard/${uId}`)
+        }
+        
+    }, [createAssignmentData, isLoadingCreateAssignment]);
 
     return(
         <form onSubmit={HandleSubmit} className="border-r-2 py-6 border-b-2 border-indigo-300">

@@ -9,6 +9,7 @@ import Footer from "./components/Misc/Footer";
 import TeacherLanding from "./pages/TeacherLanding";
 import RegisterPage from './pages/RegisterPage';
 import Dashboard from './pages/Dashboard';
+import ClassPage from './pages/ClassPage';
 
 
 function App() {
@@ -23,6 +24,7 @@ function App() {
                 <Route path="/app/student/:assignmentId" element={<DemoWorksheet/>}/>
                 <Route path="/register" element={<RegisterPage/>}/>
                 <Route path="/dashboard/:userId" element={<Dashboard/>}/>
+                <Route path="/class/:userId/:classId" element={<ClassPage/>}/>
                 <Route path="/about" element={<About/>}/>
                 <Route path="/faq" element={<Faq />}/>
             </Routes>

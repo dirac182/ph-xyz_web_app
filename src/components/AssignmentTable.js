@@ -39,7 +39,7 @@ function AssignmentTable () {
                 var isPm = assignment.isPm;
                 var minute = assignment.timeMin;
                 dispatch(edit({
-                    assignmentId: assignment.assignmentID,
+                    assignmentId: assignment._id,
                     assignmentName: assignment.assignmentName,
                     tqPair: assignment.tqPair,
                     isQuiz: assignment.quiz,
@@ -53,12 +53,12 @@ function AssignmentTable () {
                 console.log(assignment.tqPair)
             }
             const handleDeleteClick = () => {
-                const data = {userId:user, assignmentId: assignment.assignmentID};
+                const data = {userId:user, assignmentId: assignment._id};
                 deleteAssignment(data);
             }
             const handleAssignmentClick = () => {
                 dispatch(assignmentSetup({
-                    assignmentId: assignment.assignmentID,
+                    assignmentId: assignment._id,
                     assignmentName: assignment.assignmentName,
                     tqPair: assignment.tqPair,
                     isQuiz: assignment.quiz,
@@ -70,7 +70,7 @@ function AssignmentTable () {
                     classes: assignment.classes
                 }))
                 dispatch(setQuestionSet(assignment.questionSet));
-                navigate(`/app/student/${assignment.assignmentID}`);
+                navigate(`/app/student/${assignment._id}`);
             }
             //Handles date format
             // const yearString = assignment.dueDate.slice(0,4);
@@ -79,8 +79,8 @@ function AssignmentTable () {
             // const isPmText = assignment.isPm ? "AM" : "PM"
 
         return(
-            <tr className="border-b" key={assignment._id}>
-                <td className="p-2"><Link to={`/app/teacher/edit/${assignment.userID}/${assignment.assignmentID}`}><button onClick={handleEditClick}><BiEditAlt/></button></Link></td>
+            <tr className="border-b text-center" key={assignment._id}>
+                <td className="p-2"><Link to={`/app/teacher/edit/${assignment.userID}/${assignment._id}`}><button onClick={handleEditClick}><BiEditAlt/></button></Link></td>
                 <td className="p-2"><p className="cursor-pointer hover:underline" onClick={handleAssignmentClick}>{assignment.assignmentName}</p></td>
                 <td className="p-2">
                     <div className="relative">
@@ -107,7 +107,7 @@ function AssignmentTable () {
                         </div>
                     </div>
                 </td>
-                <td className="p-2">{isQuiz}</td>
+                {/* <td className="p-2">{isQuiz}</td> */}
                 <td className="p-2">{isPosted}</td>
                 <td className="p-2">{assignment.dueDate.slice(0,10)} at {assignment.timeHr}:{assignment.timeMin} {isPmText}</td>
                 <td className="p-2"><button onClick={handleDeleteClick}><BiTrash/></button></td>
@@ -122,13 +122,13 @@ function AssignmentTable () {
            <table className="table-auto border-spacing-2">
                 <thead>
                     <tr className="border-b-2">
-                        <th>Edit</th>
-                        <th>Assignment Name</th>
-                        <th>Skills</th>
-                        <th>Type</th>
-                        <th>Status</th>
-                        <th>Due Date</th>
-                        <th>Delete</th>
+                        <th className="p-2">Edit</th>
+                        <th className="p-2">Assignment Name</th>
+                        <th className="p-2">Skills</th>
+                        {/* <th>Type</th> */}
+                        <th className="p-2">Status</th>
+                        <th className="p-2">Due Date</th>
+                        <th className="p-2">Delete</th>
                     </tr>
                 </thead>
                 <tbody>

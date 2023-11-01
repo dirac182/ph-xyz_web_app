@@ -83,7 +83,7 @@ const assignmentsApi = createApi({
                 },
             }),
             deleteAssignment: builder.mutation({
-                invalidatesTags: ["Assignments"],
+                invalidatesTags: ["Classrooms", "Assignments"],
                 query: (data) => {
                     return {
                         url: "/delete/assignment",

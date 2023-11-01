@@ -63,10 +63,32 @@ const classesApi = createApi({
                         }
                     }
                 }
-            })
+            }),
+            checkJoinCode: builder.mutation({
+                query: (userInput) => {
+                    return {
+                        url: "/classes/check_valid_join_code",
+                        method: "POST",
+                        body: {
+                            userInput: userInput,
+                        }
+                    }
+                }
+            }),
+            fetchClassById: builder.query({
+                query: (classId) => {
+                    return {
+                        url: `/classes/get_class_by_id`,
+                        method: "GET",
+                        params: {
+                            classId
+                        }
+                    }
+                }
+            }),
         }
     }
 });
 
-export const { useUpdateClassroomAssignmentMutation, useCreateClassroomMutation, useDeleteClassroomMutation, useFetchTeacherClassroomsQuery } = classesApi;
+export const { useFetchClassByIdQuery, useCheckJoinCodeMutation, useUpdateClassroomAssignmentMutation, useCreateClassroomMutation, useDeleteClassroomMutation, useFetchTeacherClassroomsQuery } = classesApi;
 export { classesApi };
