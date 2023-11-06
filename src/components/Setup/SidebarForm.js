@@ -6,6 +6,9 @@ import { useUpdateClassroomAssignmentMutation, useFetchAllQuestionIDsQuery ,useC
 import { setQuestionSet,setQIDs, changeName, setIsQuiz, setIsPm, setDueDate, setTimeHr, setTimeMin } from "../../store";
 import { useNavigate } from "react-router-dom";
 import SelectClassDropdown from "./SelectClassDropdown";
+import { Link } from "react-router-dom";
+import { FiChevronLeft } from "react-icons/fi";
+import Modal from "../Misc/Modal";
 
 function SidebarForm({ userId, assignmentId}) {
     const navigate = useNavigate();
@@ -31,6 +34,7 @@ function SidebarForm({ userId, assignmentId}) {
     var classes = useSelector(state => state.assignment.classes);
     const [timeButtonText, setTimeButtontext] = useState("PM");
     const [qTotal,setqTotal] = useState(0)
+    const [showModal, setShowModal] = useState(false);
 
     useEffect(() => {
         if (!isFetching && !error && data) {
@@ -114,7 +118,6 @@ function SidebarForm({ userId, assignmentId}) {
             updateClassAssignment(classData)
             navigate(`/dashboard/${uId}`)
         }else{
-            const aId = "aid" + Math.random().toString(16).slice(2)
             const createdData = {"userId": uId, "name": assignmentName, "tqPair": tqPair, "isQuiz": isQuiz, "timeLimit": timeLimit, "dueDate": newDate, "timeHr": timeHr, "timeMin": timeMin, "isPm": isPm, "status": status, "questionSet": newQuestionSet, "classes":classes };
             createAssignment(createdData);
         }
@@ -132,10 +135,27 @@ function SidebarForm({ userId, assignmentId}) {
         
     }, [createAssignmentData, isLoadingCreateAssignment]);
 
+    const handleModalClose = () => {
+        setShowModal(false)
+    }
+    const toggleModal = () => {
+        setShowModal(true)
+    }
+    const actionBar = <div className="flex ">
+        <span className="mx-4"><Button onClick={handleModalClose} secondary outline>Cancel</Button></span>
+        <span className="mx-4"><Link to={`/dashboard/${uId}`}><Button danger>Leave</Button></Link></span>
+        </div>
+    const modal = <Modal onClose={handleModalClose} actionBar={actionBar} >
+        <p>Are you sure you want to leave without saving?</p> 
+         </Modal>;
+
     return(
-        <form onSubmit={HandleSubmit} className="border-r-2 py-6 border-b-2 border-indigo-300">
+        <form onSubmit={HandleSubmit} className="border-r-2 pb-6 border-b-2 border-indigo-300">
+            <div className="p-1">
+               <Button onClick={toggleModal} primary outline rounded><FiChevronLeft/> Back</Button>
+            </div>
         <div className="grid lg:grid-cols-2 lg:gap-3 md:grid-cols-1 md:gap-1 items-center justify-items-center">
- 
+            
             <div className="flex w-full items-center justify-center lg:col-span-2 p-4">
                     <Button type="submit" className="text-2xl w-9/12 shadow-lg shadow-indigo-500/40 hover:bg-indigo-700" primary rounded>{buttonText}</Button>
             </div>
@@ -180,6 +200,7 @@ function SidebarForm({ userId, assignmentId}) {
                 <SelectClassDropdown/>
             </div>
         </div>
+        {showModal && modal}
     </form>
     )
 }

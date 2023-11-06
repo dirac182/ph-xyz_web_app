@@ -49,7 +49,7 @@ function DemoSetup() {
             <div className="flex px-4 pt-10 justify-between landing-page-title">
                <Searchbar />
                <Button onClick={handleExpandButton} primary expand >{expandButtonText}</Button>
-               <span className="flex items-center">
+               <span className="flex items-center hidden">
                   <label className="pr-3">Sort By: </label>
                   <SortDropdown options={dropdownOptions} value={dropdownSelection} onChange={handleDropdownSelect} />
                </span>

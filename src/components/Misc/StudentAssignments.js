@@ -1,12 +1,16 @@
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { useState, useEffect } from "react";
-import { useFetchStudentClassroomsQuery, useCheckJoinCodeMutation, useAddStudentToClassroomMutation } from "../../store";
+import { assignmentSetup, useFetchStudentClassroomsQuery, useCheckJoinCodeMutation, useAddStudentToClassroomMutation } from "../../store";
 import Button from "./Button";
 import { BiCheck } from "react-icons/bi";
 import { RxCross2 } from "react-icons/rx"
+import { useNavigate } from "react-router-dom";
 
 function StudentAssignments () {
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
     const studentClasses = useSelector(state => state.user.studentClasses);
+    const studentAssignmentInfo = useSelector(state => state.user.studentAssignmentInfo)
     const userId = useSelector(state => state.user.userId);
     const {data,error,isFetching} = useFetchStudentClassroomsQuery(studentClasses);
     const [toggleDropdown, setToggleDropdown] = useState(false);
@@ -24,7 +28,6 @@ function StudentAssignments () {
     },[newClassCodeText])
 
     useEffect(() => {
-        console.log(joinCodeCheckData)
         if(joinCodeCheckData === true){
             setValidCode(true)
         } else if (joinCodeCheckData === false){
@@ -52,24 +55,50 @@ function StudentAssignments () {
         console.log(error)
         // renderedAssignments = <div>Error Loading Assignments</div>
     } else if (data){
+        console.log(studentAssignmentInfo)
         renderedAssignments = data.map(cls => {
             const assignments = cls.assignments.map(assignment => {
                 const isPmText = assignment.isPm ? "PM" : "AM"
                 const options = { weekday: 'long', day: 'numeric', month: 'short' };
                 const date = new Date(assignment.dueDate.slice(0,10));
                 const formatedDate = date.toLocaleDateString('en-US', options);
+                const handleAssignmentClick = () => {
+                    dispatch(assignmentSetup({
+                        assignmentId: assignment._id,
+                        assignmentName: assignment.assignmentName,
+                        tqPair: assignment.tqPair,
+                        isQuiz: assignment.quiz,
+                        timeLimit: assignment.timeLimit,
+                        dueDate: assignment.dueDate.slice(0,10),
+                        timeHr: assignment.timeHr,
+                        timeMin: assignment.timeMin,
+                        isPm:  assignment.isPm,
+                        classes: assignment.classes,
+                        questionSet: assignment.questionSet
+                    }))
+                    navigate(`/app/student/${assignment._id}`);
+                }
+                let assignmentGrade = null;
+                studentAssignmentInfo.map(a => {
+                    if (a.assignmentId === assignment._id){                     
+                        assignmentGrade = a.grade;   
+                    }
+                })
 
                 return (
-                <tr className="border-b text-center" key={assignment._id}>
+                <tr onClick={handleAssignmentClick} className="border-b text-center hover:bg-indigo-300 cursor-pointer" key={assignment._id}>
                     <td className="p-2">{assignment.assignmentName}</td>
                     <td className="p-2">{formatedDate} at {assignment.timeHr}:{assignment.timeMin} {isPmText}</td>
+                    <td className="p-2">{cls.className}</td>
+                    <td className="p-2">
+                        {assignmentGrade ? assignmentGrade : "0"}
+                    </td>
                 </tr>
                 )
             })
             return assignments
         })
         renderedClasses = data.map(cls => {
-            console.log(cls)
             return (
                 <tr className="border-b text-center" key={cls._id}>
                     <td className="p-2">{cls.className}</td>
@@ -90,6 +119,7 @@ function StudentAssignments () {
                             <tr className="border-b-2">
                                 <th className="px-2">Assignment Name</th>
                                 <th className="px-2">Due Date</th>
+                                <th className="px-2">Class</th>
                                 <th className="px-2">Grade</th>
                             </tr>
                         </thead>

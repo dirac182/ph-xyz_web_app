@@ -63,6 +63,7 @@ const classesApi = createApi({
             }),
             fetchStudentClassrooms: builder.query({
                 providesTags: ["studentClassrooms"],
+                invalidateTags: ['AssignmentInfo'],
                 query: (classesArray) => {
                     return {
                         url: `/classes/get_student_classrooms`,

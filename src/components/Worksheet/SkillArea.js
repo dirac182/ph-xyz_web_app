@@ -74,7 +74,7 @@ function SkillArea() {
      })
 
     return (
-        <div className="w-1/5 bg-indigo-200">
+        <div className="w-full bg-indigo-200">
             <div className="flex justify-center text-xl pt-10 ">
                <p className="">Skills and Objectives</p>
             </div>

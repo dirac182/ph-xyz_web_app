@@ -1,5 +1,8 @@
 import { useParams } from 'react-router-dom';
 import { useFetchClassByIdQuery } from '../store';
+import { Link } from 'react-router-dom';
+import Button from '../components/Misc/Button';
+import { FiChevronLeft } from "react-icons/fi";
 
 function ClassPage () {
     const { userId, classId } = useParams(); 
@@ -27,11 +30,27 @@ function ClassPage () {
             <p className="text-4xl p-6">Classroom: {classData.className}</p>
         </div>
         renderedStudents = classData.students.map(student => {
+
+            const assignmentGrade = classData.assignments.map(a => {
+                const b = student.studentAssignmentInfo.map((el, index) => {
+                    if (el.assignmentId === a._id){
+                        return (
+                            <th className="px-2" key={index}>
+                                {el.grade}
+                            </th>
+                        )
+                    }
+                })
+                return b
+            })
+            console.log(assignmentGrade)
+
             return(
                 <tr className="border-b text-center" key={student._id}>
                     <td className="p-2">{student.firstName}</td>
                     <td className="p-2">{student.lastName}</td>
                     <td className="p-2">{student.username}</td>
+                    {assignmentGrade}
                 </tr>
             )
         })
@@ -40,6 +59,9 @@ function ClassPage () {
 
     return (
         <div className=''>
+            <div className=" px-5 pt-5">
+               <Link to={`/dashboard/${userId}`} ><Button primary outline rounded><FiChevronLeft/> Back</Button></Link>
+            </div>
             {renderedClassName}
             <div className='flex justify-center'>
                 <table className="table-auto justify-center border-spacing-2">

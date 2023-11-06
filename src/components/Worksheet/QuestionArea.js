@@ -7,12 +7,35 @@ import SubmitButton from "./SubmitButton";
 import Solution from "./Solution";
 import { useSelector, useDispatch } from "react-redux";
 import { InlineMath } from 'react-katex';
+import { useUpdateStudentAssignmentInfoMutation, resetWorkPageData } from "../../store/index.js";
+import { useEffect, useRef } from "react";
 
-function QuestionArea() {
+
+function QuestionArea({assignmentId, userId}) {
    const dispatch = useDispatch();
+   const [updateStudentAssignmentInfo, { data:assignmentUpdateData, isLoading:assignmentUpdateisLoading }] = useUpdateStudentAssignmentInfoMutation();
    const workpageData = useSelector(state => state.workpage.workpageData);
    const topicIndex = useSelector(state => state.workpage.topicIndex);
-   const questionIndex = useSelector(state => state.workpage.questionIndex); 
+   const questionIndex = useSelector(state => state.workpage.questionIndex);
+   const grade = useSelector(state => state.workpage.grade);
+   const workpageDataRef = useRef(workpageData);
+   const gradeRef = useRef(grade);
+
+   useEffect(() => {
+      workpageDataRef.current = workpageData;
+      gradeRef.current = grade
+    }, [workpageData,grade]);
+
+   useEffect(()=> {
+         return () => {
+            
+            const updatedData = {userId, assignmentId, updatedAssignmentInfo:workpageDataRef.current, updatedGrade:gradeRef.current}
+            console.log("Updated Data",updatedData)
+            updateStudentAssignmentInfo(updatedData)
+            }
+   },[])
+
+
 
     const renderedAnswerChoices = workpageData[topicIndex][questionIndex].isCorrect !== null    
      ? workpageData[topicIndex][questionIndex].question.choices.map((choice,answerIndex) => {
@@ -46,8 +69,8 @@ function QuestionArea() {
      const questionText = workpageData[topicIndex][questionIndex].question.text;
 
     return (
-        <div className="w-3/5 border-x-2 border-dashed border-indigo-500">
-            <div className="flex pt-10 justify-around justify-items-center">
+        <div className="w-full border-x-2 border-dashed border-indigo-500">
+            <div className="flex md:pt-10 pt-5 justify-around justify-items-center">
                <div className="flex items-center ">
                   <QuestionIcon />
                </div>
@@ -72,7 +95,7 @@ function QuestionArea() {
                      {renderedSolution}
                   </div>           
             </div>
-            <div className="flex justify-center pt-3 pb-60">
+            <div className="flex justify-center pt-3 md:pb-60 pb-10">
                   <SubmitButton />
             </div>    
          </div>

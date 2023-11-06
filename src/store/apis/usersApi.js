@@ -16,10 +16,57 @@ const usersApi = createApi({
                         method: "GET"
                     }
                 }
-            })
+            }),
+            initializeStudentAssignmentInfo: builder.mutation({
+                invalidatesTags: ["AssignmentInfo"],
+                query: (data) => {
+                    return {
+                        url: "/user/initialize_student_assignment_info",
+                        method: "POST",
+                        params: {
+                            userId: data.userId,
+                            assignmentId: data.assignmentId
+                        },
+                        body: {
+                            assignmentInfo: data.assignmentInfo,
+                        }
+                    }
+                }
+            }),
+            fetchStudentAssignmentInfo: builder.query({
+                providesTags: ["AssignmentInfo"],
+                
+                query: (data) => {
+                    return {
+                        url: "/user/fetch_student_assignment_info",
+                        method: "GET",
+                        params: {
+                            userId: data.userId,
+                            assignmentId: data.assignmentId
+                        },
+                    }
+                }
+            }),
+            updateStudentAssignmentInfo: builder.mutation({
+                invalidatesTags: ["AssignmentInfo"],
+                query: (data) => {
+                    return {
+                        url: "/user/update_student_assignment_info",
+                        method: "POST",
+                        params: {
+                            userId: data.userId,
+                            assignmentId: data.assignmentId
+                        },
+                        body: {
+                            updatedAssignmentInfo: data.updatedAssignmentInfo,
+                            updatedGrade: data.updatedGrade
+                        }
+                    }
+                }
+            }),
         }
     }
 });
 
-export const { useGetUserQuery } = usersApi;
+export const { useUpdateStudentAssignmentInfoMutation, useFetchStudentAssignmentInfoQuery, useInitializeStudentAssignmentInfoMutation, useGetUserQuery } = usersApi;
 export { usersApi };

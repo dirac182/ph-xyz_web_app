@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { setQuestionSet } from "./assignmentSlice";
+import { assignmentSetup, setQuestionSet } from "./assignmentSlice";
 
 const workpageSlice = createSlice({
     name: "workpage",
@@ -9,9 +9,13 @@ const workpageSlice = createSlice({
         workpageData: [],
         topicIndex: 0,
         questionIndex: 0,
-        skillId: ""
+        skillId: "",
+        grade:0
     },
     reducers: {
+        updateGrade(state,action){
+            state.grade = action.payload
+        },
         setTopicIndex(state,action){
             state.topicIndex = action.payload;
             state.questionIndex = 0;
@@ -39,15 +43,18 @@ const workpageSlice = createSlice({
         },
         setSkillId(state,action){
             state.skillId = action.payload
+        },
+        resetWorkPageData(state,action){
+            state.workpageData = []
         }
     },
     extraReducers(builder) {
-        builder.addCase(setQuestionSet, (state,action) => {
-            state.questionSet = action.payload;
+        builder.addCase(assignmentSetup, (state,action) => {
+            state.questionSet = action.payload.questionSet;
             }
         )
     }
 })
 
-export const { setSkillId, setIsFocused, setIsCorrect, setIsFlagged, setSelectedAnswer, setTopicIndex, setQuestionIndex, setWorkpageData, setQIDs } = workpageSlice.actions; 
+export const { updateGrade, resetWorkPageData, setSkillId, setIsFocused, setIsCorrect, setIsFlagged, setSelectedAnswer, setTopicIndex, setQuestionIndex, setWorkpageData, setQIDs } = workpageSlice.actions; 
 export const workpageReducer = workpageSlice.reducer;

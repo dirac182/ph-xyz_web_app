@@ -6,7 +6,7 @@ import { questionsApi } from "./apis/questionsApi";
 import { usersApi } from "./apis/usersApi";
 import { classesApi } from "./apis/classesApi";
 import { setUserState, userReducer } from "./slices/userSlice";
-import { setSkillId, setIsFocused, setIsCorrect, setIsFlagged, setSelectedAnswer, setTopicIndex, setQuestionIndex, setWorkpageData, setQIDs, workpageReducer } from "./slices/workpageSlice";
+import { updateGrade, resetWorkPageData, setSkillId, setIsFocused, setIsCorrect, setIsFlagged, setSelectedAnswer, setTopicIndex, setQuestionIndex, setWorkpageData, setQIDs, workpageReducer } from "./slices/workpageSlice";
 
 
 const store = configureStore({
@@ -29,8 +29,8 @@ const store = configureStore({
 });
 
 setupListeners(store.dispatch);
-export { changeAssignmentClasses, setUserState, setSkillId, setIsFocused, setIsCorrect, setIsFlagged, setSelectedAnswer, setTopicIndex, setQuestionIndex, setWorkpageData, assignmentSetup, setQuestionSet ,setQIDs , store, changeName, setIsQuiz, setIsPm, setDueDate, setTimeHr, setTimeMin, setTimeLimit, addTopic, removeTopic, changeQuestions, updateTqPair, reset, edit};
+export { updateGrade, resetWorkPageData, changeAssignmentClasses, setUserState, setSkillId, setIsFocused, setIsCorrect, setIsFlagged, setSelectedAnswer, setTopicIndex, setQuestionIndex, setWorkpageData, assignmentSetup, setQuestionSet ,setQIDs , store, changeName, setIsQuiz, setIsPm, setDueDate, setTimeHr, setTimeMin, setTimeLimit, addTopic, removeTopic, changeQuestions, updateTqPair, reset, edit};
 export { useFetchAssignmentByIdQuery, useFetchAssignmentsQuery, useCreateAssignmentMutation, useEditAssignmentMutation, useDeleteAssignmentMutation } from "./apis/assignmentsApi"
 export {  useFetchQuestionSetByIdsQuery, useFetchAllQuestionIDsQuery, useFetchQuestionByTopicMutation } from "./apis/questionsApi";
-export { useGetUserQuery } from "./apis/usersApi"
+export { useUpdateStudentAssignmentInfoMutation, useFetchStudentAssignmentInfoQuery, useInitializeStudentAssignmentInfoMutation, useGetUserQuery } from "./apis/usersApi"
 export {  useAddStudentToClassroomMutation, useFetchStudentClassroomsQuery, useFetchClassByIdQuery, useCheckJoinCodeMutation, useUpdateClassroomAssignmentMutation, useCreateClassroomMutation, useDeleteClassroomMutation, useFetchTeacherClassroomsQuery } from "./apis/classesApi"

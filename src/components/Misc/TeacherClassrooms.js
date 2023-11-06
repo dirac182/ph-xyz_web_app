@@ -1,6 +1,7 @@
 import { useSelector, useDispatch } from "react-redux";
 import { useState } from "react";
 import Button from "./Button";
+import Modal from "./Modal";
 import { useNavigate } from "react-router-dom";
 import { BiCheck, BiEditAlt, BiSpreadsheet, BiTrash } from "react-icons/bi";
 import { RxCross2 } from "react-icons/rx"
@@ -17,6 +18,7 @@ function TeacherClassrooms() {
     const [newClassText, setNewClassText] = useState("");
     const { userId } = useParams();
     const {data,error,isFetching} = useFetchTeacherClassroomsQuery(userId);
+    const [showModal, setShowModal] = useState(false);
 
     let renderedRooms;
     if(isFetching) {
@@ -24,16 +26,31 @@ function TeacherClassrooms() {
     } else if (error) {
         renderedRooms = <tr><td><div>Error Loading Classrooms</div></td></tr>
     } else {
-        // console.log(data)
+        console.log(data)
         renderedRooms = data ? data.classes.map(room => {
 
         const handleDeleteClass = (event) => {
             event.preventDefault();
             deleteClassroom({userId:userId, classId: room._id});
+            setShowModal(false)
             }
         const handleClassClick = () => {
             navigate(`/class/${userId}/${room._id}`);
         }
+
+        const handleModalClose = () => {
+            setShowModal(false)
+        }
+        const toggleModal = () => {
+            setShowModal(true)
+        }
+        const actionBar = <div className="flex ">
+            <span className="mx-4"><Button onClick={handleModalClose} secondary outline>Cancel</Button></span>
+            <span className="mx-4"><Button onClick={handleDeleteClass} danger>Delete</Button></span>
+            </div>
+        const modal = <Modal onClose={handleModalClose} actionBar={actionBar} >
+            <p>Are you sure you want to delete this classroom?</p> 
+             </Modal>;
 
         return(
             <tr className="border-b text-center" key={room._id}>
@@ -62,9 +79,10 @@ function TeacherClassrooms() {
                                 </tbody>
                             </table>
                         </div>
+                        {showModal && modal}
                     </div>
                 </td>
-                <td className=""><button onClick={handleDeleteClass}><BiTrash/></button></td>
+                <td className=""><button onClick={toggleModal}><BiTrash/></button></td>
             </tr>
         )
     })

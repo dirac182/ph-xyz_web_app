@@ -115,6 +115,7 @@ const assignmentSlice = createSlice({
             state.timeMin = action.payload.timeMin;
             state.isPm = action.payload.isPm
             state.classes = action.payload.classes;
+            state.questionSet = action.payload.questionSet;
         },
         changeAssignmentClasses(state,action){
             state.classes = action.payload

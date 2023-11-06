@@ -1,10 +1,12 @@
 import {BiEditAlt, BiSpreadsheet, BiTrash} from "react-icons/bi";
+import { useState } from "react";
 import { Link, useNavigate } from 'react-router-dom';
 import { useFetchAssignmentsQuery, useDeleteAssignmentMutation, useFetchQuestionByTopicMutation } from "../store";
 import { useSelector, useDispatch } from "react-redux";
 import { edit, setQuestionSet, assignmentSetup } from "../store";
 import { useFetchAllQuestionIDsQuery, reset } from "../store";
 import Button from "./Misc/Button";
+import Modal from "./Misc/Modal";
 
 function AssignmentTable () {
     const navigate = useNavigate();
@@ -12,7 +14,7 @@ function AssignmentTable () {
     const user = useSelector(state => state.user.userId)
     const questionArray = useSelector(state => state.workpage.questionArray)
     const {data,error,isFetching} = useFetchAssignmentsQuery(user);
-    
+    const [showModal, setShowModal] = useState(false);
     const [deleteAssignment, { isFetchingDelete, isErrorDelete, dataDelete }] = useDeleteAssignmentMutation();
     const [fetchQuestion, {isFetchingQuestion, isErrorQuestion, questionData}] = useFetchQuestionByTopicMutation();
 
@@ -55,6 +57,7 @@ function AssignmentTable () {
             const handleDeleteClick = () => {
                 const data = {userId:user, assignmentId: assignment._id};
                 deleteAssignment(data);
+                setShowModal(false)
             }
             const handleAssignmentClick = () => {
                 dispatch(assignmentSetup({
@@ -67,16 +70,24 @@ function AssignmentTable () {
                     timeHr: assignment.timeHr,
                     timeMin: assignment.timeMin,
                     isPm:  assignment.isPm,
-                    classes: assignment.classes
+                    classes: assignment.classes,
+                    questionSet: assignment.questionSet
                 }))
-                dispatch(setQuestionSet(assignment.questionSet));
                 navigate(`/app/student/${assignment._id}`);
             }
-            //Handles date format
-            // const yearString = assignment.dueDate.slice(0,4);
-            // const monthString = assignment.dueDate.slice(5,7);
-            // const dayString = assignment.dueDate.slice(8,10);
-            // const isPmText = assignment.isPm ? "AM" : "PM"
+            const handleModalClose = () => {
+                setShowModal(false)
+            }
+            const toggleModal = () => {
+                setShowModal(true)
+            }
+            const actionBar = <div className="flex">
+                <span className="mx-4"><Button onClick={handleModalClose} secondary outline>Cancel</Button></span>
+                <span className="mx-4"><Button onClick={handleDeleteClick} danger>Delete</Button></span>
+                </div>
+            const modal = <Modal onClose={handleModalClose} actionBar={actionBar} >
+                <p>Are you sure you want to delete this assignment?</p> 
+                 </Modal>;
 
         return(
             <tr className="border-b text-center" key={assignment._id}>
@@ -110,7 +121,8 @@ function AssignmentTable () {
                 {/* <td className="p-2">{isQuiz}</td> */}
                 <td className="p-2">{isPosted}</td>
                 <td className="p-2">{assignment.dueDate.slice(0,10)} at {assignment.timeHr}:{assignment.timeMin} {isPmText}</td>
-                <td className="p-2"><button onClick={handleDeleteClick}><BiTrash/></button></td>
+                <td className="p-2"><button onClick={toggleModal}><BiTrash/></button></td>
+                {showModal && modal}
             </tr>
         )
     })

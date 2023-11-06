@@ -2,7 +2,7 @@ import JsxParser from 'react-jsx-parser';
 
 function Solution({data}) {
     const jsxString = data;
-    console.log(data);
+    // console.log(data);
     //This finds any LAtex after each render of whatever is in the parenthesis.
     // useEffect(()=>{
     //     if( typeof window?.MathJax !== "undefined"){

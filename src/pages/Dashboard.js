@@ -2,14 +2,20 @@ import { useSelector } from "react-redux";
 import TeacherClassrooms from "../components/Misc/TeacherClassrooms";
 import AssignmentTable from "../components/AssignmentTable";
 import StudentAssignments from "../components/Misc/StudentAssignments";
+import { useEffect } from "react";
 
 function TeacherDashboard() {
     const userFirstName = useSelector(state => state.user.firstName)
     const userLastName = useSelector(state => state.user.lastName)
     const userEmail = useSelector(state => state.user.userEmail)
     const isTeacher = useSelector(state => state.user.isTeacher);
+    const workpageData = useSelector(state => state.workpage.workpageData);
 
     const tOrS = isTeacher ? "Teacher" : "Student"
+
+    useEffect(()=> {
+        console.log("CurrentState:", workpageData)
+    },[workpageData])
 
     const renderedAccountInfo = <div className="flex flex-col text-center py-5">
         <div className=""><p className="text-5xl text-center underline pb-3">Account Info</p></div>

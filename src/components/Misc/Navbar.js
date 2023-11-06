@@ -30,7 +30,7 @@ function MyNavbar () {
         } else {
             if(data){
                 console.log(data);
-                dispatch(setUserState({id:data._id, email:data.username, firstName:data.firstName, lastName:data.lastName, isTeacher:data.isTeacher,studentClasses:data.studentClasses}))
+                dispatch(setUserState({id:data._id, email:data.username, firstName:data.firstName, lastName:data.lastName, isTeacher:data.isTeacher,studentClasses:data.studentClasses, studentAssignmentInfo: data.studentAssignmentInfo}))
             } else{
                 console.log("NO ONE is logged in.")
             }
