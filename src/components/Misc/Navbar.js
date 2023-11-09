@@ -68,7 +68,7 @@ function MyNavbar () {
         setShowModal(false)
     }
     
-    const actionBar = <div><Link to="https://www.ph-zyx.com//auth/google"><Button primary><span className="text-lg pr-2"><AiOutlineGoogle/></span>| Login with Google</Button></Link></div>
+    const actionBar = <div><Link to="https://www.ph-zyx.com/auth/google"><Button primary><span className="text-lg pr-2"><AiOutlineGoogle/></span>| Login with Google</Button></Link></div>
     const modal = <Modal onClose={handleModalClose} actionBar={actionBar} >
         <p>Already have an account? Login!</p> 
          </Modal>;
@@ -120,7 +120,7 @@ function MyNavbar () {
     {/* Mobile User dropdown menu */}
     <div ref={divEl} className={`${userToggle ? 'flex' : 'hidden'} md:hidden text-2xl flex-col absolute top-full left-0 bg-white `} >
         <Link className="py-2 px-4 text-indigo-500" to={`/dashboard/${userId}`}><button onClick={()=> setUserToggle(false)}>Dashboard</button></Link>
-        <Link className="py-2 px-4 text-indigo-500" to="https://www.ph-zyx.com//user/logout"><button onClick={()=> setUserToggle(false)}>Logout</button></Link>
+        <Link className="py-2 px-4 text-indigo-500" to="https://www.ph-zyx.com/user/logout"><button onClick={()=> setUserToggle(false)}>Logout</button></Link>
     </div>
 
 
