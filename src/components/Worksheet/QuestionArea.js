@@ -5,15 +5,13 @@ import {FiFlag} from "react-icons/fi";
 import QuestionIcon from "./QuestionIcon";
 import SubmitButton from "./SubmitButton";
 import Solution from "./Solution";
-import { useSelector, useDispatch } from "react-redux";
-import { InlineMath } from 'react-katex';
-import { useUpdateStudentAssignmentInfoMutation, resetWorkPageData } from "../../store/index.js";
+import { useSelector } from "react-redux";
+import { useUpdateStudentAssignmentInfoMutation } from "../../store/index.js";
 import { useEffect, useRef } from "react";
 
 
 function QuestionArea({assignmentId, userId}) {
-   const dispatch = useDispatch();
-   const [updateStudentAssignmentInfo, { data:assignmentUpdateData, isLoading:assignmentUpdateisLoading }] = useUpdateStudentAssignmentInfoMutation();
+   const [updateStudentAssignmentInfo] = useUpdateStudentAssignmentInfoMutation();
    const workpageData = useSelector(state => state.workpage.workpageData);
    const topicIndex = useSelector(state => state.workpage.topicIndex);
    const questionIndex = useSelector(state => state.workpage.questionIndex);

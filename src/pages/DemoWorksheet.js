@@ -11,9 +11,8 @@ function DemoWorksheet() {
   const {assignmentId} = useParams();
   const [dataFetched, setDataFetched] = useState(false);
   const questionSet = useSelector(state => state.workpage.questionSet);
-  const workpageData = useSelector(state => state.workpage.workpageData);
   const userId = useSelector(state => state.user.userId);
-  const [initializeStudentAssignmentInfo, { data:assignmentUpdateData, isLoading:assignmentUpdateisLoading }] = useInitializeStudentAssignmentInfoMutation();
+  const [initializeStudentAssignmentInfo] = useInitializeStudentAssignmentInfoMutation();
   const qIdsArray = questionSet.map((topic)=> {
         const qIdArray = topic.QIDArray;
         const ids = qIdArray.map((Id) => {

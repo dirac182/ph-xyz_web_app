@@ -1,10 +1,8 @@
 import {GiUnbalanced} from "react-icons/gi"
 import { Link } from 'react-router-dom';
-import { useState } from "react";
 
 function Footer() {
-    const year = new Date()
-    const [thisYear, setThisYear] =useState(year.getFullYear())
+    const year = new Date().getFullYear()
 
     return (
         <div className="">
@@ -18,7 +16,7 @@ function Footer() {
                     </div>
                 </a>
                 <span className="flex items-center">
-                    <p>© {thisYear} ZYX inc.</p>
+                    <p>© {year} ZYX inc.</p>
                 </span>
                 <span className="flex items-center">   
                     <Link className="no-underline text-indigo-100 text-xl px-3" to="/demo/teacher">Privacy Policy</Link>

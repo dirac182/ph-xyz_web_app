@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import { setSelectedAnswer } from "../../store";
 import { useDispatch, useSelector } from "react-redux";
 

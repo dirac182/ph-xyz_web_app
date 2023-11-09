@@ -1,10 +1,10 @@
 import {BiEditAlt, BiSpreadsheet, BiTrash} from "react-icons/bi";
 import { useState } from "react";
 import { Link, useNavigate } from 'react-router-dom';
-import { useFetchAssignmentsQuery, useDeleteAssignmentMutation, useFetchQuestionByTopicMutation } from "../store";
+import { useFetchAssignmentsQuery, useDeleteAssignmentMutation } from "../store";
 import { useSelector, useDispatch } from "react-redux";
-import { edit, setQuestionSet, assignmentSetup } from "../store";
-import { useFetchAllQuestionIDsQuery, reset } from "../store";
+import { edit, assignmentSetup } from "../store";
+import { reset } from "../store";
 import Button from "./Misc/Button";
 import Modal from "./Misc/Modal";
 
@@ -12,11 +12,9 @@ function AssignmentTable () {
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const user = useSelector(state => state.user.userId)
-    const questionArray = useSelector(state => state.workpage.questionArray)
     const {data,error,isFetching} = useFetchAssignmentsQuery(user);
     const [showModal, setShowModal] = useState(false);
-    const [deleteAssignment, { isFetchingDelete, isErrorDelete, dataDelete }] = useDeleteAssignmentMutation();
-    const [fetchQuestion, {isFetchingQuestion, isErrorQuestion, questionData}] = useFetchQuestionByTopicMutation();
+    const [deleteAssignment] = useDeleteAssignmentMutation();
 
     const handleCreateAssignment = () => {
         dispatch(reset());
@@ -30,7 +28,7 @@ function AssignmentTable () {
     } else {
         
         renderedRows = data.map((assignment) => {
-            const isQuiz = assignment.quiz ? "Quiz" : "Assignment";
+            // const isQuiz = assignment.quiz ? "Quiz" : "Assignment";
             const isPosted = assignment.status ? "Posted" : "NotPosted";
             const isPmText = assignment.isPm ? "PM" : "AM"
 

@@ -1,5 +1,4 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { setQuestionSet } from "./assignmentSlice";
 
 const userSlice = createSlice({
     name: "user",

@@ -14,7 +14,6 @@ function AssignmentInfo({userId}) {
    const timeHr = useSelector(state => state.assignment.timeHr);
    const timeMin = useSelector(state => state.assignment.timeMin);
    const isPm = useSelector(state => state.assignment.isPm);
-   const grade = useSelector(state => state.workpage.grade);
    const [selectedSubjectIndex, setSelectedSubjectIndex] = useState(0);
    const isPmText = isPm ? "PM" : "AM"
    const [totalQuestions,setTotalQuestions] = useState(0);
@@ -23,7 +22,6 @@ function AssignmentInfo({userId}) {
    
 
    const renderedSubjects = questionSet.map((subject,index) => {
-      const amountCompleted = 0;
 
       const handleQuestionSetChange = () => {
          dispatch(setTopicIndex(index));

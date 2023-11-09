@@ -3,7 +3,7 @@ import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 const assignmentsApi = createApi({
     reducerPath: "assignments",
     baseQuery: fetchBaseQuery({
-        baseUrl: "http://localhost:5000",
+        baseUrl: "https://www.ph-zyx.com",
     }),
     endpoints(builder) {
         return {
@@ -11,7 +11,7 @@ const assignmentsApi = createApi({
                 providesTags: ["Assignments"],
                 query: (user) => {
                     return {
-                        url: `/get/assignments`,
+                        url: `/assignments/get_assignments`,
                         params: {
                             userId:user
                         },
@@ -23,7 +23,7 @@ const assignmentsApi = createApi({
                 providesTags: ["Assignments"],
                 query: (data) => {
                     return {
-                        url: `/get/assignmentById`,
+                        url: `/assignments/get_assignment_by_id`,
                         params: {
                             userId: data.userId,
                             assignmentId: data.assignmentId
@@ -36,7 +36,7 @@ const assignmentsApi = createApi({
                 invalidatesTags: ["Assignments"],
                 query: (data) => {
                     return{
-                        url: "/create/assignment",
+                        url: "/assignments/create_assignment",
                         method: "POST",
                         body: {
                             userID: data.userId,
@@ -60,7 +60,7 @@ const assignmentsApi = createApi({
                 invalidatesTags: ["Assignments"],
                 query: (data) => {
                     return{
-                        url: "/edit/assignment",
+                        url: "/assignments/edit_assignment",
                         method: "POST",
                         params: {
                             userID: data.userId,
@@ -86,7 +86,7 @@ const assignmentsApi = createApi({
                 invalidatesTags: ["Classrooms", "Assignments"],
                 query: (data) => {
                     return {
-                        url: "/delete/assignment",
+                        url: "/assignments/delete_assignment",
                         method: "POST",
                         params: {
                             userID: data.userId,

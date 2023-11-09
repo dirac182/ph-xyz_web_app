@@ -1,19 +1,18 @@
-import { useSelector, useDispatch } from "react-redux";
+// import { useSelector, useDispatch } from "react-redux";
 import { useState } from "react";
 import Button from "./Button";
 import Modal from "./Modal";
 import { useNavigate } from "react-router-dom";
-import { BiCheck, BiEditAlt, BiSpreadsheet, BiTrash } from "react-icons/bi";
+import { BiCheck, BiTrash } from "react-icons/bi";
 import { RxCross2 } from "react-icons/rx"
 import { useParams } from 'react-router-dom';
 import { useCreateClassroomMutation, useDeleteClassroomMutation, useFetchTeacherClassroomsQuery } from "../../store";
 
 function TeacherClassrooms() {
     const navigate = useNavigate();
-    const dispatch = useDispatch();
-    const classrooms = useSelector(state => state.user.teacherClassrooms);
-    const [createClassroom, { a, b, c }] = useCreateClassroomMutation();
-    const [deleteClassroom, { d, e, f }] = useDeleteClassroomMutation();
+    // const dispatch = useDispatch();
+    const [createClassroom] = useCreateClassroomMutation();
+    const [deleteClassroom] = useDeleteClassroomMutation();
     const [toggleDropdown, setToggleDropdown] = useState(false);
     const [newClassText, setNewClassText] = useState("");
     const { userId } = useParams();

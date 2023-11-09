@@ -68,7 +68,7 @@ function MyNavbar () {
         setShowModal(false)
     }
     
-    const actionBar = <div><Link to="http://localhost:5002/auth/google"><Button primary><span className="text-lg pr-2"><AiOutlineGoogle/></span>| Login with Google</Button></Link></div>
+    const actionBar = <div><Link to="https://ph-zyx.com/auth/google"><Button primary><span className="text-lg pr-2"><AiOutlineGoogle/></span>| Login with Google</Button></Link></div>
     const modal = <Modal onClose={handleModalClose} actionBar={actionBar} >
         <p>Already have an account? Login!</p> 
          </Modal>;

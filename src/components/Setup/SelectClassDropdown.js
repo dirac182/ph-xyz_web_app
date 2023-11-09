@@ -8,9 +8,7 @@ function Dropdown() {
     const dispatch = useDispatch();
     const [isOpen, setIsOpen] = useState(false);
     const divEl = useRef();
-    const teacherClassrooms = useSelector(state => state.user.teacherClassrooms)
     const userId = useSelector(state => state.user.userId)
-    const [options, setOptions] = useState([])
     const classes = useSelector(state => state.assignment.classes);
     const {data,error,isFetching} = useFetchTeacherClassroomsQuery(userId);
     
@@ -40,11 +38,9 @@ function Dropdown() {
             const updatedOptions = classes.filter(c => {
                 return c !== choice;
             })
-            setOptions(updatedOptions);
             dispatch(changeAssignmentClasses(updatedOptions))
         }else{
             const updatedOptions = [...classes,choice];
-            setOptions(updatedOptions);
             dispatch(changeAssignmentClasses(updatedOptions))
         }
         console.log(classes)

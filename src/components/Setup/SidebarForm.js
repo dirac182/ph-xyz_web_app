@@ -1,25 +1,24 @@
 import Button from "../Misc/Button";
 import { useDispatch, useSelector } from "react-redux";
 import {useEffect, useState} from "react";
-import TimedDropdown from "./TimedDropdown";
+// import TimedDropdown from "./TimedDropdown";
 import { useUpdateClassroomAssignmentMutation, useFetchAllQuestionIDsQuery ,useCreateAssignmentMutation, useEditAssignmentMutation } from "../../store";
-import { setQuestionSet,setQIDs, changeName, setIsQuiz, setIsPm, setDueDate, setTimeHr, setTimeMin } from "../../store";
+import { setQuestionSet,setQIDs, changeName, setIsPm, setDueDate, setTimeHr, setTimeMin } from "../../store";
 import { useNavigate } from "react-router-dom";
 import SelectClassDropdown from "./SelectClassDropdown";
 import { Link } from "react-router-dom";
 import { FiChevronLeft } from "react-icons/fi";
 import Modal from "../Misc/Modal";
 
-function SidebarForm({ userId, assignmentId}) {
+function SidebarForm({ assignmentId }) {
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const buttonText = assignmentId ? "Edit Workpage" : "Create Workpage"
-    const [createAssignment, { data: createAssignmentData, isLoading: isLoadingCreateAssignment }] = useCreateAssignmentMutation();    const [editAssignment, { isFetchingEdit, isErrorEdit, dataEdit }] = useEditAssignmentMutation();
-    const [updateClassAssignment, { data: updateClassAssignmenttData, isLoading: isLoadingupdateClassAssignment }] = useUpdateClassroomAssignmentMutation();
+    const [createAssignment, { data: createAssignmentData, isLoading: isLoadingCreateAssignment }] = useCreateAssignmentMutation();    
+    const [editAssignment] = useEditAssignmentMutation();
+    const [updateClassAssignment] = useUpdateClassroomAssignmentMutation();
     const { data,error,isFetching } = useFetchAllQuestionIDsQuery();
-    // To change when I add unique users
     const uId = useSelector(state => state.user.userId);
-    const teacherClassrooms = useSelector(state => state.user.teacherClassrooms);
     var assignmentName = useSelector(state => state.assignment.assignmentName);
     var tqPair = useSelector(state => state.assignment.tqPair)
     var isQuiz = useSelector(state => state.assignment.isQuiz);
@@ -30,7 +29,6 @@ function SidebarForm({ userId, assignmentId}) {
     var isPm = useSelector(state => state.assignment.isPm);
     var status = useSelector(state => state.assignment.status);
     var QIDs = useSelector(state => state.workpage.QIDs);
-    var questionSet = useSelector(state => state.assignment.questionSet);
     var classes = useSelector(state => state.assignment.classes);
     const [timeButtonText, setTimeButtontext] = useState("PM");
     const [qTotal,setqTotal] = useState(0)
@@ -68,11 +66,11 @@ function SidebarForm({ userId, assignmentId}) {
         setqTotal(total);
     },[tqPair])
 
-    const checkToggle = (
-            <div>
-                {isQuiz && <TimedDropdown />}
-            </div>
-        )
+    // const checkToggle = (
+    //         <div>
+    //             {isQuiz && <TimedDropdown />}
+    //         </div>
+    //     )
 
     const HandleSubmit = (event) => {
         event.preventDefault();

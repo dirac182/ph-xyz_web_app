@@ -39,7 +39,7 @@ function RegisterPage () {
     }
 
     const actionBar = <div className={`${validCode ? "flex" : "hidden"}`}>
-        <Link to={`http://localhost:5002/auth/google?role=student&classCode=${classCodeText}`}><Button primary><span className={"text-lg pr-2"}><AiOutlineGoogle/></span>| Register as Student</Button></Link>
+        <Link to={`https://phzyxserver-a2204ae0f213.herokuapp.com/auth/google?role=student&classCode=${classCodeText}`}><Button primary><span className={"text-lg pr-2"}><AiOutlineGoogle/></span>| Register as Student</Button></Link>
         </div>
     const modal = <Modal onClose={handleModalClose} actionBar={actionBar} >
         <p className="text-2xl">Create a Student Accound through Google!</p>
@@ -65,7 +65,7 @@ function RegisterPage () {
             </div>
             <div className="flex flex-col items-center w-4/5 bg-white p-4 rounded-full">
                 <label className="md:text-3xl text-xl text-center p-2">Register as a Teacher</label>
-                <Link to="http://localhost:5002/auth/google?role=teacher"><Button primary rounded>Teacher Signup</Button></Link> 
+                <Link to="https://phzyxserver-a2204ae0f213.herokuapp.com/auth/google?role=teacher"><Button primary rounded>Teacher Signup</Button></Link> 
             </div>
         </div>
         <div className="flex flex-col items-center justify-center w-full p-6">

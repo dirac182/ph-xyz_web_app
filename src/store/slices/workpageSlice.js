@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { assignmentSetup, setQuestionSet } from "./assignmentSlice";
+import { assignmentSetup } from "./assignmentSlice";
 
 const workpageSlice = createSlice({
     name: "workpage",

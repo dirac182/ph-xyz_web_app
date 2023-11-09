@@ -1,7 +1,6 @@
 import AssignmentTable from "../components/AssignmentTable";
 import Button from "../components/Misc/Button";
 import { Link } from 'react-router-dom';
-import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { reset } from "../store";
 

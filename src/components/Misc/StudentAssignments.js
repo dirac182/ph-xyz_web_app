@@ -17,7 +17,7 @@ function StudentAssignments () {
     const [newClassCodeText, setNewClassCodeText] = useState("");
     const [validCode, setValidCode] = useState(null);
     const [checkJoinCode, { data:joinCodeCheckData, isLoading:joinCodeCheckisLoading }] = useCheckJoinCodeMutation();
-    const [addStudentToClassroom, { data:addStudentData, isLoading:addStudentisLoading }] = useAddStudentToClassroomMutation();
+    const [addStudentToClassroom] = useAddStudentToClassroomMutation();
 
     useEffect(() => {
         if (newClassCodeText.length === 6){

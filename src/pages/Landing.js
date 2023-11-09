@@ -1,5 +1,5 @@
-import { useDispatch } from "react-redux";
-import { useGetUserQuery, setUserState } from "../store";
+// import { useDispatch } from "react-redux";
+// import { useGetUserQuery, setUserState } from "../store";
 
 function Landing() {
    // const dispatch = useDispatch()
