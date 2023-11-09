@@ -15,7 +15,7 @@ function UserDropdown() {
             </div>
             <div className="user-dropdown-panel absolute hidden">
                 <Link to={dashboardLink}><div className="flex p-2 border-b cursor-pointer hover:underline"> Dashboard</div></Link>
-                <Link to="http://localhost:5002/user/logout"><div className="flex p-2 cursor-pointer hover:underline"> Logout</div></Link>
+                <Link to="https://www.ph-zyx.com/user/logout"><div className="flex p-2 cursor-pointer hover:underline"> Logout</div></Link>
             </div>
         </div>
     )
