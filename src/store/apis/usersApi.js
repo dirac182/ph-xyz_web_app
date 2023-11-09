@@ -3,7 +3,7 @@ import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 const usersApi = createApi({
     reducerPath: "users",
     baseQuery: fetchBaseQuery({
-        baseUrl: "https://www.ph-zyx.com/",
+        baseUrl: "https://phzyxserver-a2204ae0f213.herokuapp.com/",
         credentials: 'include',
     }),
     endpoints(builder) {
