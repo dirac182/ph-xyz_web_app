@@ -7,7 +7,7 @@ function Checkbox({topic}) {
     const dispatch = useDispatch();
     const tqPair = useSelector(state => state.assignment.tqPair)
 
-    useEffect((topic) =>{
+    useEffect(() =>{
         tqPair.map((listItem) =>{
             if (listItem.topicId === topic.id){
                 setChecked(true);
@@ -15,7 +15,7 @@ function Checkbox({topic}) {
             })
         }, [tqPair])
 
-    useEffect((topic)=> {
+    useEffect(()=> {
         const isNotInArray = tqPair.every(item => item.topicId !== topic.id);
         if (isNotInArray) {
             setChecked(false);
