@@ -3,7 +3,7 @@ import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 const classesApi = createApi({
     reducerPath: "classes",
     baseQuery: fetchBaseQuery({
-        baseUrl: "https://phzyxserver-a2204ae0f213.herokuapp.com/",
+        baseUrl: "https://www.ph-zyx.com/",
         credentials: 'include',
     }),
     endpoints(builder) {
