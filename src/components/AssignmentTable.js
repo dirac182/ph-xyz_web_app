@@ -86,6 +86,7 @@ function AssignmentTable () {
             const modal = <Modal onClose={handleModalClose} actionBar={actionBar} >
                 <p>Are you sure you want to delete this assignment?</p> 
                  </Modal>;
+            const options = { weekday: 'long', day: 'numeric', month: 'short' };
             const unformattedDate = new Date(assignment.dueDate.slice(0,10));
             const formattedDate = unformattedDate.toLocaleDateString('en-US', options);
         return(
