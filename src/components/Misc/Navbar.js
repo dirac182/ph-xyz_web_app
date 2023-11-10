@@ -103,12 +103,13 @@ function MyNavbar () {
     </span>
 
     {/* Mobile */}
-    {/* <button className={`${userId ? 'flex' : 'hidden'} md:hidden flex items-center text-4xl pr-3`} onClick={toggleUserMenu}>
-        <BiUserCircle />
-    </button> */}
-    <button id="userMenuButton" className={`${userId ? 'flex' : 'hidden'} md:hidden flex items-center text-4xl pr-3`} onClick={toggleUserMenu}>
-        <BiUserCircle />
-    </button>
+    
+    <span className={`${userId ? 'flex' : 'hidden'}`}>
+        <Button primary outline id="userMenuButton" className="md:hidden flex items-center text-4xl pr-3" onClick={toggleUserMenu}>
+            <BiUserCircle id="userMenuButton" />
+        </Button>
+    </span>
+    
     
     <a href="/" className="md:hidden pl-5 flex content-center items-center md:text-5xl text-4xl text-indigo-500 cursor-pointer">
         <GiUnbalanced className="relative right-2 bottom-1" />
@@ -116,13 +117,11 @@ function MyNavbar () {
             <p className="relative top-2 ml-2 text-center">ph-ZYX</p>
         </div>
     </a>
+    <Button primary outline id="hamburgerMenuButton" className="md:hidden flex items-center text-4xl pr-3" onClick={toggleHamburgerMenu}>
+        <HiMenu id="hamburgerMenuButton" />
+    </Button>
     
-    {/* <button className="md:hidden flex items-center text-4xl pr-3" onClick={toggleHamburgerMenu}>
-        <HiMenu />
-    </button> */}
-    <button id="hamburgerMenuButton" className="md:hidden flex items-center text-4xl pr-3" onClick={toggleHamburgerMenu}>
-        <HiMenu />
-    </button>
+    
 
     {/* Mobile User dropdown menu */}
     <div ref={divEl} className={`${userToggle ? 'flex' : 'hidden'} md:hidden text-2xl flex-col absolute top-full left-0 bg-white `} >
