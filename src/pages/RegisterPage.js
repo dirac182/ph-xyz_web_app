@@ -1,8 +1,8 @@
 import { Link } from "react-router-dom";
 import chalkBackground from "../images/chalk.jpg";
 import Button from "../components/Misc/Button";
-import teacherImage from "../images/teacher.jpg"
-import studentimage from "../images/student.png"
+import teacherImage from "../images/dalle-teacher.png"
+import studentimage from "../images/dalle-student.png"
 import { useEffect, useState } from "react";
 import Modal from "../components/Misc/Modal";
 import {AiOutlineGoogle} from "react-icons/ai";

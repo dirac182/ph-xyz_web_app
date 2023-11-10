@@ -59,19 +59,21 @@ function DemoWorksheet() {
         setDataFetched(true);
       } else if (infoFetchData === false){
         console.log("NEW")
-        const groupedQuestions = questionSet.map(set => {
-          return data.filter(q => set.QIDArray.includes(q.QID));
+        if (data){
+          const groupedQuestions = questionSet.map(set => {
+            return data.filter(q => set.QIDArray.includes(q.QID));
             })
-        const databaseFormat = groupedQuestions.map(set => {
-          return set.map(q =>{return {"question": q._id,"selectedAnswerIndex": null, "isCorrect": null, "isFlagged": false, "isFocused": false}});
-            })
-        const studentAssignmentInfo = {userId, assignmentId, assignmentInfo: databaseFormat}
-        initializeStudentAssignmentInfo(studentAssignmentInfo)
-        refetch();
+          const databaseFormat = groupedQuestions.map(set => {
+            return set.map(q =>{return {"question": q._id,"selectedAnswerIndex": null, "isCorrect": null, "isFlagged": false, "isFocused": false}});
+          })
+          const studentAssignmentInfo = {userId, assignmentId, assignmentInfo: databaseFormat}
+          initializeStudentAssignmentInfo(studentAssignmentInfo)
+          refetch();
+        }
       } 
     }
     }
-  },[infoFetchData, isFetchingInfoFetch])
+  },[infoFetchData, isFetchingInfoFetch, data])
 
   // useEffect(()=> {
   //   if (isFetching) {
