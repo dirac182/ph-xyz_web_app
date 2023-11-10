@@ -42,12 +42,13 @@ function MyNavbar () {
             if (!divEl.current) {
                 return;
             }
-            if (!divEl.current.contains(event.target)){
+            // Check if the clicked element is not the menu toggle button
+            if (!divEl.current.contains(event.target) && event.target.id !== 'userMenuButton' && event.target.id !== 'hamburgerMenuButton') {
                 setUserToggle(false);
                 setHamburgerToggle(false);
             }
         }
-        document.addEventListener("click",handler, true);
+        document.addEventListener("click", handler, true);
         return () => {
             document.removeEventListener("click", handler);
         }
@@ -102,7 +103,10 @@ function MyNavbar () {
     </span>
 
     {/* Mobile */}
-    <button className={`${userId ? 'flex' : 'hidden'} md:hidden flex items-center text-4xl pr-3`} onClick={toggleUserMenu}>
+    {/* <button className={`${userId ? 'flex' : 'hidden'} md:hidden flex items-center text-4xl pr-3`} onClick={toggleUserMenu}>
+        <BiUserCircle />
+    </button> */}
+    <button id="userMenuButton" className={`${userId ? 'flex' : 'hidden'} md:hidden flex items-center text-4xl pr-3`} onClick={toggleUserMenu}>
         <BiUserCircle />
     </button>
     
@@ -113,7 +117,10 @@ function MyNavbar () {
         </div>
     </a>
     
-    <button className="md:hidden flex items-center text-4xl pr-3" onClick={toggleHamburgerMenu}>
+    {/* <button className="md:hidden flex items-center text-4xl pr-3" onClick={toggleHamburgerMenu}>
+        <HiMenu />
+    </button> */}
+    <button id="hamburgerMenuButton" className="md:hidden flex items-center text-4xl pr-3" onClick={toggleHamburgerMenu}>
         <HiMenu />
     </button>
 

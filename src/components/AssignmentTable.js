@@ -86,7 +86,8 @@ function AssignmentTable () {
             const modal = <Modal onClose={handleModalClose} actionBar={actionBar} >
                 <p>Are you sure you want to delete this assignment?</p> 
                  </Modal>;
-
+            const unformattedDate = new Date(assignment.dueDate.slice(0,10));
+            const formattedDate = unformattedDate.toLocaleDateString('en-US', options);
         return(
             <tr className="border-b text-center" key={assignment._id}>
                 <td className="p-2"><Link to={`/app/teacher/edit/${assignment.userID}/${assignment._id}`}><button onClick={handleEditClick}><BiEditAlt/></button></Link></td>
@@ -118,7 +119,7 @@ function AssignmentTable () {
                 </td>
                 {/* <td className="p-2">{isQuiz}</td> */}
                 <td className="p-2">{isPosted}</td>
-                <td className="p-2">{assignment.dueDate.slice(0,10)} at {assignment.timeHr}:{assignment.timeMin} {isPmText}</td>
+                <td className="p-2">{formattedDate} at {assignment.timeHr}:{assignment.timeMin} {isPmText}</td>
                 <td className="p-2"><button onClick={toggleModal}><BiTrash/></button></td>
                 {showModal && modal}
             </tr>
