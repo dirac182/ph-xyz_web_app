@@ -98,13 +98,13 @@ function MyNavbar () {
         <Button onClick={toggleModal} className="h-8 w-23 text-sm mx-2" primary>Login</Button>
         <Link to="/register"><Button className="h-8 w-23 text-sm mx-2" primary outline>Register</Button></Link>
     </span>
-    <span className={`hidden user-icon w-34 h-10 items-center pr-6 ${userId ? 'md:flex' : 'md:hidden'} md:flex`}>
+    <span className={`hidden user-icon w-34 h-10 items-center pr-6 ${userId ? '' : 'md:hidden'} md:flex`}>
         <UserDropdown />
     </span>
 
     {/* Mobile */}
     
-    <span className={`${userId ? 'flex' : 'hidden'}`}>
+    <span className={`${userId ? '' : 'hidden'}`}>
         <Button primary outline id="userMenuButton" className="md:hidden flex items-center text-4xl pr-3" onClick={toggleUserMenu}>
             <BiUserCircle id="userMenuButton" />
         </Button>
