@@ -85,13 +85,11 @@ function MyNavbar () {
 
     {/* Desktop Menu */}
     <span className="hidden md:flex items-center">
-        <Link className="no-underline text-indigo-500 text-xl px-3 hover:underline" to="/app/teacher">Teacher Demo</Link>
+        <Link className="no-underline text-indigo-500 text-xl px-3 hover:underline" to="/">Home</Link>
         <p className="text-xl">|</p>
-        <Link className="no-underline text-indigo-500 text-xl px-3 hover:underline" to="/app/student">Student Demo</Link>
+        <Link className="no-underline text-indigo-500 text-xl px-3 hover:underline" to="/app/student">Worksheet Demo</Link>
         <p className="text-xl">|</p>
         <Link className="no-underline text-indigo-500 text-xl px-3 hover:underline" to="/about">About</Link>
-        <p className="text-xl">|</p>
-        <Link className="no-underline text-indigo-500 text-xl px-3 hover:underline" to="/faq">FAQ</Link>
     </span>
 
     <span className={`hidden md:flex w-34 h-10 items-center pr-6 ${userId ? 'md:hidden' : 'md:flex'}`}>
