@@ -6,7 +6,7 @@ import { assignmentSetup, updateGrade, useFetchStudentAssignmentInfoQuery, useIn
 import { useSelector,useDispatch } from "react-redux";
 import { useParams } from "react-router-dom";
 
-function DemoWorksheet() {
+function DemoWorksheet({isTeacher}) {
   const dispatch = useDispatch();
   const {assignmentId} = useParams();
   const [dataFetched, setDataFetched] = useState(false);
@@ -106,7 +106,7 @@ function DemoWorksheet() {
       <AssignmentInfo userId={userId} />
     </div>
     <div className="flex md:w-7/12">
-      <QuestionArea userId={userId} assignmentId={assignmentId} />
+      <QuestionArea isTeacher={isTeacher} userId={userId} assignmentId={assignmentId} />
       </div>
     <div className="flex md:w-3/12">
       <SkillArea />

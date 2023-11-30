@@ -71,7 +71,7 @@ function AssignmentTable () {
                     classes: assignment.classes,
                     questionSet: assignment.questionSet
                 }))
-                navigate(`/app/student/${assignment._id}`);
+                navigate(`/app/teacher/${assignment._id}`);
             }
             const handleModalClose = () => {
                 setShowModal(false)

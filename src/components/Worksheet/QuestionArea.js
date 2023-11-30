@@ -10,7 +10,7 @@ import { useUpdateStudentAssignmentInfoMutation } from "../../store/index.js";
 import { useEffect, useRef } from "react";
 
 
-function QuestionArea({assignmentId, userId}) {
+function QuestionArea({assignmentId, userId, isTeacher}) {
    const [updateStudentAssignmentInfo] = useUpdateStudentAssignmentInfoMutation();
    const workpageData = useSelector(state => state.workpage.workpageData);
    const topicIndex = useSelector(state => state.workpage.topicIndex);
@@ -26,10 +26,11 @@ function QuestionArea({assignmentId, userId}) {
 
    useEffect(()=> {
          return () => {
-            
-            const updatedData = {userId, assignmentId, updatedAssignmentInfo:workpageDataRef.current, updatedGrade:gradeRef.current}
-            console.log("Updated Data",updatedData)
-            updateStudentAssignmentInfo(updatedData)
+            if (!isTeacher) {
+              const updatedData = {userId, assignmentId, updatedAssignmentInfo:workpageDataRef.current, updatedGrade:gradeRef.current}
+               console.log("Updated Data",updatedData)
+               updateStudentAssignmentInfo(updatedData) 
+               }
             }
    },[])
 

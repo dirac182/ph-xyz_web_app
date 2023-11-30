@@ -87,7 +87,7 @@ function MyNavbar () {
     <span className="hidden md:flex items-center">
         <Link className="no-underline text-indigo-500 text-xl px-3 hover:underline" to="/">Home</Link>
         <p className="text-xl">|</p>
-        <Link className="no-underline text-indigo-500 text-xl px-3 hover:underline" to="/app/student">Worksheet Demo</Link>
+        <Link className="no-underline text-indigo-500 text-xl px-3 hover:underline" to="/app/teacher/6568f247e4ff5f7dee532039">Worksheet Demo</Link>
         <p className="text-xl">|</p>
         <Link className="no-underline text-indigo-500 text-xl px-3 hover:underline" to="/about">About</Link>
     </span>

@@ -25,6 +25,7 @@ function App() {
                 <Route path="/app/teacher/edit/:userId/:assignmentId" 
                 element={user ? <DemoSetup/> : <Landing/>}/>
                 <Route path="/app/student/:assignmentId" element={<DemoWorksheet/>}/>
+                <Route path="/app/teacher/:assignmentId" element={<DemoWorksheet isTeacher={true}/>}/>
                 <Route path="/register" element={<RegisterPage/>}/>
                 <Route path="/dashboard/:userId" 
                 element={user ? <Dashboard/> : <Landing/>}/>
